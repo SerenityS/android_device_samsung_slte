@@ -583,7 +583,7 @@ static int start_voice_call(struct audio_device *adev)
     /* Open modem PCM channels */
     adev->pcm_voice_rx = pcm_open(PCM_CARD,
                                   PCM_DEVICE_VOICE,
-                                  PCM_OUT,
+                                  PCM_OUT | PCM_MONOTONIC,
                                   voice_config);
     if (adev->pcm_voice_rx != NULL && !pcm_is_ready(adev->pcm_voice_rx)) {
         ALOGE("%s: cannot open PCM voice RX stream: %s",
@@ -1248,6 +1248,40 @@ static int out_get_next_write_timestamp(const struct audio_stream_out *stream,
     return -EINVAL;
 }
 
+static int out_get_presentation_position(const struct audio_stream_out *stream,
+                                   uint64_t *frames, struct timespec *timestamp)
+{
+    struct stream_out *out = (struct stream_out *)stream;
+    int ret = -1;
+
+    pthread_mutex_lock(&out->lock);
+
+    int i;
+    // There is a question how to implement this correctly when there is more than one PCM stream.
+    // We are just interested in the frames pending for playback in the kernel buffer here,
+    // not the total played since start.  The current behavior should be safe because the
+    // cases where both cards are active are marginal.
+    for (i = 0; i < PCM_TOTAL; i++)
+        if (out->pcm[i]) {
+            size_t avail;
+            if (pcm_get_htimestamp(out->pcm[i], &avail, timestamp) == 0) {
+                size_t kernel_buffer_size = out->config.period_size * out->config.period_count;
+                // FIXME This calculation is incorrect if there is buffering after app processor
+                int64_t signed_frames = out->written - kernel_buffer_size + avail;
+                // It would be unusual for this value to be negative, but check just in case ...
+                if (signed_frames >= 0) {
+                    *frames = signed_frames;
+                    ret = 0;
+                }
+                break;
+            }
+        }
+
+    pthread_mutex_unlock(&out->lock);
+
+    return ret;
+}
+
 /** audio_stream_in implementation **/
 static uint32_t in_get_sample_rate(const struct audio_stream *stream)
 {
@@ -1588,6 +1622,7 @@ static int adev_open_output_stream(struct audio_hw_device *dev,
     out->stream.write = out_write;
     out->stream.get_render_position = out_get_render_position;
     out->stream.get_next_write_timestamp = out_get_next_write_timestamp;
+    out->stream.get_presentation_position = out_get_presentation_position;
 
     out->dev = adev;
 
@@ -1596,6 +1631,8 @@ static int adev_open_output_stream(struct audio_hw_device *dev,
     config->sample_rate = out_get_sample_rate(&out->stream.common);
 
     out->standby = true;
+    /* out->muted = false; by calloc() */
+    /* out->written = 0; by calloc() */
 
     pthread_mutex_lock(&adev->lock);
     if (adev->outputs[type]) {
