@@ -1,0 +1,73 @@
+Device configuration for the Samsung Galaxy Alpha
+
+Copyright (C) 2014 The CyanogenMod Project
+Copyright (C) 2014 Andreas Schneider <asn@cryptomilk.org>
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+------------------------------------------------------------------
+
+* Description
+
+  This repository is for CM11 on Samsung Galaxy Alpha (slte)
+
+    THIS IS WORK IN PROGRESS.
+
+
+* How To Build CM11 for Samsung Galaxy Alpha
+
+  - Make a workspace
+
+  $ mkdir -p ~/cyanogenmod/system
+  $ cd ~/cyanogenmod/system
+
+
+  - Do repo init & sync
+
+  $ repo init -u git://github.com/CyanogenMod/android.git -b cm-11.0
+
+
+  - Create .repo/local_manifests/roomservice.xml with the following content:
+
+  <?xml version="1.0" encoding="UTF-8"?>
+  <manifest>
+      <remote  name="cryptomilk" fetch="git://git.cryptomilk.org/" />
+
+      <remove-project name="CyanogenMod/android_bootable_recovery" />
+      <project name="omnirom/android_bootable_recovery" revision="android-4.4" path="bootable/recovery" remote="github" />
+
+      <project name="projects/android/android_samsung_kernel_slte.git" path="kernel/samsung/slte" remote="cryptomilk" />
+      <project name="projects/android/android_samsung_device_slte.git" path="device/samsung/slte" remote="cryptomilk" />
+  </manifest>
+
+  $ repo sync
+
+
+  - Setup vendor
+
+  $ ./vendor/cm/get-prebuilts
+
+
+  - Setup environment
+
+  $ source build/envsetup.sh
+  $ lunch cm_slte-userdebug
+
+
+  - Build CM
+
+  $ export USE_CCACHE=1
+  $ make -j10 bacon
+
+
+* Thanks
+
+  CyanogenMod
+  TeamWin
+
+----
+EOF
