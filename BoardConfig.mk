@@ -17,6 +17,7 @@ TARGET_BOOTLOADER_BOARD_NAME := slte
 
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
+BOARD_KERNEL_SEPARATED_DT := true
 # Extracted with libbootimg
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt device/samsung/slte/dtb.img
 
@@ -27,7 +28,9 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x8f200000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x692000000
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-TARGET_PREBUILT_KERNEL := device/samsung/slte/kernel
+#TARGET_PREBUILT_KERNEL := device/samsung/slte/kernel
+TARGET_KERNEL_CONFIG := cm_exynos5430-slte_defconfig
+TARGET_KERNEL_SOURCE := kernel/samsung/slte
 
 BOARD_HAS_NO_SELECT_BUTTON := true
 
