@@ -39,9 +39,14 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_USERIMAGES_USE_EXT4 := true
 
-# twrp recovery
+###########################################################
+### TWRP RECOVERY
+###########################################################
+
 DEVICE_RESOLUTION := 720x1280
 
+# Use our own init.rc without setting up functionfs
+TARGET_RECOVERY_INITRC := device/samsung/slte/recovery/init.rc
 TARGET_RECOVERY_PIXEL_FORMAT := "BRGA_8888"
 TARGET_RECOVERY_DEVICE_MODULES += prebuilt_file_contexts
 
