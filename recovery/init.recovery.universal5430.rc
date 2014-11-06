@@ -1,0 +1,7 @@
+on early-init
+    toolbox setenforce permissive
+
+on boot
+    setprop sys.usb.config mtp,adb
+    setprop usb.vendor 04e8
+    setprop usb.product.mtpadb 6860

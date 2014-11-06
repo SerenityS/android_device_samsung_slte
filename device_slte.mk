@@ -8,17 +8,13 @@ $(call inherit-product-if-exists, vendor/samsung/slte/slte-vendor.mk)
 DEVICE_PACKAGE_OVERLAYS += device/samsung/slte/overlay
 
 LOCAL_PATH := device/samsung/slte
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-	LOCAL_KERNEL := $(LOCAL_PATH)/kernel
-else
-	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
 
+# This file gets automatically copied to the recovery root by CM.
 PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel
+	$(LOCAL_PATH)/recovery/init.recovery.universal5430.rc:root/init.recovery.universal5430.rc
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/selinux/recovery_file_contexts:recovery/root/prebuilt_file_contexts
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.hardware = universal5430
 
 $(call inherit-product, build/target/product/full.mk)
 

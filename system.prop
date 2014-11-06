@@ -1,3 +1,7 @@
 #
 # system.prop for slte
 #
+ro.product.model=SM-G850F
+ro.product.brand=samsung
+ro.product.name=sltexx
+ro.product.device=slte

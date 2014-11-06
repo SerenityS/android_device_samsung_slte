@@ -17,6 +17,7 @@ TARGET_BOOTLOADER_BOARD_NAME := slte
 
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
+#BOARD_KERNEL_CMDLINE := The bootloader ignores the cmdline from the boot.img
 BOARD_KERNEL_SEPARATED_DT := true
 # Extracted with libbootimg
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt device/samsung/slte/dtb.img
@@ -40,7 +41,10 @@ TARGET_USERIMAGES_USE_EXT4 := true
 
 # twrp recovery
 DEVICE_RESOLUTION := 720x1280
+
 TARGET_RECOVERY_PIXEL_FORMAT := "BRGA_8888"
+TARGET_RECOVERY_DEVICE_MODULES += prebuilt_file_contexts
+
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
 BOARD_HAS_NO_REAL_SDCARD := true
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
@@ -52,3 +56,5 @@ TW_HAS_DOWNLOAD_MODE := true
 TW_INCLUDE_JB_CRYPTO := true
 
 TW_NO_USB_STORAGE := true
+
+TW_MTP_DEVICE := /dev/usb_mtp_gadget

@@ -1,2 +1,0 @@
-on early-init
-    toolbox setenforce permissive
