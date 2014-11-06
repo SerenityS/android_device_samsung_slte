@@ -56,5 +56,7 @@ TW_HAS_DOWNLOAD_MODE := true
 TW_INCLUDE_JB_CRYPTO := true
 
 TW_NO_USB_STORAGE := true
+# The kernel has exfat support.
+TW_NO_EXFAT_FUSE := true
 
 TW_MTP_DEVICE := /dev/usb_mtp_gadget
