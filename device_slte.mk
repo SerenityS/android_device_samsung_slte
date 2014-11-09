@@ -73,6 +73,21 @@ PRODUCT_PACKAGES += \
 	libion_exynos \
 	gralloc.exynos5
 
+###########################################################
+### WIFI
+###########################################################
+
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/configs/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
+	$(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
+
+PRODUCT_PROPERTY_OVERRIDES += \
+	wifi.interface=wlan0
+
+PRODUCT_PACKAGES += \
+	libnetcmdiface \
+	macloader
+
 $(call inherit-product-if-exists, hardware/samsung_slsi/exynos5/exynos5.mk)
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 $(call inherit-product, build/target/product/full.mk)
