@@ -32,6 +32,13 @@ vendor/firmware/setfile_2p2_12m.bin
 vendor/firmware/setfile_6b2.bin
 vendor/firmware/setfile_8b1.bin
 
+# Audio
+vendor/lib/liblvverx_3.21.15.so
+vendor/lib/liblvvetx_3.21.15.so
+lib/libmysound.so
+lib/libaudiosa.so
+lib/soundfx/libaudiosa_sec.so
+
 # Camera
 lib/hw/camera.universal5430.so:lib/hw/camera.vendor.universal5430.so
 lib/libexynoscamera.so

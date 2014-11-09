@@ -88,6 +88,19 @@ PRODUCT_PACKAGES += \
 	libnetcmdiface \
 	macloader
 
+###########################################################
+### AUDIO
+###########################################################
+
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/configs/audio/audio_effects.conf:system/etc/audio_effects.conf \
+	$(LOCAL_PATH)/configs/audio/audio_policy.conf:system/etc/audio_policy.conf
+
+PRODUCT_PACKAGES += \
+	audio.a2dp.default \
+	audio.usb.default \
+	audio.r_submix.default
+
 $(call inherit-product-if-exists, hardware/samsung_slsi/exynos5/exynos5.mk)
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 $(call inherit-product, build/target/product/full.mk)
