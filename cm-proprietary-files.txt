@@ -1,0 +1,90 @@
+# Bluetooth
+vendor/firmware/BT_FW_VER_BCM4354_003.001.012.0226.0389_S_LTE_B80_ORC.hcd
+vendor/firmware/bcm4350.hcd
+vendor/firmware/bcm4350_semco.hcd
+vendor/firmware/bcm4350_wisol.hcd
+
+# Wifi
+etc/wifi/bcmdhd_apsta.bin
+etc/wifi/bcmdhd_ibss.bin
+etc/wifi/bcmdhd_mfg.bin
+etc/wifi/bcmdhd_sta.bin
+etc/wifi/cred.conf
+etc/wifi/nvram_mfg.txt
+etc/wifi/nvram_mfg.txt_a0
+etc/wifi/nvram_mfg.txt_muratafem1
+etc/wifi/nvram_mfg.txt_semco
+etc/wifi/nvram_mfg.txt_semco3rd
+etc/wifi/nvram_mfg.txt_wisol
+etc/wifi/nvram_net.txt
+etc/wifi/nvram_net.txt_a0
+etc/wifi/nvram_net.txt_muratafem1
+etc/wifi/nvram_net.txt_semco
+etc/wifi/nvram_net.txt_semco3rd
+etc/wifi/nvram_net.txt_wisol
+
+# NFC
+
+# Media
+vendor/firmware/fimc_is_fw2_2p2_12m.bin
+vendor/firmware/mfc_fw.bin
+vendor/firmware/setfile_2p2_12m.bin
+vendor/firmware/setfile_6b2.bin
+vendor/firmware/setfile_8b1.bin
+
+# Camera
+lib/hw/camera.universal5430.so:lib/hw/camera.vendor.universal5430.so
+lib/libexynoscamera.so
+lib/libvdis.so
+
+# GPS
+bin/gpsd
+bin/gps.cer
+lib/hw/gps.default.so
+lib/libwrappergps.so
+
+# HWC
+vendor/lib/libmalicore.bc
+vendor/lib/egl/libGLES_mali.so
+vendor/lib/libRSDriverArm.so
+
+# Sensors
+lib/hw/sensors.universal5430.so
+
+# Widevine
+vendor/lib/drm/libdrmwvmplugin.so
+vendor/lib/mediadrm/libwvdrmengine.so
+vendor/lib/libWVStreamControlAPI_L1.so
+vendor/lib/libwvdrm_L1.so
+vendor/lib/libwvm.so
+
+# LPM
+bin/lpm
+lib/libQmageDecoder.so
+
+# RNDG
+bin/exyrngd
+
+# Mobicore
+app/mcRegistry/00060308060501020000000000000000.tlbin
+app/mcRegistry/02010000080300030000000000000000.tlbin
+app/mcRegistry/07010000000000000000000000000000.tlbin
+app/mcRegistry/07060000000000000000000000000000.tlbin
+app/mcRegistry/ffffffff000000000000000000000004.tlbin
+app/mcRegistry/ffffffff000000000000000000000005.tlbin
+app/mcRegistry/ffffffff000000000000000000000009.tlbin
+app/mcRegistry/ffffffff00000000000000000000000a.tlbin
+app/mcRegistry/ffffffff00000000000000000000000c.tlbin
+app/mcRegistry/ffffffff00000000000000000000000d.tlbin
+app/mcRegistry/ffffffff00000000000000000000000e.tlbin
+app/mcRegistry/ffffffff00000000000000000000000f.tlbin
+app/mcRegistry/ffffffff000000000000000000000011.tlbin
+app/mcRegistry/ffffffff000000000000000000000012.tlbin
+app/mcRegistry/ffffffff000000000000000000000013.tlbin
+app/mcRegistry/ffffffff000000000000000000000016.tlbin
+app/mcRegistry/ffffffff000000000000000000000017.tlbin
+app/mcRegistry/ffffffff000000000000000000000018.tlbin
+app/mcRegistry/ffffffffd00000000000000000000004.tlbin
+app/mcRegistry/ffffffffd0000000000000000000000a.tlbin
+app/mcRegistry/ffffffffd0000000000000000000000e.tlbin
+app/mcRegistry/ffffffffd00000000000000000000016.tlbin
