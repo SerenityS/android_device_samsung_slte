@@ -63,6 +63,17 @@ WIFI_DRIVER_FW_PATH_AP           := "/etc/wifi/bcmdhd_apsta.bin"
 # MACLOADER
 BOARD_HAVE_SAMSUNG_WIFI := true
 
+# SELINUX
+BOARD_SEPOLICY_DIRS := \
+	device/samsung/slte/sepolicy
+
+BOARD_SEPOLICY_UNION := \
+	file_contexts \
+	adbd.te \
+	app.te \
+	device.te \
+	surfaceflinger.te
+
 ###########################################################
 ### TWRP RECOVERY
 ###########################################################
