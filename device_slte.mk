@@ -109,6 +109,14 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/gps/gps.conf:system/etc/gps.conf \
 	$(LOCAL_PATH)/configs/gps/gps.xml:system/etc/gps.xml
 
+###########################################################
+### PACKAGES
+###########################################################
+
+PRODUCT_PACKAGES += \
+	SamsungServiceMode \
+	Torch
+
 $(call inherit-product-if-exists, hardware/samsung_slsi/exynos5/exynos5.mk)
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 $(call inherit-product, build/target/product/full.mk)
