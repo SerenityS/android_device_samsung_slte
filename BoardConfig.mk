@@ -5,7 +5,12 @@ USE_CAMERA_STUB := true
 
 TARGET_ARCH := arm
 TARGET_NO_BOOTLOADER := true
-TARGET_BOARD_PLATFORM := unknown
+
+# Platform
+TARGET_BOARD_PLATFORM := exynos5
+TARGET_SOC := exynos5430
+
+# CPU
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
@@ -38,6 +43,10 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 # Use these flags if the board has a ext4 partition larger than 2gb
 BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_USERIMAGES_USE_EXT4 := true
+
+# GRAPHICS
+USE_OPENGL_RENDERER := true
+BOARD_EGL_CFG := device/samsung/slte/configs/egl/egl.cfg
 
 ###########################################################
 ### TWRP RECOVERY
