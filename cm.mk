@@ -14,5 +14,5 @@ $(call inherit-product, device/samsung/slte/device_slte.mk)
 PRODUCT_NAME := cm_slte
 PRODUCT_DEVICE := slte
 PRODUCT_BRAND := samsung
-PRODUCT_MODEL := SM_G850F
+PRODUCT_MODEL := SM-G850F
 PRODUCT_MANUFACTURER := samsung
