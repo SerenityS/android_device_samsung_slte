@@ -7,3 +7,6 @@ ro.product.name=sltexx
 ro.product.device=slte
 
 ro.sf.lcd_density=320
+
+rild.libpath=/system/lib/libsec-ril.so
+rild.libargs=-d /dev/ttyS0
