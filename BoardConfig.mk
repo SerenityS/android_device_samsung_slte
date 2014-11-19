@@ -69,10 +69,7 @@ BOARD_SEPOLICY_DIRS := \
 
 BOARD_SEPOLICY_UNION := \
 	file_contexts \
-	adbd.te \
-	app.te \
-	device.te \
-	surfaceflinger.te
+	adbd.te
 
 ###########################################################
 ### TWRP RECOVERY
