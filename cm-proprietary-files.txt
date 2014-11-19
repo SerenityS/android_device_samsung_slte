@@ -1,10 +1,10 @@
-# Bluetooth
+### Bluetooth
 vendor/firmware/BT_FW_VER_BCM4354_003.001.012.0226.0389_S_LTE_B80_ORC.hcd
 vendor/firmware/bcm4350.hcd
 vendor/firmware/bcm4350_semco.hcd
 vendor/firmware/bcm4350_wisol.hcd
 
-# Wifi
+### Wifi
 etc/wifi/bcmdhd_apsta.bin
 etc/wifi/bcmdhd_ibss.bin
 etc/wifi/bcmdhd_mfg.bin
@@ -23,60 +23,71 @@ etc/wifi/nvram_net.txt_semco
 etc/wifi/nvram_net.txt_semco3rd
 etc/wifi/nvram_net.txt_wisol
 
-# NFC
+### NFC
+vendor/firmware/sec_s3fwrn5_firmware.bin
 
-# Media
-vendor/firmware/fimc_is_fw2_2p2_12m.bin
+### Media
+# hevc for v4l2
+vendor/firmware/hevc_fw.bin
+# S5P Multi Format Codec
 vendor/firmware/mfc_fw.bin
+# Image subsystem
+vendor/firmware/fimc_is_fw2_2p2_12m.bin
+vendor/firmware/companion_2p2_12m_master_setfile.bin
+vendor/firmware/companion_2p2_12m_mode_setfile.bin
+vendor/firmware/companion_fw_2p2_12m_evt1.bin
+
+### Audio
+lib/libmysound.so
+lib/libaudiosa.so
+lib/soundfx/libaudiosa_sec.so
+vendor/lib/liblvverx_3.21.15.so
+vendor/lib/liblvvetx_3.21.15.so
+# audio decoder
+vendor/firmware/seiren_fw_dram.bin
+vendor/firmware/seiren_fw_sram.bin
+
+### Camera
+lib/hw/camera.universal5430.so:lib/hw/camera.vendor.universal5430.so
+lib/libexynoscamera.so
+lib/libvdis.so
 vendor/firmware/setfile_2p2_12m.bin
 vendor/firmware/setfile_6b2.bin
 vendor/firmware/setfile_8b1.bin
 
-# Audio
-vendor/lib/liblvverx_3.21.15.so
-vendor/lib/liblvvetx_3.21.15.so
-lib/libmysound.so
-lib/libaudiosa.so
-lib/soundfx/libaudiosa_sec.so
-
-# Camera
-lib/hw/camera.universal5430.so:lib/hw/camera.vendor.universal5430.so
-lib/libexynoscamera.so
-lib/libvdis.so
-
-# GPS
+### GPS
 bin/gpsd
 bin/gps.cer
 lib/hw/gps.default.so
 lib/libwrappergps.so
 
-# HWC
+### HWC
 vendor/lib/libmalicore.bc
 vendor/lib/egl/libGLES_mali.so
 vendor/lib/libRSDriverArm.so
 
-# Sensors
+### Sensors
 lib/hw/sensors.universal5430.so
 
-# Widevine
+### Widevine
 vendor/lib/drm/libdrmwvmplugin.so
 vendor/lib/mediadrm/libwvdrmengine.so
 vendor/lib/libWVStreamControlAPI_L1.so
 vendor/lib/libwvdrm_L1.so
 vendor/lib/libwvm.so
 
-# LPM
+### LPM
 bin/lpm
 lib/libQmageDecoder.so
 
-# RNDG
+### RNDG
 bin/exyrngd
 
-#RIL
+### RIL
 lib/libsecnativefeature.so
 lib/libsec-ril.so
 
-# Mobicore
+### Mobicore
 app/mcRegistry/00060308060501020000000000000000.tlbin
 app/mcRegistry/02010000080300030000000000000000.tlbin
 app/mcRegistry/07010000000000000000000000000000.tlbin
