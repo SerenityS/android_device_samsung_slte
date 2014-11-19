@@ -1,0 +1,21 @@
+This file collects all the required changes so that you can build a working
+CyanogenMod ROM.
+
+hardware/libhardware_legacy:
+http://review.cyanogenmod.org/78177
+http://review.cyanogenmod.org/78178
+http://review.cyanogenmod.org/78179
+
+hardware/samsung:
+http://review.cyanogenmod.org/78176
+
+hardware/samsung_sli/exynos5:
+http://review.cyanogenmod.org/78173
+http://review.cyanogenmod.org/78174
+http://review.cyanogenmod.org/78175
+
+system/core:
+http://review.cyanogenmod.org/76217
+
+system/netd:
+http://review.cyanogenmod.org/78180
