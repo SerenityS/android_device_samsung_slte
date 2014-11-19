@@ -12,6 +12,10 @@
 /dev/media[0-3]*        u:object_r:camera_device:s0
 
 ####################################
+# wifi files
+/data/\.cid\.info       u:object_r:wifi_data_file:s0
+
+####################################
 # sysfs files
 #
 /sys(/.*)?              u:object_r:sysfs:s0
