@@ -1,5 +1,5 @@
 ### Bluetooth
-vendor/firmware/BT_FW_VER_BCM4354_003.001.012.0226.0389_S_LTE_B80_ORC.hcd
+vendor/firmware/BT_FW_VER_BCM4354_003.001.012.0239.0473_S_LTE_B80_ORC_IncTxPwr1p5dB.hcd
 vendor/firmware/bcm4350.hcd
 vendor/firmware/bcm4350_semco.hcd
 vendor/firmware/bcm4350_wisol.hcd
