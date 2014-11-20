@@ -3,6 +3,8 @@ USE_CAMERA_STUB := true
 # inherit from the proprietary version
 -include vendor/samsung/slte/BoardConfigVendor.mk
 
+LOCAL_PATH := device/samsung/slte
+
 TARGET_ARCH := arm
 TARGET_NO_BOOTLOADER := true
 
@@ -64,6 +66,12 @@ WIFI_DRIVER_FW_PATH_AP           := "/etc/wifi/bcmdhd_apsta.bin"
 
 # MACLOADER
 BOARD_HAVE_SAMSUNG_WIFI := true
+
+# BLUETOOTH
+BOARD_HAVE_BLUETOOTH := true
+BOARD_HAVE_BLUETOOTH_BCM := true
+BOARD_BLUEDROID_VENDOR_CONF := $(LOCAL_PATH)/bluetooth/libbt_vndcfg.txt
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 
 # SELINUX
 BOARD_SEPOLICY_DIRS := \
