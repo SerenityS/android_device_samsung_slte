@@ -9,10 +9,12 @@ http://review.cyanogenmod.org/78179
 hardware/samsung:
 http://review.cyanogenmod.org/78176
 
-hardware/samsung_sli/exynos5:
-http://review.cyanogenmod.org/78173
-http://review.cyanogenmod.org/78174
-http://review.cyanogenmod.org/78175
+hardware/samsung_sli/exynos5-insignal:
+http://review.cyanogenmod.org/78565
+http://review.cyanogenmod.org/78566
+http://review.cyanogenmod.org/78567
+http://review.cyanogenmod.org/78568
+http://review.cyanogenmod.org/78569
 
 system/core:
 http://review.cyanogenmod.org/76217
