@@ -132,9 +132,9 @@ PRODUCT_PACKAGES += \
 	SamsungServiceMode \
 	Torch
 
-$(call inherit-product-if-exists, hardware/samsung_slsi/exynos5/exynos5.mk)
-$(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
-$(call inherit-product, build/target/product/full.mk)
+$(call inherit-product-if-exists, hardware/samsung_slsi/exynos5-insignal/exynos5.mk)
+$(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
+$(call inherit-product-if-exists, build/target/product/full.mk)
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_NAME := full_slte

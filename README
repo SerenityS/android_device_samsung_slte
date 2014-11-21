@@ -40,6 +40,13 @@ Copyright (C) 2014 Andreas Schneider <asn@cryptomilk.org>
       <remove-project name="CyanogenMod/android_bootable_recovery" />
       <project name="omnirom/android_bootable_recovery" revision="android-4.4" path="bootable/recovery" remote="github" />
 
+      <project name="CyanogenMod/android_hardware_samsung_slsi_exynos" path="hardware/samsung_slsi/exynos" remote="github" />
+      <project name="CyanogenMod/android_hardware_samsung_slsi_exynos5-insignal" path="hardware/samsung_slsi/exynos5-insignal" remote="github" />
+      <project name="CyanogenMod/android_hardware_samsung_slsi_openmax" path="hardware/samsung_slsi/openmax" remote="github" />
+      <project name="CyanogenMod/android_hardware_samsung" path="hardware/samsung" remote="github" />
+      <project name="CyanogenMod/android_packages_apps_SamsungServiceMode" path="packages/apps/SamsungServiceMode" remote="github" />
+      <project name="projects/android/android_hardware_samsung_slsi_exynos5430" path="hardware/samsung_slsi/exynos5430" remote="cryptomilk" />
+
       <project name="projects/android/android_kernel_samsung_slte.git" path="kernel/samsung/slte" remote="cryptomilk" />
       <project name="projects/android/android_device_samsung_slte.git" path="device/samsung/slte" remote="cryptomilk" />
   </manifest>
