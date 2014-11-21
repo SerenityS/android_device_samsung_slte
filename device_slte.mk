@@ -125,6 +125,13 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/gps/gps.xml:system/etc/gps.xml
 
 ###########################################################
+### TOUCHSCREEN
+###########################################################
+
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/configs/idc/Synaptics_HID_TouchPad.idc:/system/usr/idc/Synaptics_HID_TouchPad.idc
+
+###########################################################
 ### PACKAGES
 ###########################################################
 
