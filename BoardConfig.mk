@@ -88,6 +88,9 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 BOARD_BATTERY_DEVICE_NAME := battery
 
+# RIL
+BOARD_VENDOR := samsung
+
 # SELINUX
 BOARD_SEPOLICY_DIRS := \
 	device/samsung/slte/sepolicy
