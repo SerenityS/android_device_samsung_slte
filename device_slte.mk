@@ -132,6 +132,14 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/idc/Synaptics_HID_TouchPad.idc:/system/usr/idc/Synaptics_HID_TouchPad.idc
 
 ###########################################################
+### CHARGER
+###########################################################
+
+PRODUCT_PACKAGES += \
+	charger_res_images \
+	charger
+
+###########################################################
 ### PACKAGES
 ###########################################################
 

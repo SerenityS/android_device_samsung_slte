@@ -84,6 +84,10 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUEDROID_VENDOR_CONF := $(LOCAL_PATH)/bluetooth/libbt_vndcfg.txt
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 
+# CHARCHER
+BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
+BOARD_BATTERY_DEVICE_NAME := battery
+
 # SELINUX
 BOARD_SEPOLICY_DIRS := \
 	device/samsung/slte/sepolicy
