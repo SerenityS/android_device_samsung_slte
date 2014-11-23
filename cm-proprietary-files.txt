@@ -48,8 +48,10 @@ vendor/firmware/seiren_fw_dram.bin
 vendor/firmware/seiren_fw_sram.bin
 
 ### Camera
-lib/hw/camera.universal5430.so:lib/hw/camera.vendor.universal5430.so
+lib/hw/camera.universal5430.so
+lib/libarcsoft_nighthawk.so
 lib/libexynoscamera.so
+lib/libliveframework.so
 lib/libvdis.so
 vendor/firmware/setfile_2p2_12m.bin
 vendor/firmware/setfile_6b2.bin
