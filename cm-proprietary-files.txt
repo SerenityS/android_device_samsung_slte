@@ -38,6 +38,25 @@ vendor/firmware/companion_2p2_12m_mode_setfile.bin
 vendor/firmware/companion_fw_2p2_12m_evt1.bin
 
 ### Audio
+etc/firmware/florida-dsp1-edac.bin
+etc/firmware/florida-dsp1-edac.wmfw
+etc/firmware/florida-dsp2-tx-nb.wmfw
+etc/firmware/florida-dsp2-tx-swb.wmfw
+etc/firmware/florida-dsp2-tx-wb.wmfw
+etc/firmware/florida-dsp3-ez2-control.wmfw
+etc/firmware/florida-dsp3-lpsd-control.bin
+etc/firmware/florida-dsp3-tx-nb.bin
+etc/firmware/florida-dsp3-tx-nb.wmfw
+etc/firmware/florida-dsp3-tx-swb-conversation.bin
+etc/firmware/florida-dsp3-tx-swb-interview.bin
+etc/firmware/florida-dsp3-tx-swb.wmfw
+etc/firmware/florida-dsp3-tx-wb.bin
+etc/firmware/florida-dsp3-tx-wb.wmfw
+etc/firmware/florida-dsp4-dsm.wmfw
+etc/firmware/florida-dsp4-rx-anc-nb.bin
+etc/firmware/florida-dsp4-rx-anc-nb.wmfw
+etc/firmware/florida-dsp4-rx-anc-wb.bin
+etc/firmware/florida-dsp4-rx-anc-wb.wmfw
 lib/libmysound.so
 lib/libaudiosa.so
 lib/soundfx/libaudiosa_sec.so
