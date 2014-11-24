@@ -1,9 +1,6 @@
 This file collects all the required changes so that you can build a working
 CyanogenMod ROM.
 
-frameworks/av:
-http://review.cyanogenmod.org/79010
-
 hardware/libhardware_legacy:
 http://review.cyanogenmod.org/78177
 http://review.cyanogenmod.org/78178
