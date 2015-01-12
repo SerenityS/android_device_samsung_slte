@@ -99,8 +99,11 @@ COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CAMERA_HARDWARE
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 BOARD_BATTERY_DEVICE_NAME := battery
 
-# RIL
+### RIL
 BOARD_VENDOR := samsung
+BOARD_PROVIDES_LIBRIL := true
+# hardware/samsung/ril
+BOARD_MODEM_TYPE := xmm7260
 
 ### WEBKIT
 ENABLE_WEBGL := true
