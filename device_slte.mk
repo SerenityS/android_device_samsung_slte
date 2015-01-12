@@ -77,6 +77,10 @@ PRODUCT_PACKAGES += \
 ### RADIO
 ###########################################################
 
+# cpboot-daemon for xmm7260 modem
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/ril/sbin/cbd:root/sbin/cbd
+
 PRODUCT_PACKAGES += \
     libsecril-client \
     libsecril-client-sap
