@@ -110,6 +110,9 @@ BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril
 ### WEBKIT
 ENABLE_WEBGL := true
 
+### CMHW
+BOARD_HARDWARE_CLASS += hardware/samsung/cmhw
+
 # SELINUX
 BOARD_SEPOLICY_DIRS := \
 	device/samsung/slte/sepolicy
