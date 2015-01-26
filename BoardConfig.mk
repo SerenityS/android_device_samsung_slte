@@ -102,6 +102,9 @@ BOARD_BATTERY_DEVICE_NAME := battery
 # RIL
 BOARD_VENDOR := samsung
 
+### WEBKIT
+ENABLE_WEBGL := true
+
 # SELINUX
 BOARD_SEPOLICY_DIRS := \
 	device/samsung/slte/sepolicy
