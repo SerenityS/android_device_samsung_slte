@@ -131,7 +131,7 @@ DEVICE_RESOLUTION := 720x1280
 # Use our own init.rc without setting up functionfs
 TARGET_RECOVERY_INITRC := device/samsung/slte/recovery/init.rc
 TARGET_RECOVERY_PIXEL_FORMAT := "BRGA_8888"
-TARGET_RECOVERY_DEVICE_MODULES += prebuilt_file_contexts
+TARGET_RECOVERY_DEVICE_MODULES += prebuilt_file_contexts exyrngd
 
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
 BOARD_HAS_NO_REAL_SDCARD := true
