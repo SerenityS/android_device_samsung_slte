@@ -145,5 +145,3 @@ TW_INCLUDE_JB_CRYPTO := true
 
 # The kernel has exfat support.
 TW_NO_EXFAT_FUSE := true
-
-TW_MTP_DEVICE := /dev/usb_mtp_gadget
