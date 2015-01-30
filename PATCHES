@@ -1,6 +1,4 @@
 This file collects all the required changes so that you can build a working
 CyanogenMod ROM.
 
-hardware/samsung_sli/exynos5-insignal:
-# New Kernel DV Timing API
-http://review.cyanogenmod.org/78565
+NONE
