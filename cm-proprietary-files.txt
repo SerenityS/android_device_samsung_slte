@@ -22,6 +22,8 @@ etc/wifi/nvram_net.txt_semco3rd
 etc/wifi/nvram_net.txt_wisol
 
 ### NFC
+etc/sec_s3fwrn5_rfreg.bin
+lib/hw/nfc_nci.universal5430.so
 vendor/firmware/sec_s3fwrn5_firmware.bin
 
 ### Media
