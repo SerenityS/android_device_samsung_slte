@@ -79,7 +79,7 @@ vendor/firmware/setfile_8b1.bin
 ### GPS
 bin/gpsd
 bin/gps.cer
-lib/hw/gps.default.so
+lib/hw/gps.default.so:lib/hw/gps.universal5430.so
 lib/libwrappergps.so
 
 ### HWC
