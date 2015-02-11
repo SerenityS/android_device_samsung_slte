@@ -118,6 +118,7 @@ BOARD_SEPOLICY_DIRS := \
 	device/samsung/slte/sepolicy
 
 BOARD_SEPOLICY_UNION := \
+	app.te \
 	file_contexts \
 	file.te \
 	uventd.te
