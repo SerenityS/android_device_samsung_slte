@@ -298,14 +298,18 @@ static int get_input_source_id(audio_source_t source, bool wb_amr)
     case AUDIO_SOURCE_DEFAULT:
         return IN_SOURCE_NONE;
     case AUDIO_SOURCE_MIC:
+        ALOGV("%s: AUDIO_SOURCE_MIC\n", __func__);
         return IN_SOURCE_MIC;
     case AUDIO_SOURCE_CAMCORDER:
         return IN_SOURCE_CAMCORDER;
     case AUDIO_SOURCE_VOICE_RECOGNITION:
+        ALOGV("%s: IN_SOURCE_VOICE_RECOGNITION\n", __func__);
         return IN_SOURCE_VOICE_RECOGNITION;
     case AUDIO_SOURCE_VOICE_COMMUNICATION:
+        ALOGV("%s: AUDIO_SOURCE_VOICE_COMMUNICATION\n", __func__);
         return IN_SOURCE_VOICE_COMMUNICATION;
     case AUDIO_SOURCE_VOICE_CALL:
+        ALOGV("%s: AUDIO_SOURCE_VOICE_CALL:\n", __func__);
         if (wb_amr) {
             return IN_SOURCE_VOICE_CALL_WB;
         }

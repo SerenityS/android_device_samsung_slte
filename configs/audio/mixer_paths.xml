@@ -269,6 +269,17 @@
         <ctl name="HPOUT3R Input 3" value="ISRC2INT1" />
     </path>
 
+    <path name="scenario-earpiece-loopback">
+        <ctl name="ASRC RATE 1" value="SYNCCLK rate 3" />
+        <ctl name="ISRC2INT1 Input" value="ASRC2L" />
+        <ctl name="LHPF3 Input 1" value="None" />
+        <ctl name="LHPF3 Input 2" value="None" />
+        <ctl name="HPOUT3L Input 3" value="ISRC2INT1" />
+        <ctl name="HPOUT3R Input 3" value="ISRC2INT1" />
+        <ctl name="HPOUT3L Input 1" value="AIF1RX1" />
+        <ctl name="HPOUT3R Input 1" value="AIF1RX2" />
+    </path>
+
     <!-- ### Volume ### -->
 
     <path name="volume-earpiece-default">
@@ -720,6 +731,28 @@
         <ctl name="ISRC2DEC1 Input" value="IN1L" />
         <ctl name="ASRC1L Input" value="ISRC2DEC1" />
         <ctl name="ASRC1R Input" value="ISRC2DEC1" />
+        <ctl name="AIF2TX1 Input 1" value="ASRC1L" />
+        <ctl name="AIF2TX2 Input 1" value="ASRC1R" />
+    </path>
+
+    <path name="scenario-builtin-mic-earpiece-communication">
+        <ctl name="ASRC RATE 1" value="SYNCCLK rate 1" />
+        <ctl name="AIF1TX1 Input 3" value="None" />
+        <ctl name="AIF1TX2 Input 3" value="None" />
+        <ctl name="LHPF1 Input 1" value="IN1L" />
+        <ctl name="ASRC1L Input" value="LHPF1" />
+        <ctl name="ASRC1R Input" value="LHPF1" />
+        <ctl name="AIF2TX1 Input 1" value="ASRC1L" />
+        <ctl name="AIF2TX2 Input 1" value="ASRC1R" />
+    </path>
+
+    <path name="scenario-builtin-mic-speaker-communication">
+        <ctl name="ASRC RATE 1" value="SYNCCLK rate 1" />
+        <ctl name="AIF1TX1 Input 3" value="None" />
+        <ctl name="AIF1TX2 Input 3" value="None" />
+        <ctl name="LHPF1 Input 1" value="IN1L" />
+        <ctl name="ASRC1L Input" value="LHPF2" />
+        <ctl name="ASRC1R Input" value="LHPF2" />
         <ctl name="AIF2TX1 Input 1" value="ASRC1L" />
         <ctl name="AIF2TX2 Input 1" value="ASRC1R" />
     </path>
@@ -1274,7 +1307,7 @@
 
     <path name="communication-speaker">
         <path name="device-speaker" />
-        <path name="verb-default" />
+        <path name="verb-incall" />
 
         <path name="scenario-speaker-default" />
         <path name="volume-speaker-default" />
@@ -1282,15 +1315,15 @@
 
     <path name="communication-earpiece">
         <path name="device-earpiece" />
-        <path name="verb-default" />
+        <path name="verb-incall" />
 
-        <path name="scenario-earpiece-default" />
+        <path name="scenario-earpiece-loopback" />
         <path name="volume-earpiece-default" />
     </path>
 
     <path name="communication-headphones">
         <path name="device-headphones" />
-        <path name="verb-default" />
+        <path name="verb-incall" />
 
         <path name="scenario-headphones-default" />
         <path name="volume-headphones-default" />
@@ -1426,10 +1459,19 @@
         <path name="channel-left" />
     </path>
 
-    <path name="communication-main-mic">
+    <path name="communication-earpiece-main-mic">
         <path name="device-builtin-mic" />
 
-        <path name="scenario-builtin-mic-default" />
+        <path name="scenario-builtin-mic-earpiece-communication" />
+        <path name="volume-builtin-mic-default" />
+
+        <path name="channel-left" />
+    </path>
+
+    <path name="communication-speaker-main-mic">
+        <path name="device-builtin-mic" />
+
+        <path name="scenario-builtin-mic-speaker-communication" />
         <path name="volume-builtin-mic-default" />
 
         <path name="channel-left" />
