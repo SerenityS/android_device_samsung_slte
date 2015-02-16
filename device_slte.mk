@@ -18,7 +18,8 @@ PRODUCT_PACKAGES += \
     init.universal5430.rc \
     init.universal5430.usb.rc \
     init.universal5430.wifi.rc \
-    ueventd.universal5430.rc
+    ueventd.universal5430.rc \
+    init.sec.boot.sh
 
 # This file gets automatically copied to the recovery root by CM.
 PRODUCT_COPY_FILES += \
