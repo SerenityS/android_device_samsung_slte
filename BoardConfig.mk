@@ -124,7 +124,7 @@ BOARD_SEPOLICY_UNION := \
 	file_contexts \
 	file.te \
 	vold.te \
-	uventd.te
+	ueventd.te
 
 ###########################################################
 ### TWRP RECOVERY
