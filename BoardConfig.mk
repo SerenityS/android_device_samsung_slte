@@ -121,6 +121,7 @@ BOARD_SEPOLICY_UNION := \
 	domain.te \
 	file_contexts \
 	file.te \
+	recovery.te \
 	ueventd.te
 
 ###########################################################
