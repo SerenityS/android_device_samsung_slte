@@ -27,7 +27,7 @@ TARGET_BOOTLOADER_BOARD_NAME := universal5430
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
 #BOARD_KERNEL_CMDLINE := The bootloader ignores the cmdline from the boot.img
-BOARD_KERNEL_SEPARATED_DT := true
+#BOARD_KERNEL_SEPARATED_DT := true
 # Extracted with libbootimg
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt device/samsung/slte/dtb.img
 
@@ -128,12 +128,14 @@ BOARD_SEPOLICY_UNION := \
 ### TWRP RECOVERY
 ###########################################################
 
-DEVICE_RESOLUTION := 720x1280
+TW_THEME := portrait_mdpi
 
 # Use our own init.rc without setting up functionfs
-TARGET_RECOVERY_INITRC := device/samsung/slte/recovery/init.rc
 TARGET_RECOVERY_PIXEL_FORMAT := "BRGA_8888"
 TARGET_RECOVERY_DEVICE_MODULES += prebuilt_file_contexts exyrngd
+
+TW_BRIGHTNESS_PATH := /sys/class/backlight/panel/brightness
+TW_MAX_BRIGHTNESS := 255
 
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
 BOARD_HAS_NO_REAL_SDCARD := true
@@ -144,6 +146,8 @@ TW_NO_REBOOT_BOOTLOADER := true
 TW_HAS_DOWNLOAD_MODE := true
 
 TW_INCLUDE_JB_CRYPTO := true
+TW_INCLUDE_L_CRYPTO := true
 
 # The kernel has exfat support.
 TW_NO_EXFAT_FUSE := true
+#TW_DISABLE_TTF := true
