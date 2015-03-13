@@ -462,6 +462,9 @@
 /efs/gyro_cal_data	u:object_r:sensor_efs_file:s0
 /efs/nv_data.bin(/.*)?	u:object_r:bin_nv_data_efs_file:s0
 
+# Exynrgd
+/sbin/exyrngd u:object_r:exyrngd_exec:s0
+
 #line 1 "vendor/samsung/common/sepolicy/vmware/file_contexts"
 # VMware daemon
 /system/bin/mvpd	u:object_r:vmwared_exec:s0
