@@ -1,10 +1,17 @@
 on early-init
-    toolbox setenforce permissive
+    start set_permissive
     start exyrngd
 
 on boot
-    setprop sys.usb.config mtp,adb
+    setprop sys.usb.config adb
     setprop usb.vendor 04e8
+    setprop usb.product.adb 6860
     setprop usb.product.mtpadb 6860
+
+on fs
+    umount /dev/usb-ffs/adb
+
+    write /sys/class/android_usb/android0/idVendor 04e8
+    write /sys/class/android_usb/android0/idProduct 6860
 
 service exyrngd /sbin/exyrngd -b
