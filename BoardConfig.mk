@@ -118,11 +118,9 @@ BOARD_SEPOLICY_DIRS := \
 
 BOARD_SEPOLICY_UNION := \
 	app.te \
-	device.te \
 	domain.te \
 	file_contexts \
 	file.te \
-	vold.te \
 	ueventd.te
 
 ###########################################################
