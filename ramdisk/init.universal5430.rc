@@ -923,6 +923,7 @@ service cpboot-daemon /sbin/cbd -d -txmm72xx -bl -ml -p 13
     class main
     user root
     group radio cache inet misc audio sdcard_rw log sdcard_r shell
+    seclabel u:r:cpboot-daemon:s0
 
 service netmgrd /system/bin/netmgrd
     class late_start
@@ -980,6 +981,7 @@ service exyrngd /system/bin/exyrngd -b
     user root
     group root
     class main
+    seclabel u:r:exyrngd:s0
     oneshot
 
 # virtual sdcard daemon running as media_rw (1023)
@@ -1006,6 +1008,7 @@ service gpsd /system/bin/gpsd -c /system/etc/gps.xml
     user gps
     group system inet net_raw
     ioprio be 0
+    seclabel u:r:gpsd:s0
 
 # on userdebug and eng builds, enable kgdb on the serial console
 on property:ro.debuggable=1
