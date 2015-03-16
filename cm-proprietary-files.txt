@@ -59,7 +59,11 @@ etc/firmware/florida-dsp4-rx-anc-wb.bin
 etc/firmware/florida-dsp4-rx-anc-wb.wmfw
 lib/libmysound.so
 lib/libaudiosa.so
+lib/lib_SA_GoogleFX_ver124b.so
 lib/soundfx/libaudiosa_sec.so
+lib/lib_SoundAlive_play_ver125e.so
+lib/libsoundalive.so
+lib/lib_SoundAlive_ver118t.so
 vendor/lib/liblvverx_3.21.15.so
 vendor/lib/liblvvetx_3.21.15.so
 # audio decoder
