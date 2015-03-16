@@ -59,6 +59,8 @@ USE_OPENGL_RENDERER := true
 BOARD_EGL_CFG := device/samsung/slte/configs/egl/egl.cfg
 # hwcomposer insignal
 BOARD_HDMI_INCAPABLE := true
+# frameworks/native/services/surfaceflinger
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 5
 
 ### OMX (insignal)
 BOARD_USE_DMA_BUF := true
