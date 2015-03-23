@@ -99,7 +99,7 @@ BOARD_USES_SCALER := true
 # frameworks/av/camera, camera blob support
 COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CAMERA_HARDWARE
 
-# CHARCHER
+# CHARGER
 BOARD_BATTERY_DEVICE_NAME := battery
 # system/core/init/Android.mk
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
