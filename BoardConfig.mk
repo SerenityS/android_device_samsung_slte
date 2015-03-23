@@ -111,6 +111,9 @@ BOARD_MODEM_TYPE := xmm7260
 # RIL.java overwrite
 BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril
 
+### FONTS
+EXTENDED_FONT_FOOTPRINT := true
+
 ### WEBKIT
 ENABLE_WEBGL := true
 
