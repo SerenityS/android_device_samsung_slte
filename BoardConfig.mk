@@ -98,6 +98,8 @@ BOARD_NEEDS_MEMORYHEAPION := true
 BOARD_USES_SCALER := true
 # frameworks/av/camera, camera blob support
 COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CAMERA_HARDWARE
+# frameworks/av/media/libstagefright, for libwvm.so
+COMMON_GLOBAL_CFLAGS += -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL
 
 # CHARGER
 BOARD_BATTERY_DEVICE_NAME := battery
