@@ -136,11 +136,20 @@ BOARD_SEPOLICY_UNION := \
 	cpboot-daemon.te \
 	domain.te \
 	exyrngd.te \
-	file_contexts \
 	file.te \
+	file_contexts \
+	gpsd.te \
+	kernel.te \
+	lmkd.te \
+	init.te \
 	macloader.te \
 	recovery.te \
-	ueventd.te
+	system_server.te \
+	rild.te \
+	ueventd.te \
+	uncrypt.te \
+	vold.te \
+	wpa.te
 
 ###########################################################
 ### TWRP RECOVERY
