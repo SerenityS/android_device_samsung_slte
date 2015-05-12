@@ -45,7 +45,7 @@ public class SlteRIL extends RIL {
      * SAMSUNG REQUESTS
      **********************************************************/
     static final boolean RILJ_LOGD = true;
-    static final boolean RILJ_LOGV = true;
+    static final boolean RILJ_LOGV = false;
 
     private static final int RIL_REQUEST_DIAL_EMERGENCY_CALL = 10016;
 
