@@ -1,0 +1,20 @@
+#
+# system.prop for slte
+#
+
+# Screen
+ro.sf.lcd_density=320
+
+# Radio
+rild.libpath=/system/lib/libsec-ril.so
+rild.libargs=-d /dev/ttyS0
+ro.telephony.ril_class=SlteRIL
+
+# USB
+persist.sys.isUsbOtgEnabled=true
+persist.sys.usb.config=mtp
+
+# Wifi
+wifi.interface=wlan0
+
+ro.nfc.sec_hal=true

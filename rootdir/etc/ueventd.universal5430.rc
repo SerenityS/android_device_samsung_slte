@@ -1,0 +1,116 @@
+/dev/mali0                0666   system     system
+/dev/ion                  0666   system     system
+/dev/ump                  0666   system     graphics
+/dev/exynos-mem           0660   system     graphics
+/dev/video0               0660   system     camera
+/dev/video1               0660   system     camera
+/dev/video2               0660   system     camera
+/dev/video3               0660   system     camera
+/dev/video20              0660   system     system
+# media0 is used for GSC, DECON, etc
+/dev/media0               0660   system     camera
+# Various devices use the v4l-subdev interface
+# We declare all such nodes simultaneously here
+/dev/v4l-subdev*          0660   system     camera
+
+# gscalers
+/dev/video23              0660   media      graphics
+/dev/video26              0660   media      graphics
+/dev/video24              0660   media      graphics
+/dev/video27              0660   media      graphics
+/dev/video29              0660   media      graphics
+/dev/video30              0660   media      graphics
+
+# mscalers
+/dev/video50              0660   media      graphics
+/dev/video51              0660   media      graphics
+
+/dev/video55              0666   system     graphics
+/dev/fimg2d               0666   system     graphics
+/dev/i2c-2                0660   system     system
+/dev/HPD                  0660   system     system
+
+# mfc
+/dev/video6               0660   media      media
+/dev/video7               0660   media      media
+/dev/video8               0660   media      media
+/dev/video9               0660   media      media
+
+# mfc 1
+/dev/video66              0660   media      media
+/dev/video67              0660   media      media
+/dev/video68              0660   media      media
+/dev/video69              0660   media      media
+
+# camera
+/dev/video100             0660   media      media
+/dev/video101             0660   media      media
+/dev/video102             0660   media      media
+/dev/video103             0660   media      media
+/dev/video109             0660   media      media
+/dev/video110             0660   media      media
+/dev/video111             0660   media      media
+/dev/video112             0660   media      media
+/dev/video114             0660   media      media
+/dev/video115             0660   media      media
+/dev/video116             0660   media      media
+/dev/video130             0660   media      media
+/dev/video134             0660   media      media
+/dev/video137             0660   media      media
+/dev/video140             0660   media      media
+/dev/video141             0660   media      media
+/dev/video146             0660   media      media
+/dev/video149             0660   media      media
+/dev/media2               0660   media      media
+
+# hevc
+/dev/video10              0660   media      media
+/dev/video11              0660   media      media
+
+# jpeg
+/dev/video12              0660   media      media
+
+# audio
+/dev/seiren               0660   system     audio
+
+# MobiCore
+/dev/mobicore             0600   drmrpc     drmrpc
+/dev/mobicore-user        0660   drm        drmrpc
+
+# rfkill
+/dev/rfkill               0660   root       wifi
+
+# Secure MEM driver
+/dev/s5p-smem             0660   drm        drmrpc
+
+# sensor sysfs properties
+/sys/devices/virtual/input/input*	poll_delay	0660	system	radio
+/sys/devices/virtual/input/input*	enable		0660	system	radio
+
+# Sensor IIO
+/dev/iio:device*          0660   system		system
+/sys/bus/iio/devices/iio:device*    0664   system     radio
+
+# fingerprint sensor
+/dev/vfsspi        0660   system     system
+
+/dev/block/mmcblk0p13     0660   system     radio
+/dev/block/mmcblk0p14     0660   system     radio
+/dev/umts*                0660   system     radio
+
+# USB Device
+/dev/usb/lp*              0660   system     usb
+/dev/ttyUSB*              0660   system     usb
+
+# MobiCore
+/dev/mobicore             0700   system     system
+/dev/mobicore-user        0666   radio     	system
+
+# Secure MEM driver
+/dev/s5p-smem             0660   system     system
+
+#SysScope
+/dev/block/mmcblk0p8      0660   system     system
+
+# NFC
+/dev/sec-nfc              0660   nfc        nfc
