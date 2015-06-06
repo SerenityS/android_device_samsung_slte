@@ -921,10 +921,11 @@ on fs
 # ARGOSD network_throughput
     chown system system /dev/network_throughput
 
-service cpboot-daemon /system/bin/cbd -d -txmm72xx -bl -ml -p 13
+# CP Boot Daemon (CBD)
+service cpboot-daemon /system/bin/cbd -d -t xmm72xx_lli -b l -m l -p 13
     class main
     user root
-    group radio cache inet misc audio sdcard_rw log sdcard_r shell
+    group radio cache inet misc audio sdcard_r sdcard_rw log shell
 
 service netmgrd /system/bin/netmgrd
     class late_start
