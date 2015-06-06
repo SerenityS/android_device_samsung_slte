@@ -172,5 +172,16 @@ TARGET_NR_SVC_SUPP_GIDS := 20
 BOARD_USES_WFD_SERVICE := true
 BOARD_USES_WFD := true
 
+# Recovery
+#TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/etc/fstab.universal5430
+TARGET_RECOVERY_PIXEL_FORMAT := BRGA_8888
+TARGET_USERIMAGES_USE_EXT4 := true
+BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
+BOARD_HAS_NO_SELECT_BUTTON := true
+BOARD_HAS_NO_REAL_SDCARD := true
+BOARD_RECOVERY_SWIPE := true
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+RECOVERY_SDCARD_ON_DATA := true
+
 # inherit from the proprietary version
 -include vendor/samsung/slte/BoardConfigVendor.mk	
