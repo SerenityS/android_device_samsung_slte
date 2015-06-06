@@ -1,39 +1,16 @@
-
-# Copyright (C) 2014 The CyanogenMod Project
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-# Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, device/samsung/slte/full_slte.mk)
 
 # Enhanced NFC
 #$(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
 
-# Inherit some common cm stuff.
+# Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
-
-# Inherit from slte device
-$(call inherit-product, device/samsung/slte/device_slte.mk)
 
 PRODUCT_NAME := cm_slte
 PRODUCT_DEVICE := slte
-PRODUCT_MANUFACTURER := samsung
-PRODUCT_MODEL := SM-G850F
-
-PRODUCT_BRAND := samsung
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-	PRODUCT_MODEL=SM-G850F \
 	PRODUCT_NAME=sltexx \
-	PRODUCT_DEVICE=slte \
-	TARGET_DEVICE=slte
+	TARGET_DEVICE=slte \
+	BUILD_FINGERPRINT=samsung/sltexx/slte:5.0.2/LRX22G/G850FXXU2COD4:user/release-keys \
+	PRIVATE_BUILD_DESC="sltexx-user 5.0.2 LRX22G G850FXXU2COD4 release-keys"

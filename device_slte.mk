@@ -1,7 +1,24 @@
+#
+# Copyright (C) 2013 The CyanogenMod Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
 LOCAL_PATH := device/samsung/slte
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+
+DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 # Ramdisk
 #TARGET_PROVIDES_INIT_RC := true
@@ -12,9 +29,8 @@ PRODUCT_PACKAGES += \
     init.universal5430.wifi.rc \
     ueventd.universal5430.rc \
     init.sec.boot.sh
+    #init.samsung.rc \
 
-	#init.samsung.rc \	
-	
 # Recovery
 PRODUCT_PACKAGES += \
     init.recovery.universal5430.rc
@@ -54,12 +70,12 @@ PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.opengles.version=196608
+    ro.opengles.version=196608
 
 PRODUCT_PACKAGES += \
-	libion_exynos \
+    libion_exynos \
     hwcomposer.exynos5 \
-	gralloc.exynos5
+    gralloc.exynos5
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 1280
@@ -67,21 +83,21 @@ TARGET_SCREEN_WIDTH := 720
 
 # Nfc
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/configs/nfc/libnfc-sec-hal.conf:system/etc/libnfc-sec-hal.conf \
-	$(LOCAL_PATH)/configs/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
-	$(LOCAL_PATH)/configs/nfc/nfcee_access.xml:system/etc/nfcee_access.xml
+    $(LOCAL_PATH)/configs/nfc/libnfc-sec-hal.conf:system/etc/libnfc-sec-hal.conf \
+    $(LOCAL_PATH)/configs/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
+    $(LOCAL_PATH)/configs/nfc/nfcee_access.xml:system/etc/nfcee_access.xml
 
 PRODUCT_PACKAGES += \
     com.android.nfc_extras \
-	NfcNci \
+    NfcNci \
     libnfc-nci \
-    Tag	
+    Tag
 
 # Filesystem management tools
 #PRODUCT_PACKAGES += \
-	#make_ext4fs \
-	#e2fsck \
-	#setup_fs
+#    make_ext4fs \
+#    e2fsck \
+#    setup_fs
 
 # RIL
 PRODUCT_PACKAGES += \
@@ -90,38 +106,38 @@ PRODUCT_PACKAGES += \
 
 # dex-opt to cache
 PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.dexopt-data-only=0	
-	
+    dalvik.vm.dexopt-data-only=0
+
 # Wifi
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-	$(LOCAL_PATH)/configs/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
-	$(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
+    $(LOCAL_PATH)/configs/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
+    $(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
 
 PRODUCT_PACKAGES += \
-	libnetcmdiface \
-	macloader \
-	dhcpcd.conf \
+    libnetcmdiface \
+    macloader \
+    dhcpcd.conf \
     hostapd \
     hostapd_default.conf \
     libwpa_client \
     wpa_supplicant
-	
+
 # Audio
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/configs/audio/audio_effects.conf:system/etc/audio_effects.conf \
-	$(LOCAL_PATH)/configs/audio/audio_policy.conf:system/etc/audio_policy.conf \
-	$(LOCAL_PATH)/configs/audio/mixer_paths.xml:system/etc/mixer_paths.xml
+    $(LOCAL_PATH)/configs/audio/audio_effects.conf:system/etc/audio_effects.conf \
+    $(LOCAL_PATH)/configs/audio/audio_policy.conf:system/etc/audio_policy.conf \
+    $(LOCAL_PATH)/configs/audio/mixer_paths.xml:system/etc/mixer_paths.xml
 
 PRODUCT_PACKAGES += \
-	audio.a2dp.default \
-	audio.usb.default \
-	audio.r_submix.default \
-	audio.primary.universal5430
-	
+    audio.a2dp.default \
+    audio.usb.default \
+    audio.r_submix.default \
+    audio.primary.universal5430
+
 # Bluetooth
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/bluetooth/bcm4350_prepatch.hcd:system/vendor/firmware/bcm4350_prepatch.hcd	
+    $(LOCAL_PATH)/bluetooth/bcm4350_prepatch.hcd:system/vendor/firmware/bcm4350_prepatch.hcd
 
 # Media profile
 PRODUCT_COPY_FILES += \
@@ -129,18 +145,18 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
-	$(LOCAL_PATH)/configs/media/media_codecs.xml:system/etc/media_codecs.xml \
-	$(LOCAL_PATH)/configs/media/media_profiles.xml:system/etc/media_profiles.xml
-	
+    $(LOCAL_PATH)/configs/media/media_codecs.xml:system/etc/media_codecs.xml \
+    $(LOCAL_PATH)/configs/media/media_profiles.xml:system/etc/media_profiles.xml
+
 # OMX
 #PRODUCT_PACKAGES += \
-    #libcsc \
-    #libstagefrighthw
-    #libExynosOMX_Core \
-    #libOMX.Exynos.MP3.Decoder \
-	#libOMX.Exynos.MPEG4.Decoder \
-	#libOMX.Exynos.MPEG4.Encoder \
-	#libOMX.Exynos.MPEG2.Decoder \
+#    libcsc \
+#    libstagefrighthw
+#    libExynosOMX_Core \
+#    libOMX.Exynos.MP3.Decoder \
+#    libOMX.Exynos.MPEG4.Decoder \
+#    libOMX.Exynos.MPEG4.Encoder \
+#    libOMX.Exynos.MPEG2.Decoder \
 
 PRODUCT_PACKAGES += \
     libcsc \
@@ -149,36 +165,36 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-	power.universal5430
+    power.universal5430
 
 # Lights
 PRODUCT_PACKAGES += \
-	lights.universal5430
+    lights.universal5430
 
 # Gps
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/configs/gps/gps.conf:system/etc/gps.conf \
-	$(LOCAL_PATH)/configs/gps/gps.xml:system/etc/gps.xml
+    $(LOCAL_PATH)/configs/gps/gps.conf:system/etc/gps.conf \
+    $(LOCAL_PATH)/configs/gps/gps.xml:system/etc/gps.xml
 
 # Camera
 PRODUCT_PACKAGES += \
-	camera.universal5430 \
-	libhwjpeg
+    camera.universal5430 \
+    libhwjpeg
 
 # Touchscreen
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/configs/idc/Synaptics_HID_TouchPad.idc:/system/usr/idc/Synaptics_HID_TouchPad.idc \
-	$(LOCAL_PATH)/configs/keylayout/gpio_keys_8.kl:/system/usr/keylayout/gpio_keys_8.kl \
-	$(LOCAL_PATH)/configs/keylayout/sec_touchkey.kl:/system/usr/keylayout/sec_touchkey.kl
+    $(LOCAL_PATH)/configs/idc/Synaptics_HID_TouchPad.idc:/system/usr/idc/Synaptics_HID_TouchPad.idc \
+    $(LOCAL_PATH)/configs/keylayout/gpio_keys_8.kl:/system/usr/keylayout/gpio_keys_8.kl \
+    $(LOCAL_PATH)/configs/keylayout/sec_touchkey.kl:/system/usr/keylayout/sec_touchkey.kl
 
 # Keystore
 PRODUCT_PACKAGES += \
-    keystore.exynos5	
-	
+    keystore.exynos5
+
 # Charger
 PRODUCT_PACKAGES += \
-	charger_res_images \
-	charger
+    charger_res_images \
+    charger
 
 # Misc
 PRODUCT_PACKAGES += \
@@ -186,26 +202,26 @@ PRODUCT_PACKAGES += \
 
 # Packages
 PRODUCT_PACKAGES += \
-	SamsungServiceMode
+    SamsungServiceMode
 
 # ANT+
 PRODUCT_PACKAGES += \
-	AntHalService \
-	com.dsi.ant.antradio_library \
-	libantradio	
+    AntHalService \
+    com.dsi.ant.antradio_library \
+    libantradio
 
 # Filesystem management tools
 #PRODUCT_PACKAGES += \
 #    fsck.f2fs \
-#	mkfs.f2fs	
+#    mkfs.f2fs
 
 # MobiCore setup
 #PRODUCT_PACKAGES += \
-    #libMcClient \
-    #libMcRegistry \
-    #libPaApi \
-    #libgdmcprov \
-    #mcDriverDaemon
+#    libMcClient \
+#    libMcRegistry \
+#    libPaApi \
+#    libgdmcprov \
+#    mcDriverDaemon
 
 # call dalvik heap config
 $(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
