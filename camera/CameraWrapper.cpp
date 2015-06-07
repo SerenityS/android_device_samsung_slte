@@ -25,8 +25,6 @@
 
 #define LOG_TAG "CameraWrapper"
 #include <cutils/log.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 
 #include <utils/threads.h>
 #include <utils/String8.h>
@@ -35,8 +33,6 @@
 #include <camera/Camera.h>
 #include <camera/CameraParameters.h>
 
-#define CAMID_PATH "/data/CameraID.txt"
-
 static android::Mutex gCameraWrapperLock;
 static camera_module_t *gVendorModule = 0;
 
@@ -44,7 +40,6 @@ static char **fixed_set_params = NULL;
 
 static int camera_device_open(const hw_module_t *module, const char *name,
         hw_device_t **device);
-static int camera_device_close(hw_device_t *device);
 static int camera_get_number_of_cameras(void);
 static int camera_get_camera_info(int camera_id, struct camera_info *info);
 
@@ -54,11 +49,11 @@ static struct hw_module_methods_t camera_module_methods = {
 
 camera_module_t HAL_MODULE_INFO_SYM = {
     .common = {
-         .tag = HARDWARE_MODULE_TAG,
+         tag: HARDWARE_MODULE_TAG,
          .module_api_version = CAMERA_MODULE_API_VERSION_1_0,
          .hal_api_version = HARDWARE_HAL_API_VERSION,
          .id = CAMERA_HARDWARE_MODULE_ID,
-         .name = "Exynos5420 Camera Wrapper",
+         .name = "Exynos5430 Camera Wrapper",
          .author = "The CyanogenMod Project",
          .methods = &camera_module_methods,
          .dso = NULL, /* remove compilation warnings */
@@ -84,36 +79,6 @@ typedef struct wrapper_camera_device {
 })
 
 #define CAMERA_ID(device) (((wrapper_camera_device_t *)(device))->id)
-static void fix_camera_id_permissions()
-{
-    FILE* camidfile;
-    int amode;
-    int ret = -1;
-    camidfile = fopen(CAMID_PATH, "w");
-    if (camidfile == 0) {
-        fprintf(stderr, "open(%s) failed\n", CAMID_PATH);
-        ALOGE("Can't open %s\n", CAMID_PATH);
-    } else {
-        ALOGD("Setting permissions of %s\n", CAMID_PATH);
-
-        /* write permissions for the file owner */
-        amode = S_IWUSR;
-        ret = chmod(CAMID_PATH, amode);
-
-        /* owner: media; group: system */
-        char* chown_cmd = (char*) malloc(strlen("chown media ") + strlen(CAMID_PATH) + 1);
-        char* chgrp_cmd = (char*) malloc(strlen("chgrp system ") + strlen(CAMID_PATH) + 1);
-        sprintf(chown_cmd, "chown media %s", CAMID_PATH);
-        sprintf(chgrp_cmd, "chgrp system %s", CAMID_PATH);
-        system(chown_cmd);
-        system(chgrp_cmd);
-
-        if (ret != 0) {
-            fprintf(stderr, "chmod() on file %s failed\n", CAMID_PATH);
-            ALOGE("Can't set permissions on %s\n", CAMID_PATH);
-        }
-    }
-}
 
 static int check_vendor_module()
 {
@@ -130,9 +95,6 @@ static int check_vendor_module()
     return rv;
 }
 
-#define KEY_VIDEO_HFR_VALUES "video-hfr-values"
-#define KEY_VIDEO_FRAME_FORMAT "video-frame-format"
-
 static char *camera_fixup_getparams(int id, const char *settings)
 {
     android::CameraParameters params;
@@ -143,15 +105,6 @@ static char *camera_fixup_getparams(int id, const char *settings)
     params.dump();
 #endif
 
-    const char *videoSizeValues = params.get(
-            android::CameraParameters::KEY_SUPPORTED_VIDEO_SIZES);
-    if (videoSizeValues) {
-        char videoSizes[strlen(videoSizeValues) + 10 + 1];
-        sprintf(videoSizes, "3840x2160,%s", videoSizeValues);
-        params.set(android::CameraParameters::KEY_SUPPORTED_VIDEO_SIZES,
-                videoSizes);
-	}
-				
     /* Convert to Qualcomm-style max parameters */
     if (params.get("contrast-max")) {
         params.set("max-contrast", params.get("contrast-max"));
@@ -167,12 +120,6 @@ static char *camera_fixup_getparams(int id, const char *settings)
     ALOGV("%s: fixed parameters:", __FUNCTION__);
     params.dump();
 #endif
-
-//    params.setPreviewFormat("yuv420sp");
-//    params.set(KEY_VIDEO_FRAME_FORMAT, "rgba8888");
-
-    /* Enforce video-snapshot-supported to true */
-    params.set(android::CameraParameters::KEY_VIDEO_SNAPSHOT_SUPPORTED, "true");
 
     android::String8 strParams = params.flatten();
     char *ret = strdup(strParams.string());
@@ -190,9 +137,6 @@ static char *camera_fixup_setparams(int id, const char *settings)
     params.dump();
 #endif
 
-    const char *recordingHint = params.get(android::CameraParameters::KEY_RECORDING_HINT);
-    bool isVideo = recordingHint && !strcmp(recordingHint, "true");
-
     /* Convert to Qualcomm-style max/min parameters */
     if (params.get("max-contrast")) {
         params.set("contrast-max", params.get("max-contrast"));
@@ -204,32 +148,15 @@ static char *camera_fixup_setparams(int id, const char *settings)
         params.set("sharpness-max", params.get("max-sharpness"));
     }
 
-    /* If the vendor has HFR values but doesn't also expose that
-     * this can be turned off, fixup the params to tell the Camera
-     * that it really is okay to turn it off.
-     */
+    // video-frame-format=yuv420p
+    //params.set(android::CameraParameters::KEY_VIDEO_FRAME_FORMAT, "yuv420p");
 
-//    params.setPreviewFormat("yuv420sp");
-//    params.set(KEY_VIDEO_FRAME_FORMAT, "rgba8888");
-
-    const char *hfrModeValues = params.get(KEY_VIDEO_HFR_VALUES);
-    if (hfrModeValues && !strstr(hfrModeValues, "off")) {
-        char hfrModes[strlen(hfrModeValues) + 4 + 1];
-        sprintf(hfrModes, "%s,off", hfrModeValues);
-        params.set(KEY_VIDEO_HFR_VALUES, hfrModes);
-    }
-
-    //android::String8 strParams = params.flatten();
-    //char *ret = strdup(strParams.string());	
-	
 #if !LOG_NDEBUG
     ALOGV("%s: fixed parameters:", __FUNCTION__);
     params.dump();
 #endif
 
-
-
-   android::String8 strParams = params.flatten();
+    android::String8 strParams = params.flatten();
     if (fixed_set_params[id])
         free(fixed_set_params[id]);
     fixed_set_params[id] = strdup(strParams.string());
@@ -242,8 +169,6 @@ static char *camera_fixup_setparams(int id, const char *settings)
  * implementation of camera_device_ops functions
  *******************************************************************/
 
- 
- 
 static int camera_set_preview_window(struct camera_device *device,
         struct preview_stream_ops *window)
 {
@@ -629,7 +554,8 @@ static int camera_device_open(const hw_module_t *module, const char *name,
         memset(camera_ops, 0, sizeof(*camera_ops));
 
         camera_device->base.common.tag = HARDWARE_DEVICE_TAG;
-        camera_device->base.common.version = CAMERA_DEVICE_API_VERSION_1_0;
+        //camera_device->base.common.version = CAMERA_DEVICE_API_VERSION_1_0;
+        camera_device->base.common.version = 0;
         camera_device->base.common.module = (hw_module_t *)(module);
         camera_device->base.common.close = camera_device_close;
         camera_device->base.ops = camera_ops;
