@@ -178,8 +178,7 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    camera.universal5430 \
-    libhwjpeg
+    camera.universal5430
 
 # Touchscreen
 PRODUCT_COPY_FILES += \
