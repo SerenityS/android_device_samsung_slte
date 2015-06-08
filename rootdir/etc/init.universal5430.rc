@@ -24,11 +24,16 @@ on init
     symlink /storage/usbdisk /mnt/usbdisk
     symlink /data/app /factory
 
+    mkdir /tombstones
+
+# Baseband
     mkdir /efs 0771 radio system
-    symlink /dev/block/mmcblk0p13 /dev/mbin0
+    symlink /dev/block/platform/15540000.dwmmc0/by-name/RADIO /dev/mbin0
     restorecon /dev/mbin0
+
     symlink  /sys/devices/15510000.usb/ehci_power /dev/ehci_power
     symlink  /sys/devices/10f24000.mipi-lli /dev/mipi-lli
+
     write /sys/class/net/rmnet0/queues/rx-0/rps_cpus 1
     write /sys/class/net/rmnet1/queues/rx-0/rps_cpus 1
     write /sys/class/net/rmnet2/queues/rx-0/rps_cpus 1
@@ -37,9 +42,7 @@ on init
     write /sys/class/net/rmnet5/queues/rx-0/rps_cpus 1
     write /sys/class/net/rmnet6/queues/rx-0/rps_cpus 1
     write /sys/class/net/rmnet7/queues/rx-0/rps_cpus 1
-    write /proc/sys/net/core/netdev_max_backlog 5000
-
-    mkdir /tombstones
+    write /proc/sys/net/core/netdev_max_backlog 8192
 
 # Support Preload install apks
     mkdir /preload 0771 system system
@@ -68,6 +71,8 @@ on post-fs-data
     # Permissions Camera
     chown system radio /sys/class/camera/rear/rear_camfw
     chown system radio /sys/class/camera/rear/rear_camfw_full
+    chown system radio /sys/class/camera/rear/rear_checkfw_user
+    chown system radio /sys/class/camera/rear/rear_checkfw_factory
     chown system radio /sys/class/camera/rear/rear_camtype
     chown system radio /sys/class/camera/rear/rear_companionfw
     chown system radio /sys/class/camera/rear/rear_companionfw_full
@@ -77,10 +82,17 @@ on post-fs-data
     chown system radio /sys/class/camera/front/front_camfw
     chown system radio /sys/class/camera/front/front_camtype
 
+    # Permissions for Camera to flush cache buffers
+    chown system system /sys/devices/virtual/sec/sec_misc/drop_caches
+
 #Private Mode
     mkdir /data/privatemode 0770 system system
     chown system system /data/privatemode
     restorecon /data/privatemode
+
+# Audio
+    mkdir /data/firmware 0770 media system
+    chown media system /data/firmware
 
 on boot
     mount debugfs /sys/kernel/debug /sys/kernel/debug
@@ -98,7 +110,10 @@ on boot
     setprop net.tcp.buffersize.gprs    6138,45000,45000,6144,13140,17520
     setprop net.tcp.buffersize.evdo    6141,131070,393216,6144,24576,393216
 
-	# For setting tcp delayed ack
+    # Allow to access debugfs for system:system
+    chown system system /sys/kernel/debug
+
+    # For setting tcp delayed ack
     chown system system /sys/kernel/ipv4/tcp_delack_seg
     chown system system /sys/kernel/ipv4/tcp_use_userconfig
 
@@ -216,6 +231,7 @@ on boot
 
 # DRK permission
     mkdir /efs/prov 0770 radio system
+    mkdir /efs/prov_data 0770 radio system
     chown radio system /efs/prov_data
     chmod 0770 /efs/prov_data
     chown radio system /efs/prov_data/dev_root
@@ -369,6 +385,7 @@ on fs
     mount_all /fstab.universal5430
     setprop ro.crypto.fuse_sdcard true
 
+# MIF
     chown radio radio /sys/devices/virtual/misc/multipdp/waketime
     chmod 0660 /sys/devices/virtual/misc/umts_dm0/dm_state
     chown radio system /sys/devices/virtual/misc/umts_dm0/dm_state
