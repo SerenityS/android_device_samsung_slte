@@ -179,21 +179,21 @@ const struct route_config voice_rec_headset = {
 
 const struct route_config communication_speaker = {
     "communication-speaker",
-    "communication-speaker-main-mic",
+    "communication-main-mic",
     { ES325_PRESET_VOIP_HANDHELD,
       ES325_PRESET_VOIP_DESKTOP }
 };
 
 const struct route_config communication_earpiece = {
     "communication-earpiece",
-    "communication-earpiece-main-mic",
+    "communication-main-mic",
     { ES325_PRESET_OFF,
       ES325_PRESET_OFF }
 };
 
 const struct route_config communication_headphones = {
     "communication-headphones",
-    "communication-earpiece-main-mic",
+    "communication-main-mic",
     { ES325_PRESET_VOIP_HEADPHONES,
       ES325_PRESET_VOIP_HP_DESKTOP}
 };

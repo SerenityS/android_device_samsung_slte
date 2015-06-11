@@ -535,7 +535,7 @@ static void start_bt_sco(struct audio_device *adev)
 
     ALOGV("%s: Opening SCO PCMs", __func__);
 
-    adev->wb_amr = 1;	
+    adev->wb_amr = 1;
     if (adev->wb_amr) {
         sco_config = &pcm_config_sco_wide;
     } else {
@@ -683,17 +683,17 @@ static void adev_set_wb_amr_callback(void *data, int enable)
         adev->wb_amr = enable;
 
         /* reopen the modem PCMs at the new rate */
-       /* if (adev->in_call) {
+       if (adev->in_call) {
             ALOGV("%s: %s Incall Wide Band support",
                   __func__,
                   enable ? "Turn on" : "Turn off");
 
+#if 0
             stop_voice_call(adev);
             select_devices(adev);
             start_voice_call(adev);
-
+#endif
         }
-		*/
     }
 
     pthread_mutex_unlock(&adev->lock);
