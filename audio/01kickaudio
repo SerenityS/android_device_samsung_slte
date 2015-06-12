@@ -1,0 +1,7 @@
+#!/system/bin/sh
+
+/system/bin/stagefright -a -o /system/media/audio/silent.ogg
+sleep 1
+/system/bin/stagefright -a -o /system/media/audio/silent.ogg
+
+exit 0
