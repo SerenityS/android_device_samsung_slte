@@ -458,18 +458,20 @@ on fs
     chown system system /sys/class/mdnie/mdnie/sensorRGB
 
 # Permissions for TouchScreen
-	chown system radio /sys/class/sec/tsp/cmd
-	chown system system /sys/class/sec/tsp/input/enabled
+    chown system radio /sys/class/sec/tsp/cmd
+    chown system system /sys/class/sec/tsp/input/enabled
 
 # Permissions for Touchkey
-	chown system radio /sys/class/sec/sec_touchkey/brightness
-	chown system radio /sys/class/sec/sec_touchkey/touchkey_firm_update
-	chown system radio /sys/class/sec/sec_touchkey/touch_sensitivity
-	chown system radio /sys/class/sec/sec_touchkey/glove_mode
-	chown system radio /sys/class/sec/sec_touchkey/flip_mode
-	chown system radio /sys/class/sec/sec_touchkey/boost_level
-	chown system system /sys/class/sec/sec_touchkey/input/enabled
-	chown root system /sys/class/sec/sec_touchkey/tsp_keys_enabled
+    chown system radio /sys/class/sec/sec_touchkey/brightness
+    chown system radio /sys/class/sec/sec_touchkey/touchkey_firm_update
+    chown system radio /sys/class/sec/sec_touchkey/touch_sensitivity
+    chown system radio /sys/class/sec/sec_touchkey/glove_mode
+    chown system radio /sys/class/sec/sec_touchkey/flip_mode
+    chown system radio /sys/class/sec/sec_touchkey/boost_level
+    chown system system /sys/class/sec/sec_touchkey/input/enabled
+    # key enabler
+    chown system radio /sys/class/sec/sec_touchkey/keypad_enable
+    chmod 0664 /sys/class/sec/sec_touchkey/keypad_enable
 
 # Permissions for gpio_keys
     chown radio system /sys/class/sec/sec_key/wakeup_keys
