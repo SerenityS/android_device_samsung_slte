@@ -17,4 +17,7 @@ persist.sys.usb.config=mtp
 # Wifi
 wifi.interface=wlan0
 
+# NFC
 ro.nfc.sec_hal=true
+
+#slte.audio.workaround=debug
