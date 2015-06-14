@@ -365,6 +365,7 @@ on boot
     chown radio system /sys/class/secgpio_check/secgpio_check_all/gpioinit_check
     chown radio system /sys/class/secgpio_check/secgpio_check_all/gpiosleep_check
     chown radio system /sys/class/secgpio_check/secgpio_check_all/checked_sleepGPIO
+    chown system system /sys/devices/gpio_keys.10/input/input8/enabled
 
 # CPU Idle
     chown system radio /sys/module/cpuidle/parameters/enable_mask
