@@ -396,17 +396,17 @@
     <!-- ### Volume ### -->
 
     <path name="volume-speaker-default">
-        <ctl name="HPOUT2 Digital Volume" value="140" />
+        <ctl name="HPOUT2 Digital Volume" value="136" />
         <ctl name="HPOUT2L Input 1 Volume" value="26" />
         <ctl name="HPOUT2R Input 1 Volume" value="26" />
         <ctl name="DSP4L Input 1 Volume" value="32" />
         <ctl name="DSP4L Input 2 Volume" value="32" />
-        <ctl name="IN4L Digital Volume" value="140" />
-        <ctl name="IN4R Digital Volume" value="140" />
+        <ctl name="IN4L Digital Volume" value="136" />
+        <ctl name="IN4R Digital Volume" value="136" />
     </path>
 
     <path name="volume-speaker-incall">
-        <ctl name="HPOUT2 Digital Volume" value="140" />
+        <ctl name="HPOUT2 Digital Volume" value="136" />
         <ctl name="HPOUT2L Input 1 Volume" value="26" />
         <ctl name="HPOUT2R Input 1 Volume" value="26" />
 
