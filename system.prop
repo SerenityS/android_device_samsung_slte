@@ -20,4 +20,4 @@ wifi.interface=wlan0
 # NFC
 ro.nfc.sec_hal=true
 
-#slte.audio.workaround=debug
+slte.audio.workaround=true

@@ -28,34 +28,33 @@ public class AudioWorkaround extends Activity {
     private static final String LOG_TAG = "AudioWorkaround";
     private static final int AUDIO_TIMEOUT = 3000;
 
-	/**
-	 * Get the value for the given key.
-	 *
-	 * @return if the key isn't found, return def if it isn't null,
-	 * or an empty string otherwise
-	 * @throws IllegalArgumentException if the key exceeds 32 characters
-	 */
-	private static String getSystemProperties(String key, String def)
-	    throws IllegalArgumentException
-	{
-		String ret = def;
-		try {
-			Class<?> SystemProperties = Class.forName("android.os.SystemProperties");
-			//Parameters Types
-			@SuppressWarnings("rawtypes")
-			Class[] paramTypes = { String.class, String.class };
-			Method get = SystemProperties.getMethod("get", paramTypes);
-			//Parameters
-			Object[] params = { key, def };
-			ret = (String) get.invoke(SystemProperties, params);
-		} catch (IllegalArgumentException iAE) {
-			throw iAE;
-		} catch (Exception e) {
-			ret = def;
-			//TODO
-		}
-		return ret;
-	}
+    /**
+     * Get the value for the given key.
+     *
+     * @return if the key isn't found, return def if it isn't null,
+     * or an empty string otherwise
+     * @throws IllegalArgumentException if the key exceeds 32 characters
+     */
+    private static String getSystemProperties(String key, String def)
+        throws IllegalArgumentException
+    {
+        String ret = def;
+        try {
+            Class<?> SystemProperties = Class.forName("android.os.SystemProperties");
+            //Parameters Types
+            @SuppressWarnings("rawtypes")
+            Class[] paramTypes = { String.class, String.class };
+            Method get = SystemProperties.getMethod("get", paramTypes);
+            //Parameters
+            Object[] params = { key, def };
+            ret = (String) get.invoke(SystemProperties, params);
+        } catch (IllegalArgumentException iAE) {
+            throw iAE;
+        } catch (Exception e) {
+            ret = def;
+        }
+        return ret;
+    }
 
 
     private MediaPlayer mMediaPlayer;
@@ -66,15 +65,19 @@ public class AudioWorkaround extends Activity {
 
         try {
             final String prop = getSystemProperties("slte.audio.workaround",
-                                                    "silent");
-            int resId = R.raw.silent;
+                                                    "false");
+            int resId;
 
             Log.d(LOG_TAG, "try to play Audio(" + prop + ")");
 
-            if ("no".equals(prop) || "false".equals(prop))
-                return;
-            if ("debug".equals(prop))
+            if ("true".equals(prop) || "on".equals(prop)) {
+                resId = R.raw.silent;
+            } else if ("debug".equals(prop)) {
                 resId = R.raw.pixiedust;
+            } else {
+                finishAudioWorkaround();
+                return;
+            }
 
             mMediaPlayer = MediaPlayer.create(this, resId);
             mMediaPlayer.start();
