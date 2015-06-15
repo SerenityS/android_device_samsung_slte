@@ -179,9 +179,9 @@ RECOVERY_SDCARD_ON_DATA := true
 TW_NO_REBOOT_BOOTLOADER := true
 TW_HAS_DOWNLOAD_MODE := true
 
-TW_INCLUDE_JB_CRYPTO := true
 TW_INCLUDE_L_CRYPTO := true
 
 # The kernel has exfat support.
 TW_NO_EXFAT_FUSE := true
-#TW_DISABLE_TTF := true
+TW_EXCLUDE_SUPERSU := true
+TW_DISABLE_TTF := true
