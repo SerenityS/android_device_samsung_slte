@@ -73,6 +73,9 @@
 
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
 
+/* Force to use Wide Band for better quality */
+#define FORCE_WIDEBAND
+
 struct pcm_config pcm_config_fast = {
     .channels = 2,
     .rate = 48000,
@@ -669,6 +672,7 @@ static void stop_voice_call(struct audio_device *adev)
 
 static void adev_set_wb_amr_callback(void *data, int enable)
 {
+#ifndef FORCE_WIDEBAND
     struct audio_device *adev = (struct audio_device *)data;
 
     pthread_mutex_lock(&adev->lock);
@@ -689,6 +693,7 @@ static void adev_set_wb_amr_callback(void *data, int enable)
     }
 
     pthread_mutex_unlock(&adev->lock);
+#endif
 }
 
 static void adev_set_call_audio_path(struct audio_device *adev)
@@ -2018,6 +2023,10 @@ static int adev_open(const hw_module_t* module, const char* name,
 
     adev->mode = AUDIO_MODE_NORMAL;
     adev->voice_volume = 1.0f;
+
+#ifdef FORCE_WIDEBAND
+    adev->wb_amr = true;
+#endif
 
     /* RIL */
     ril_open(&adev->ril);
