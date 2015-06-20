@@ -150,15 +150,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media/media_profiles.xml:system/etc/media_profiles.xml
 
 # OMX
-#PRODUCT_PACKAGES += \
-#    libcsc \
-#    libstagefrighthw
-#    libExynosOMX_Core \
-#    libOMX.Exynos.MP3.Decoder \
-#    libOMX.Exynos.MPEG4.Decoder \
-#    libOMX.Exynos.MPEG4.Encoder \
-#    libOMX.Exynos.MPEG2.Decoder \
-
 PRODUCT_PACKAGES += \
     libcsc \
     libExynosOMX_Core \
