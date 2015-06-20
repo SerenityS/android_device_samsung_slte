@@ -95,7 +95,8 @@ NUM_FRAMEBUFFER_SURFACE_BUFFERS := 5
 BOARD_USES_HWC_SERVICES := true
 
 # Hardware
-BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/cmhw
+BOARD_HARDWARE_CLASS += $(LOCAL_PATH)/cmhw
+BOARD_HARDWARE_CLASS += hardware/samsung/cmhw
 
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
