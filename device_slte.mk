@@ -128,8 +128,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
     $(LOCAL_PATH)/configs/audio/audio_policy.conf:system/etc/audio_policy.conf \
     $(LOCAL_PATH)/configs/audio/mixer_paths.xml:system/etc/mixer_paths.xml
-    # $(LOCAL_PATH)/audio/01kickaudio:system/etc/init.d/01kickaudio \
-    # $(LOCAL_PATH)/audio/silent.ogg:system/media/audio/silent.ogg
 
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
