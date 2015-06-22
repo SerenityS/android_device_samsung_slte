@@ -8,9 +8,21 @@ ro.product.device=slte
 
 ro.sf.lcd_density=320
 
+#
+# RIL
+#
 rild.libpath=/system/lib/libsec-ril.so
 rild.libargs=-d /dev/ttyS0
 ro.telephony.ril_class=SlteRIL
+
+ro.ril.hsxpa=1
+ro.ril.gprsclass=10
+
+#
+# HWC
+#
+debug.hwc.winupdate=1
+debug.hwc.otf=1
 
 #
 # HWUI_BUILD_PROPERTIES
