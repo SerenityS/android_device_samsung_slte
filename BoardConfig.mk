@@ -62,6 +62,9 @@ BOARD_HDMI_INCAPABLE := true
 # frameworks/native/services/surfaceflinger
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 5
 
+# GSC
+BOARD_USES_ONLY_GSC0_GSC1 := true
+
 ### OMX (insignal)
 BOARD_USE_DMA_BUF := true
 BOARD_USE_IMPROVED_BUFFER := true
