@@ -104,9 +104,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # RIL
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/ril/cbd:system/bin/cbd \
-    $(LOCAL_PATH)/ril/cbd_44:system/bin/cbd_44 \
-    $(LOCAL_PATH)/ril/cbd_50:system/bin/cbd_50 \
+    $(LOCAL_PATH)/ril/bin/cbd:system/bin/cbd \
+    $(LOCAL_PATH)/ril/bin/cbd_44:system/bin/cbd_44 \
+    $(LOCAL_PATH)/ril/bin/cbd_50:system/bin/cbd_50 \
 
 PRODUCT_PACKAGES += \
     libsecril-client \
@@ -217,18 +217,18 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp \
     persist.sys.isUsbOtgEnabled=true
 
+# MobiCore setup
+PRODUCT_PACKAGES += \
+    libMcClient \
+    libMcRegistry \
+    libPaApi \
+    libgdmcprov \
+    mcDriverDaemon
+
 # Filesystem management tools
 #PRODUCT_PACKAGES += \
 #    fsck.f2fs \
 #    mkfs.f2fs
-
-# MobiCore setup
-#PRODUCT_PACKAGES += \
-#    libMcClient \
-#    libMcRegistry \
-#    libPaApi \
-#    libgdmcprov \
-#    mcDriverDaemon
 
 # call dalvik heap config
 $(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
