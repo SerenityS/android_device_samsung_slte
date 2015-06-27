@@ -2,6 +2,9 @@
 # system.prop for slte
 #
 
+# CBD
+ro.cbd.version=kitkat
+
 # Screen
 ro.sf.lcd_density=320
 

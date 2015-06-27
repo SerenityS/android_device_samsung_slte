@@ -103,6 +103,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 #    setup_fs
 
 # RIL
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/ril/cbd:system/bin/cbd \
+    $(LOCAL_PATH)/ril/cbd_44:system/bin/cbd_44 \
+    $(LOCAL_PATH)/ril/cbd_50:system/bin/cbd_50 \
+
 PRODUCT_PACKAGES += \
     libsecril-client \
     libsecril-client-sap
@@ -158,9 +163,8 @@ PRODUCT_COPY_FILES += \
 # OMX
 PRODUCT_PACKAGES += \
     libcsc \
-    libExynosOMX_Core \
     libstagefrighthw \
-    stagefright
+    libExynosOMX_Core
 
 # Power
 PRODUCT_PACKAGES += \
