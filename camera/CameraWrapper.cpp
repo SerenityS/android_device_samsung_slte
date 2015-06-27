@@ -23,12 +23,6 @@
 
 //#define LOG_NDEBUG 0
 
-/* FIXME: Disable the HDR scene mode for now */
-#define DISABLE_HDR
-
-/* FIXME: Disable the recording for now */
-#define DISABLE_RECORDING
-
 #define LOG_TAG "CameraWrapper"
 #include <cutils/log.h>
 
@@ -121,11 +115,6 @@ static char *camera_fixup_getparams(int id, const char *settings)
     if (params.get("sharpness-max")) {
         params.set("max-sharpness", params.get("sharpness-max"));
     }
-
-#ifdef DISABLE_HDR
-    // auto,hdr -> auto
-    params.set(android::CameraParameters::KEY_SUPPORTED_SCENE_MODES, "auto");
-#endif
 
 #if !LOG_NDEBUG
     ALOGV("%s: fixed parameters:", __FUNCTION__);
@@ -295,14 +284,10 @@ static int camera_start_recording(struct camera_device *device)
     ALOGV("%s->%08X->%08X", __FUNCTION__, (uintptr_t)device,
             (uintptr_t)(((wrapper_camera_device_t*)device)->vendor));
 
-#ifdef DISABLE_RECORDING
-    return EINVAL;
-#else
     if (!device)
         return EINVAL;
 
     return VENDOR_CALL(device, start_recording);
-#endif
 }
 
 static void camera_stop_recording(struct camera_device *device)
@@ -310,14 +295,10 @@ static void camera_stop_recording(struct camera_device *device)
     ALOGV("%s->%08X->%08X", __FUNCTION__, (uintptr_t)device,
             (uintptr_t)(((wrapper_camera_device_t*)device)->vendor));
 
-#ifdef DISABLE_RECORDING
-    return;
-#else
     if (!device)
         return;
 
     VENDOR_CALL(device, stop_recording);
-#endif
 }
 
 static int camera_recording_enabled(struct camera_device *device)
