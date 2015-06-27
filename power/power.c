@@ -25,9 +25,14 @@
 #include <hardware/hardware.h>
 #include <hardware/power.h>
 
+#if 0 // full path version
 #define TSP_POWER "/sys/devices/14e10000.i2c/i2c-7/7-0049/input/input2/enabled"
-#define GPIO_KEYS_POWER "/sys/devices/gpio_keys.10/input/input8/enabled"
 #define TOUCHKEY_POWER "/sys/devices/14e90000.i2c/i2c-9/9-0020/input/input1/enabled"
+#else // symbolic link version
+#define TSP_POWER "/sys/class/sec/tsp/input/enabled"
+#define TOUCHKEY_POWER "/sys/class/sec/sec_touchkey/input/enabled"
+#endif
+#define GPIO_KEYS_POWER "/sys/devices/gpio_keys.10/input/input8/enabled"
 
 static void sysfs_write(char *path, char *s) {
     char buf[80];
