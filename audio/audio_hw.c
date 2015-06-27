@@ -4,6 +4,7 @@
  *               Daniel Hillenbrand <codeworkx@cyanogenmod.com>
  *               Guillaume "XpLoDWilD" Lesniak <xplodgui@gmail.com>
  *               Andreas Schneider <asn@cryptomilk.org>
+ *               "kyasu" <kyasu.m2@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -73,13 +74,15 @@
 
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
 
-/* Force to use Wide Band for better quality */
+#define MIXER_XML_PATH "/system/etc/mixer_paths.xml"
+
+/* Force to use the wide band for better quality */
 #define FORCE_WIDEBAND
 
 struct pcm_config pcm_config_fast = {
     .channels = 2,
     .rate = 48000,
-    .period_size = 256,
+    .period_size = 240,
     .period_count = 2,
     .format = PCM_FORMAT_S16_LE,
 };
@@ -87,15 +90,15 @@ struct pcm_config pcm_config_fast = {
 struct pcm_config pcm_config_deep = {
     .channels = 2,
     .rate = 48000,
-    .period_size = 1024,
-    .period_count = 4,
+    .period_size = 3840,
+    .period_count = 2,
     .format = PCM_FORMAT_S16_LE,
 };
 
 struct pcm_config pcm_config_in = {
     .channels = 2,
     .rate = 48000,
-    .period_size = 1024,
+    .period_size = 240,
     .period_count = 2,
     .format = PCM_FORMAT_S16_LE,
 };
@@ -119,7 +122,7 @@ struct pcm_config pcm_config_sco_wide = {
 struct pcm_config pcm_config_voice = {
     .channels = 2,
     .rate = 8000,
-    .period_size = 1024,
+    .period_size = 960,
     .period_count = 2,
     .format = PCM_FORMAT_S16_LE,
 };
@@ -127,7 +130,7 @@ struct pcm_config pcm_config_voice = {
 struct pcm_config pcm_config_voice_wide = {
     .channels = 2,
     .rate = 16000,
-    .period_size = 1024,
+    .period_size = 960,
     .period_count = 2,
     .format = PCM_FORMAT_S16_LE,
 };
@@ -1073,13 +1076,13 @@ static int out_standby(struct audio_stream *stream)
     struct stream_out *out = (struct stream_out *)stream;
     int ret;
 
-    pthread_mutex_lock(&out->dev->lock);
     pthread_mutex_lock(&out->lock);
+    pthread_mutex_lock(&out->dev->lock);
 
     ret = do_out_standby(out);
 
-    pthread_mutex_unlock(&out->lock);
     pthread_mutex_unlock(&out->dev->lock);
+    pthread_mutex_unlock(&out->lock);
 
     return ret;
 }
@@ -1107,8 +1110,8 @@ static int out_set_parameters(struct audio_stream *stream, const char *kvpairs)
     if (ret >= 0) {
         val = atoi(value);
 
-        pthread_mutex_lock(&adev->lock);
         pthread_mutex_lock(&out->lock);
+        pthread_mutex_lock(&adev->lock);
 
         if ((out->device != val) && (val != 0)) {
             /* Force standby if moving to/from SPDIF or if the output
@@ -1142,8 +1145,8 @@ static int out_set_parameters(struct audio_stream *stream, const char *kvpairs)
             }
         }
 
-        pthread_mutex_unlock(&out->lock);
         pthread_mutex_unlock(&adev->lock);
+        pthread_mutex_unlock(&out->lock);
     }
 
     str_parms_destroy(parms);
@@ -1220,23 +1223,20 @@ static ssize_t out_write(struct audio_stream_out *stream, const void* buffer,
     struct audio_device *adev = out->dev;
     int i;
 
-    /*
-     * acquiring hw device mutex systematically is useful if a low
-     * priority thread is waiting on the output stream mutex - e.g.
-     * executing out_set_parameters() while holding the hw device
-     * mutex
-     */
-    pthread_mutex_lock(&adev->lock);
     pthread_mutex_lock(&out->lock);
+
     if (out->standby) {
+        out->standby = false;
+
+        pthread_mutex_lock(&adev->lock);
         ret = start_output_stream(out);
+        pthread_mutex_unlock(&adev->lock);
+
         if (ret != 0) {
-            pthread_mutex_unlock(&adev->lock);
+            out->standby = true;
             goto exit;
         }
-        out->standby = false;
     }
-    pthread_mutex_unlock(&adev->lock);
 
     if (out->disabled) {
         ret = -EPIPE;
@@ -1260,8 +1260,9 @@ exit:
     pthread_mutex_unlock(&out->lock);
 
     if (ret != 0) {
-        usleep(bytes * 1000000 / audio_stream_out_frame_size(&stream) /
-               out_get_sample_rate(&stream->common));
+        //out_standby(&out->stream.common);
+        usleep(bytes * 1000000 / audio_stream_out_frame_size(stream) /
+               out_get_sample_rate(&out->stream.common));
     }
 
     return bytes;
@@ -1356,13 +1357,13 @@ static int in_standby(struct audio_stream *stream)
     struct stream_in *in = (struct stream_in *)stream;
     int ret;
 
-    pthread_mutex_lock(&in->dev->lock);
     pthread_mutex_lock(&in->lock);
+    pthread_mutex_lock(&in->dev->lock);
 
     ret = do_in_standby(in);
 
-    pthread_mutex_unlock(&in->lock);
     pthread_mutex_unlock(&in->dev->lock);
+    pthread_mutex_unlock(&in->lock);
 
     return ret;
 }
@@ -1384,8 +1385,9 @@ static int in_set_parameters(struct audio_stream *stream, const char *kvpairs)
 
     parms = str_parms_create_str(kvpairs);
 
-    pthread_mutex_lock(&adev->lock);
     pthread_mutex_lock(&in->lock);
+    pthread_mutex_lock(&adev->lock);
+
     ret = str_parms_get_str(parms, AUDIO_PARAMETER_STREAM_INPUT_SOURCE,
                             value, sizeof(value));
     if (ret >= 0) {
@@ -1420,8 +1422,8 @@ static int in_set_parameters(struct audio_stream *stream, const char *kvpairs)
         select_devices(adev);
     }
 
-    pthread_mutex_unlock(&in->lock);
     pthread_mutex_unlock(&adev->lock);
+    pthread_mutex_unlock(&in->lock);
 
     str_parms_destroy(parms);
     return ret;
@@ -1471,25 +1473,20 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
     int ret = 0;
     struct stream_in *in = (struct stream_in *)stream;
     struct audio_device *adev = in->dev;
-    size_t frames_rq = bytes / audio_stream_in_frame_size(&stream);
+    size_t frames_rq = bytes / audio_stream_in_frame_size(stream);
 
-    /*
-     * acquiring hw device mutex systematically is useful if a low
-     * priority thread is waiting on the input stream mutex - e.g.
-     * executing in_set_parameters() while holding the hw device
-     * mutex
-     */
-    pthread_mutex_lock(&adev->lock);
     pthread_mutex_lock(&in->lock);
-    if (in->standby) {
-        ret = start_input_stream(in);
-        if (ret == 0)
-            in->standby = false;
-    }
-    pthread_mutex_unlock(&adev->lock);
 
-    if (ret < 0)
-        goto exit;
+    if (in->standby) {
+        pthread_mutex_lock(&adev->lock);
+        ret = start_input_stream(in);
+        pthread_mutex_unlock(&adev->lock);
+
+        if (ret != 0) {
+            goto exit;
+        }
+        in->standby = false;
+    }
 
     /*if (in->num_preprocessors != 0)
         ret = process_frames(in, buffer, frames_rq);
@@ -1510,11 +1507,14 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
         memset(buffer, 0, bytes);
 
 exit:
-    if (ret < 0)
-        usleep(bytes * 1000000 / audio_stream_in_frame_size(&stream) /
-               in_get_sample_rate(&stream->common));
-
     pthread_mutex_unlock(&in->lock);
+
+    if (ret != 0) {
+        //in_standby(&in->stream.common);
+        usleep(bytes * 1000000 / audio_stream_in_frame_size(stream) /
+               in_get_sample_rate(&in->stream.common));
+    }
+
     return bytes;
 }
 
@@ -1530,13 +1530,13 @@ static int in_add_audio_effect(const struct audio_stream *stream,
     effect_descriptor_t descr;
     if ((*effect)->get_descriptor(effect, &descr) == 0) {
 
-        pthread_mutex_lock(&in->dev->lock);
         pthread_mutex_lock(&in->lock);
+        pthread_mutex_lock(&in->dev->lock);
 
         eS325_AddEffect(&descr, in->io_handle);
 
-        pthread_mutex_unlock(&in->lock);
         pthread_mutex_unlock(&in->dev->lock);
+        pthread_mutex_unlock(&in->lock);
     }
 
     return 0;
@@ -1549,13 +1549,13 @@ static int in_remove_audio_effect(const struct audio_stream *stream,
     effect_descriptor_t descr;
     if ((*effect)->get_descriptor(effect, &descr) == 0) {
 
-        pthread_mutex_lock(&in->dev->lock);
         pthread_mutex_lock(&in->lock);
+        pthread_mutex_lock(&in->dev->lock);
 
         eS325_RemoveEffect(&descr, in->io_handle);
 
-        pthread_mutex_unlock(&in->lock);
         pthread_mutex_unlock(&in->dev->lock);
+        pthread_mutex_unlock(&in->lock);
     }
 
     return 0;
@@ -2011,7 +2011,7 @@ static int adev_open(const hw_module_t* module, const char* name,
     adev->hw_device.set_master_mute = NULL;
     adev->hw_device.get_master_mute = NULL;
 
-    adev->ar = audio_route_init(MIXER_CARD, NULL);
+    adev->ar = audio_route_init(MIXER_CARD, MIXER_XML_PATH);
     adev->input_source = AUDIO_SOURCE_DEFAULT;
     /* adev->cur_route_id initial value is 0 and such that first device
      * selection is always applied by select_devices() */
@@ -2024,9 +2024,9 @@ static int adev_open(const hw_module_t* module, const char* name,
     adev->mode = AUDIO_MODE_NORMAL;
     adev->voice_volume = 1.0f;
 
-#ifdef FORCE_WIDEBAND
-    adev->wb_amr = true;
-#endif
+//#ifdef FORCE_WIDEBAND
+    adev->wb_amr = true; /* true by default */
+//#endif
 
     /* RIL */
     ril_open(&adev->ril);
