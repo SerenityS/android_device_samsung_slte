@@ -6,9 +6,10 @@ grepprop() { x=`grep "^$1=" $bprop | head -n 1`; echo $x | cut -d = -f 2; }
 
 cbdver=`grepprop "ro.cbd.version"`
 
-if [ "$cbdver" = "kitkat" ] || [ "$cbdver" = "4.4" ]
-then
+if [ "$cbdver" = "4.4" ]; then
     exec /system/bin/cbd_44 -d -txmm72xx -bl -ml -p 13
+elif [ "$cbdver" = "5.0" ]; then
+    exec /system/bin/cbd_50 -d -t xmm72xx_lli -b l -m l -p 13
 else
     exec /system/bin/cbd_50 -d -t xmm72xx_lli -b l -m l -p 13
 fi

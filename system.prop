@@ -3,7 +3,7 @@
 #
 
 # CBD
-ro.cbd.version=kitkat
+ro.cbd.version=5.0
 
 # Screen
 ro.sf.lcd_density=320
