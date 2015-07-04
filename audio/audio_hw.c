@@ -77,7 +77,7 @@
 #define MIXER_XML_PATH "/system/etc/mixer_paths.xml"
 
 /* Force to use the wide band for better quality */
-#define FORCE_WIDEBAND
+//#define FORCE_WIDEBAND
 
 struct pcm_config pcm_config_fast = {
     .channels = 2,
@@ -121,7 +121,8 @@ struct pcm_config pcm_config_sco_wide = {
 
 struct pcm_config pcm_config_voice = {
     .channels = 2,
-    .rate = 8000,
+    //.rate = 8000,
+    .rate = 16000,
     .period_size = 960,
     .period_count = 2,
     .format = PCM_FORMAT_S16_LE,
@@ -421,8 +422,6 @@ static void select_devices(struct audio_device *adev)
     int new_route_id;
     int new_es325_preset = -1;
 
-    audio_route_reset(adev->ar);
-
 #ifndef HDMI_INCAPABLE
     enable_hdmi_audio(adev, adev->out_device & AUDIO_DEVICE_OUT_AUX_DIGITAL);
 #endif
@@ -482,6 +481,8 @@ static void select_devices(struct audio_device *adev)
           adev->out_device, adev->input_source,
           output_route ? output_route : "none",
           input_route ? input_route : "none");
+
+    audio_route_reset(adev->ar);
 
     if (output_route != NULL) {
         audio_route_apply_path(adev->ar, output_route);
@@ -1250,8 +1251,10 @@ static ssize_t out_write(struct audio_stream_out *stream, const void* buffer,
     for (i = 0; i < PCM_TOTAL; i++)
         if (out->pcm[i]) {
             ret = pcm_write(out->pcm[i], (void *)buffer, bytes);
+	    /*
             if (ret != 0)
                 break;
+	    */
         }
     if (ret == 0)
         out->written += bytes / (out->config.channels * sizeof(short));
@@ -1699,7 +1702,7 @@ static int adev_set_parameters(struct audio_hw_device *dev, const char *kvpairs)
 
     ret = str_parms_get_str(parms, "noise_suppression", value, sizeof(value));
     if (ret >= 0) {
-        if (strcmp(value, "on") == 0 || strcmp(value, "true") == 0) {
+        if (strcmp(value, "auto") == 0 || strcmp(value, "on") == 0) {
             ALOGV("%s: enabling two mic control", __func__);
             ril_set_two_mic_control(&adev->ril, AUDIENCE, TWO_MIC_SOLUTION_ON);
         } else {
@@ -1741,11 +1744,16 @@ static int adev_set_voice_volume(struct audio_hw_device *dev, float volume)
                 sound_type = SOUND_TYPE_HEADSET;
                 break;
             case AUDIO_DEVICE_OUT_BLUETOOTH_SCO:
+	    /*
+            case AUDIO_DEVICE_OUT_BLUETOOTH_SCO_HEADSET:
+            case AUDIO_DEVICE_OUT_BLUETOOTH_SCO_CARKIT:
+	    */
             case AUDIO_DEVICE_OUT_ALL_SCO:
                 sound_type = SOUND_TYPE_BTVOICE;
                 break;
             default:
                 sound_type = SOUND_TYPE_VOICE;
+                break;
         }
 
         ril_set_call_volume(&adev->ril, sound_type, volume);
@@ -2024,9 +2032,9 @@ static int adev_open(const hw_module_t* module, const char* name,
     adev->mode = AUDIO_MODE_NORMAL;
     adev->voice_volume = 1.0f;
 
-//#ifdef FORCE_WIDEBAND
-    adev->wb_amr = true; /* true by default */
-//#endif
+#ifdef FORCE_WIDEBAND
+    adev->wb_amr = true;
+#endif
 
     /* RIL */
     ril_open(&adev->ril);
