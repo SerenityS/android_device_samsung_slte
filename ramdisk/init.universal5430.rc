@@ -923,7 +923,7 @@ on fs
 # ARGOSD network_throughput
     chown system system /dev/network_throughput
 
-service cpboot-daemon /sbin/cbd -d -txmm72xx -bl -ml -p 13
+service cpboot-daemon /system/bin/cbd -d -txmm72xx -bl -ml -p 13
     class main
     user root
     group radio cache inet misc audio sdcard_rw log sdcard_r shell
