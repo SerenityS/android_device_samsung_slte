@@ -105,9 +105,6 @@ vendor/lib/libWVStreamControlAPI_L1.so
 vendor/lib/libwvdrm_L1.so
 vendor/lib/libwvm.so
 
-### RNDG
-bin/exyrngd
-
 ### RIL
 lib/libsecnativefeature.so
 lib/libsec-ril.so
