@@ -1,0 +1,25 @@
+Copyright 2015 - The CyanogenMod Project
+
+Device configuration for Samsung Galaxy Alpha SM-G850F
+
+WORK IN PROGRESS.
+------------------------------------------------------------------
+
+  - For building CM-12.1, create '.repo/local_manifests/roomservice.xml' with
+    the following content:
+
+  <?xml version="1.0" encoding="UTF-8"?>
+  <manifest>
+
+    <project name="CyanogenMod/android_hardware_samsung" path="hardware/samsung" remote="github" />
+    <project name="CyanogenMod/android_hardware_samsung_slsi_exynos" path="hardware/samsung_slsi/exynos" remote="github" />
+    <project name="CyanogenMod/android_hardware_samsung_slsi_exynos5-insignal" path="hardware/samsung_slsi/exynos5-insignal" remote="github" />
+    <project name="CyanogenMod/android_hardware_samsung_slsi_openmax" path="hardware/samsung_slsi/openmax" remote="github" />
+    <project name="CyanogenMod/android_packages_apps_SamsungServiceMode" path="packages/apps/SamsungServiceMode" remote="github" />
+    
+    <project name="kyasu/android_hardware_samsung_slsi_exynos5430" path="hardware/samsung_slsi/exynos5430" remote="github" />
+    <project name="kyasu/android_device_samsung_slte" path="device/samsung/slte" remote="github" />
+    <project name="kyasu/android_kernel_samsung_slte" path="kernel/samsung/slte" remote="github" />
+    <project name="kyasu/android_vendor_samsung_slte" path="vendor/samsung/slte" remote="github" />
+
+  </manifest>
