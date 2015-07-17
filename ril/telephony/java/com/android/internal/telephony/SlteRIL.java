@@ -69,24 +69,24 @@ public class SlteRIL extends RIL {
     private static final int RIL_UNSOL_UART = 11020;
     private static final int RIL_UNSOL_RESPONSE_HANDOVER = 11021;
     private static final int RIL_UNSOL_PCMCLOCK_STATE = 11022;
-    private static final int RIL_LTE_UNSOL_LAST = 11036;	
+    private static final int RIL_LTE_UNSOL_LAST = 11036;
 
-    private Message mPendingGetSimStatus;	
+    private Message mPendingGetSimStatus;
 
     private final AudioManager mAudioManager;
-	
+
     public SlteRIL(Context context, int preferredNetworkType, int cdmaSubscription) {
         super(context, preferredNetworkType, cdmaSubscription, null);
-		mAudioManager = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE);
+        mAudioManager = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE);
         mQANElements = 6;
     }
 
     public SlteRIL(Context context, int preferredNetworkType, int cdmaSubscription, Integer instanceId) {
         super(context, preferredNetworkType, cdmaSubscription, instanceId);
-		mAudioManager = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE);
+        mAudioManager = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE);
         mQANElements = 6;
-    }	
-	
+    }
+
     public void
     acceptCall(int index, Message result) {
         RILRequest rr =
@@ -350,8 +350,8 @@ public class SlteRIL extends RIL {
             super.getIccCardStatus(mPendingGetSimStatus);
             mPendingGetSimStatus = null;
         }
-    }	
-	
+    }
+
     @Override
     protected Object
     responseSignalStrength(Parcel p) {
@@ -463,7 +463,7 @@ public class SlteRIL extends RIL {
                 return;
         }
 
-    }	
+    }
 
     /**
      * Set audio parameter "wb_amr" for HD-Voice (Wideband AMR).
@@ -491,10 +491,10 @@ public class SlteRIL extends RIL {
         }
         riljLog("parcel position=" + p.dataPosition() + ": " + s);
     }
-	
+
     @Override
     public void getGsmBroadcastConfig(Message response) {
-        Rlog.v(RILJ_LOG_TAG, "ExynosXMM6360RIL: getGsmBroadcastConfig");
+        Rlog.v(RILJ_LOG_TAG, "XMM7260RIL: getGsmBroadcastConfig");
 
         CommandException e = new CommandException(CommandException.Error.REQUEST_NOT_SUPPORTED);
         AsyncResult.forMessage(response, null, e);
@@ -503,7 +503,7 @@ public class SlteRIL extends RIL {
 
     @Override
     public void setGsmBroadcastConfig(SmsBroadcastConfigInfo[] config, Message response) {
-        Rlog.v(RILJ_LOG_TAG, "ExynosXMM6360RIL: setGsmBroadcastConfig");
+        Rlog.v(RILJ_LOG_TAG, "XMM7260RIL: setGsmBroadcastConfig");
 
         CommandException e = new CommandException(CommandException.Error.REQUEST_NOT_SUPPORTED);
         AsyncResult.forMessage(response, null, e);
@@ -512,7 +512,7 @@ public class SlteRIL extends RIL {
 
     @Override
     public void setGsmBroadcastActivation(boolean activate, Message response) {
-        Rlog.v(RILJ_LOG_TAG, "ExynosXMM6360RIL: setGsmBroadcastActivation");
+        Rlog.v(RILJ_LOG_TAG, "XMM7260RIL: setGsmBroadcastActivation");
 
         CommandException e = new CommandException(CommandException.Error.REQUEST_NOT_SUPPORTED);
         AsyncResult.forMessage(response, null, e);
@@ -521,7 +521,7 @@ public class SlteRIL extends RIL {
 
     @Override
     public void getCdmaBroadcastConfig(Message response) {
-        Rlog.v(RILJ_LOG_TAG, "ExynosXMM6360RIL: getCdmaBroadcastConfig");
+        Rlog.v(RILJ_LOG_TAG, "XMM7260RIL: getCdmaBroadcastConfig");
 
         CommandException e = new CommandException(CommandException.Error.REQUEST_NOT_SUPPORTED);
         AsyncResult.forMessage(response, null, e);
@@ -530,7 +530,7 @@ public class SlteRIL extends RIL {
 
     @Override
     public void setCdmaBroadcastConfig(CdmaSmsBroadcastConfigInfo[] configs, Message response) {
-        Rlog.v(RILJ_LOG_TAG, "ExynosXMM6360RIL: setCdmaBroadcastConfig");
+        Rlog.v(RILJ_LOG_TAG, "XMM7260RIL: setCdmaBroadcastConfig");
 
         CommandException e = new CommandException(CommandException.Error.REQUEST_NOT_SUPPORTED);
         AsyncResult.forMessage(response, null, e);
@@ -539,7 +539,7 @@ public class SlteRIL extends RIL {
 
     @Override
     public void setCdmaBroadcastActivation(boolean activate, Message response) {
-        Rlog.v(RILJ_LOG_TAG, "ExynosXMM6360RIL: setCdmaBroadcastActivation");
+        Rlog.v(RILJ_LOG_TAG, "XMM7260RIL: setCdmaBroadcastActivation");
 
         CommandException e = new CommandException(CommandException.Error.REQUEST_NOT_SUPPORTED);
         AsyncResult.forMessage(response, null, e);
@@ -548,11 +548,11 @@ public class SlteRIL extends RIL {
 
     @Override
     public void getCellInfoList(Message result) {
-        Rlog.v(RILJ_LOG_TAG, "ExynosXMM6360RIL: getCellInfoList");
+        Rlog.v(RILJ_LOG_TAG, "XMM7260RIL: getCellInfoList");
 
         CommandException e = new CommandException(CommandException.Error.REQUEST_NOT_SUPPORTED);
         AsyncResult.forMessage(result, null, e);
         result.sendToTarget();
-    }	
-	
+    }
+
 }
