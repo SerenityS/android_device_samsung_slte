@@ -17,7 +17,7 @@
  */
 
 #define LOG_TAG "audio_hw_primary"
-#define LOG_NDEBUG 0
+/* #define LOG_NDEBUG 0 */
 
 #include <errno.h>
 #include <pthread.h>
@@ -410,7 +410,7 @@ static int set_hdmi_channels(struct audio_device *adev, int channels) {
 #endif
 
 /* must be called with hw device mutex locked */
-static void select_devices(struct audio_device *adev)
+static void do_select_devices(struct audio_device *adev)
 {
     int output_device_id = get_output_device_id(adev->out_device);
     int input_source_id = get_input_source_id(adev->input_source, adev->in_device, adev->wb_amr);
@@ -707,7 +707,7 @@ static void adev_enter_call(struct audio_device *adev)
         ALOGV("%s: Entering IN_CALL mode", __func__);
 
         adev->input_source = AUDIO_SOURCE_VOICE_CALL;
-        select_devices(adev);
+        do_select_devices(adev);
 
         start_voice_call(adev);
         set_call_audio_path(adev);
@@ -719,17 +719,19 @@ static void adev_enter_call(struct audio_device *adev)
 }
 
 /* must be called with hw device mutex locked */
-static void adev_change_call(struct audio_device *adev)
+static void select_devices(struct audio_device *adev)
 {
     if (adev->in_call) {
         ALOGV("%s: Changing IN_CALL mode", __func__);
 
         adev->input_source = AUDIO_SOURCE_VOICE_CALL;
-        select_devices(adev);
+        do_select_devices(adev);
 
         start_voice_call(adev);
         set_call_audio_path(adev);
         set_call_volume(adev);
+    } else {
+        do_select_devices(adev);
     }
 }
 
@@ -743,7 +745,7 @@ static void adev_leave_call(struct audio_device *adev)
         ril_set_call_clock_sync(&adev->ril, SOUND_CLOCK_STOP);
 
         adev->input_source = AUDIO_SOURCE_DEFAULT;
-        select_devices(adev);
+        do_select_devices(adev);
 
         stop_voice_call(adev);
         //set_call_audio_path(adev);
@@ -1082,7 +1084,7 @@ static void do_out_standby(struct stream_out *out)
         }
 #endif
 
-        if (out->device & AUDIO_DEVICE_OUT_ALL_SCO)
+        if (!adev->in_call && (out->device & AUDIO_DEVICE_OUT_ALL_SCO))
             stop_bt_sco(adev);
 
         /* re-calculate the set of active devices from other streams */
@@ -1198,7 +1200,7 @@ static int out_set_parameters(struct audio_stream *stream, const char *kvpairs)
                     adev_enter_call(adev);
                 } else {
                     adev->out_device = output_devices(out) | val;
-                    adev_change_call(adev);
+                    select_devices(adev);
                 }
             }
             if ((adev->mode != AUDIO_MODE_IN_CALL) && adev->in_call) {
@@ -1451,8 +1453,10 @@ static void do_in_standby(struct stream_in *in)
         pcm_close(in->pcm);
         in->pcm = NULL;
 
-        if (in->device & AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET)
+        if (!adev->in_call &&
+            (in->device & AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET)) {
             stop_bt_sco(adev);
+        }
 
         in->dev->input_source = AUDIO_SOURCE_DEFAULT;
         in->dev->in_device = AUDIO_DEVICE_NONE;
