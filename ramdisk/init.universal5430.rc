@@ -1036,9 +1036,8 @@ on charger
 # Do not set any USB mode while charging
     setprop sys.usb.config charging
 
-service battery_charger /charger
+service charger /charger
     class charger
-    critical
 
 # SecEDS
 service TvoutService_C /system/bin/bintvoutservice
