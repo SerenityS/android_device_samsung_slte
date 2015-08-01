@@ -16,5 +16,8 @@ ro.telephony.default_network=9
 telephony.lteOnGsmDevice=1
 telephony.lteOnCdmaDevice=0
 
+# Camera
+camera2.portability.force_api=1
+
 # Audio workaround
 slte.audio.workaround=true
