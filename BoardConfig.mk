@@ -60,7 +60,7 @@ BOARD_EGL_CFG := device/samsung/slte/configs/egl/egl.cfg
 # hwcomposer insignal
 BOARD_HDMI_INCAPABLE := true
 # frameworks/native/services/surfaceflinger
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 5
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 
 # GSC
 BOARD_USES_ONLY_GSC0_GSC1 := true
