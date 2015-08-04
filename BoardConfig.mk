@@ -156,6 +156,7 @@ BOARD_SEPOLICY_DIRS := \
 
 BOARD_SEPOLICY_UNION := \
 	app.te \
+	bluetooth.te \
 	cpboot-daemon.te \
 	domain.te \
 	exyrngd.te \
@@ -166,6 +167,7 @@ BOARD_SEPOLICY_UNION := \
 	lmkd.te \
 	init.te \
 	macloader.te \
+	mediaserver.te \
 	recovery.te \
 	system_server.te \
 	rild.te \
