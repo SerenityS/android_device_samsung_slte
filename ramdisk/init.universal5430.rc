@@ -875,6 +875,11 @@ on fs
 # Fingerprint
     mkdir /dev/validity 0770 system system
 
+# MDNIE (mobile Digital Natural Image engine) dynamic mode
+# These adjust the brightness, sharpness, contrast on different screens in
+# apps like camera.
+write /sys/class/mdnie/mdnie/mode 4
+
 # Copy DRM Key
     copy /system/app/wv.keys /factory/wv.keys
 
