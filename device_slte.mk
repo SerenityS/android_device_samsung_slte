@@ -182,6 +182,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     camera.universal5430
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    camera2.portability.force_api=1
+
 # Touchscreen
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/idc/Synaptics_HID_TouchPad.idc:/system/usr/idc/Synaptics_HID_TouchPad.idc \
