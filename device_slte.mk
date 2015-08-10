@@ -70,7 +70,8 @@ PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=196608
+    ro.opengles.version=196608 \
+    ro.bq.gpu_to_cpu_unsupported=1
 
 PRODUCT_PACKAGES += \
     libion_exynos \
