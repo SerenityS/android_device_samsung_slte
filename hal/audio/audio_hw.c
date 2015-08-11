@@ -200,10 +200,6 @@ struct stream_out {
      * silent when watching a 5.1 movie. */
     bool disabled;
 
-    struct resampler_itfe *resampler;
-    int16_t *buffer;
-    size_t buffer_frames;
-
     audio_channel_mask_t channel_mask;
     /* Array of supported channel mask configurations. +1 so that the last entry is always 0 */
     audio_channel_mask_t supported_channel_masks[MAX_SUPPORTED_CHANNEL_MASKS + 1];
@@ -233,7 +229,7 @@ struct stream_in {
 
     uint16_t ramp_vol;
     uint16_t ramp_step;
-    uint16_t ramp_frames;
+    size_t ramp_frames;
 
     audio_channel_mask_t channel_mask;
     audio_input_flags_t flags;
@@ -1145,6 +1141,10 @@ static int out_set_parameters(struct audio_stream *stream, const char *kvpairs)
     return ret;
 }
 
+/*
+ * Returns a pointer to a heap allocated string. The caller is responsible
+ * for freeing the memory for it using free().
+ */
 static char *out_get_parameters(const struct audio_stream *stream, const char *keys)
 {
     struct stream_out *out = (struct stream_out *)stream;
@@ -1175,14 +1175,14 @@ static char *out_get_parameters(const struct audio_stream *stream, const char *k
             i++;
         }
         str_parms_add_str(reply, AUDIO_PARAMETER_STREAM_SUP_CHANNELS, value);
-        str = strdup(str_parms_to_str(reply));
+        str = str_parms_to_str(reply);
     } else {
-        str = strdup(keys);
+        str = keys;
     }
 
     str_parms_destroy(query);
     str_parms_destroy(reply);
-    return str;
+    return strdup(str);
 }
 
 static uint32_t out_get_latency(const struct audio_stream_out *stream)
@@ -1884,7 +1884,7 @@ static int adev_open_input_stream(struct audio_hw_device *dev,
                                   audio_devices_t devices,
                                   struct audio_config *config,
                                   struct audio_stream_in **stream_in,
-                                  audio_input_flags_t flags __unused,
+                                  audio_input_flags_t flags,
                                   const char *address __unused,
                                   audio_source_t source __unused)
 {
@@ -2044,8 +2044,6 @@ static int adev_open(const hw_module_t* module, const char* name,
     adev->hw_device.open_input_stream = adev_open_input_stream;
     adev->hw_device.close_input_stream = adev_close_input_stream;
     adev->hw_device.dump = adev_dump;
-    adev->hw_device.set_master_mute = NULL;
-    adev->hw_device.get_master_mute = NULL;
 
     adev->ar = audio_route_init(MIXER_CARD, NULL);
     adev->input_source = AUDIO_SOURCE_DEFAULT;
