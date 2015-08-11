@@ -43,7 +43,6 @@
 #include <tinyalsa/asoundlib.h>
 
 #include <audio_utils/resampler.h>
-#include <audio_utils/echo_reference.h>
 #include <audio_route/audio_route.h>
 
 #include "routing.h"
@@ -202,7 +201,6 @@ struct stream_out {
     bool disabled;
 
     struct resampler_itfe *resampler;
-    struct echo_reference_itfe *echo_reference;
     int16_t *buffer;
     size_t buffer_frames;
 
