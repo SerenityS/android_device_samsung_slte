@@ -59,7 +59,7 @@ USE_OPENGL_RENDERER := true
 # hwcomposer insignal
 BOARD_HDMI_INCAPABLE := true
 # frameworks/native/services/surfaceflinger
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 5
 
 # GSC
 BOARD_USES_ONLY_GSC0_GSC1 := true
