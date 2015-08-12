@@ -183,7 +183,7 @@ TW_THEME := portrait_hdpi
 
 # Use our own init.rc without setting up functionfs
 TARGET_RECOVERY_PIXEL_FORMAT := "BRGA_8888"
-TARGET_RECOVERY_DEVICE_MODULES += prebuilt_file_contexts exyrngd
+TARGET_RECOVERY_DEVICE_MODULES += prebuilt_file_contexts init.recovery.usb.rc
 
 TW_BRIGHTNESS_PATH := /sys/class/backlight/panel/brightness
 TW_MAX_BRIGHTNESS := 255
@@ -196,6 +196,9 @@ TW_NO_REBOOT_BOOTLOADER := true
 TW_HAS_DOWNLOAD_MODE := true
 
 TW_INCLUDE_L_CRYPTO := true
+
+# Provide our own init.recovery.usb.rc
+TW_EXCLUDE_DEFAULT_USB_INIT := true
 
 # The kernel has exfat support.
 TW_NO_EXFAT_FUSE := true
