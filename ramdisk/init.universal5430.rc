@@ -1,7 +1,12 @@
-import init.universal5430.wifi.rc
 import init.universal5430.usb.rc
+import init.universal5430.wifi.rc
+import init.universal5430.baseband.rc
+
+on early-init
+    mount debugfs /sys/kernel/debug /sys/kernel/debug
 
 on init
+
     # See storage config details at http://source.android.com/tech/storage/
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
@@ -22,21 +27,6 @@ on init
     symlink /storage/usbdisk /usbdisk
     symlink /storage/usbdisk /mnt/usbdisk
     symlink /data/app /factory
-
-    mkdir /efs 0771 radio system
-    symlink /dev/block/mmcblk0p13 /dev/mbin0
-    restorecon /dev/mbin0
-    symlink  /sys/devices/15510000.usb/ehci_power /dev/ehci_power
-    symlink  /sys/devices/10f24000.mipi-lli /dev/mipi-lli
-    write /sys/class/net/rmnet0/queues/rx-0/rps_cpus 1
-    write /sys/class/net/rmnet1/queues/rx-0/rps_cpus 1
-    write /sys/class/net/rmnet2/queues/rx-0/rps_cpus 1
-    write /sys/class/net/rmnet3/queues/rx-0/rps_cpus 1
-    write /sys/class/net/rmnet4/queues/rx-0/rps_cpus 1
-    write /sys/class/net/rmnet5/queues/rx-0/rps_cpus 1
-    write /sys/class/net/rmnet6/queues/rx-0/rps_cpus 1
-    write /sys/class/net/rmnet7/queues/rx-0/rps_cpus 1
-    write /proc/sys/net/core/netdev_max_backlog 5000
 
     mkdir /tombstones
 
@@ -76,13 +66,13 @@ on post-fs-data
     chown system radio /sys/class/camera/front/front_camfw
     chown system radio /sys/class/camera/front/front_camtype
 
+    # Permissions for Camera to flush cache buffers
+    chown system system /sys/devices/virtual/sec/sec_misc/drop_caches
+
 #Private Mode
     mkdir /data/privatemode 0770 system system
     chown system system /data/privatemode
     restorecon /data/privatemode
-
-on boot
-    mount debugfs /sys/kernel/debug /sys/kernel/debug
 
 # Define TCP buffer sizes for various networks
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
@@ -97,18 +87,8 @@ on boot
     setprop net.tcp.buffersize.gprs    6138,45000,45000,6144,13140,17520
     setprop net.tcp.buffersize.evdo    6141,131070,393216,6144,24576,393216
 
-	# For setting tcp delayed ack
-    chown system system /sys/kernel/ipv4/tcp_delack_seg
-    chown system system /sys/kernel/ipv4/tcp_use_userconfig
-
-# Define TCP delayed ack settings for WiFi & LTE
-    setprop net.tcp.delack.default     1    
-    setprop net.tcp.delack.lte         8
-    setprop net.tcp.usercfg.lte        1
-    setprop net.tcp.usercfg.default    0
-
-    # Reduce reserved lowmem from ~48MB to ~12MB
-    write /proc/sys/vm/lowmem_reserve_ratio "128 128"
+    # Allow to access debugfs for system:system
+    chown system system /sys/kernel/debug
 
     # Set up kernel tracing, but disable it by default
     chmod 0222 /sys/kernel/debug/tracing/trace_marker
@@ -124,6 +104,9 @@ on boot
     chmod 0660 /sys/class/rfkill/rfkill0/state
     chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
     chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
+
+# MSP FactoryApp
+    mkdir /efs/FactoryApp 0775 system system
 
 # SSWAP
     write /proc/sys/vm/swappiness 130
@@ -352,25 +335,18 @@ on boot
 # CPU Idle
     chown system radio /sys/module/cpuidle/parameters/enable_mask
 
-# RTC logging daemon
-    chmod 0770 /system/bin/rtc_log.sh
-    chown system system /system/bin/rtc_log.sh
-
-    #Remove SUID bit for iproute2 ip tool
-#    chmod 0755 /system/bin/ip
-
 #Private Mode
 service privatemode /system/bin/sdcard /data/privatemode /mnt/shell/privatemode 1000 1000
     class late_start
     oneshot
 
+# Reduce reserved lowmem from ~48MB to ~12MB
+on property:ro.debug_level=0x4f4c
+    write /proc/sys/vm/lowmem_reserve_ratio "128 128"
+
 on fs
     mount_all /fstab.universal5430
     setprop ro.crypto.fuse_sdcard true
-
-    chown radio radio /sys/devices/virtual/misc/multipdp/waketime
-    chmod 0660 /sys/devices/virtual/misc/umts_dm0/dm_state
-    chown radio system /sys/devices/virtual/misc/umts_dm0/dm_state
 
 #For Absolute Persistence Partition
 
@@ -378,8 +354,7 @@ on fs
     mkdir /persdata/absolute 0750 system system
 
     wait /dev/block/platform/15540000.dwmmc0/by-name/PERSDATA
-    # not supported by CM init
-    #check_fs /dev/block/platform/15540000.dwmmc0/by-name/PERSDATA ext4
+    check_fs /dev/block/platform/15540000.dwmmc0/by-name/PERSDATA ext4
     mount ext4 /dev/block/platform/15540000.dwmmc0/by-name/PERSDATA /persdata/absolute nosuid nodev barrier=1
 
     chown system system /persdata
@@ -438,6 +413,12 @@ on fs
     chown system system /sys/class/mdnie/mdnie/accessibility
     chown system system /sys/class/mdnie/mdnie/auto_brightness
     chown system system /sys/class/mdnie/mdnie/sensorRGB
+
+# mDNIe (mobile Digital Natural Image engine) Dynamic Mode
+# These adjust the brightness, sharpness, contrast on different screens in
+# apps like camera.
+    write /sys/class/mdnie/mdnie/mode 4
+
 
 # Permissions for TouchScreen
 	chown system radio /sys/class/sec/tsp/cmd
@@ -855,8 +836,6 @@ on fs
     chown system radio /sys/class/audio/earjack/key_state
     chown system radio /sys/class/audio/earjack/state
     chown system radio /sys/class/dsm/max98504/dsm_log
-    mkdir /data/firmware 0770 media system
-    chown media system /data/firmware
 
 # OTG_TEST
     chown system radio /sys/class/host_notify/usb_otg/booster
@@ -874,11 +853,6 @@ on fs
 
 # Fingerprint
     mkdir /dev/validity 0770 system system
-
-# MDNIE (mobile Digital Natural Image engine) dynamic mode
-# These adjust the brightness, sharpness, contrast on different screens in
-# apps like camera.
-write /sys/class/mdnie/mdnie/mode 4
 
 # Copy DRM Key
     copy /system/app/wv.keys /factory/wv.keys
@@ -927,12 +901,6 @@ write /sys/class/mdnie/mdnie/mode 4
 
 # ARGOSD network_throughput
     chown system system /dev/network_throughput
-
-service cpboot-daemon /system/bin/cbd -d -txmm72xx -bl -ml -p 13
-    class main
-    user root
-    group radio cache inet misc audio sdcard_rw log sdcard_r shell
-    seclabel u:r:cpboot-daemon:s0
 
 service netmgrd /system/bin/netmgrd
     class late_start
@@ -1044,20 +1012,6 @@ on charger
 service charger /charger
     class charger
 
-# SecEDS
-service TvoutService_C /system/bin/bintvoutservice
-     class main
-     user system
-     group graphics
-on property:ro.SecEDS.enable=false
-    stop TvoutService_C
-
-# SENSOR FRAMEWORK : starts fingerprintService
-service vcsFPService /system/bin/vcsFPService
-    class late_start
-    user system
-    group system
-
 on property:ro.securestorage.support=true
     mkdir /dev/.secure_storage
     chmod 0711 /dev/.secure_storage
@@ -1074,13 +1028,6 @@ service cs_service /system/bin/cs
 
 on property:sys.mobicoredaemon.enable=true
     start cs_service
-
-# RTC logging daemon
-service rtc_log /system/bin/sh /system/bin/rtc_log.sh
-    class main
-    user shell
-    group log
-    oneshot
 
 # IPSec for VOLTE
 service ipsec-daemon /system/bin/IPSecService
