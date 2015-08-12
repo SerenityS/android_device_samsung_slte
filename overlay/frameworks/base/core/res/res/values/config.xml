@@ -236,4 +236,9 @@
 
     <!-- Boolean to enable stk functionality on Samsung phones -->
     <bool name="config_samsung_stk">true</bool>
+
+    <!-- Device will display option to wake only if proximity sensor is uncovered -->
+    <bool name="config_proximityCheckOnWake">true</bool>
+    <integer name="config_proximityCheckTimeout">400</integer>
+    <bool name="config_proximityCheckOnWakeEnabledByDefault">true</bool>
 </resources>
