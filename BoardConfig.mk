@@ -56,7 +56,6 @@ TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
 ### GRAPHICS
 USE_OPENGL_RENDERER := true
-BOARD_EGL_CFG := device/samsung/slte/configs/egl/egl.cfg
 # hwcomposer insignal
 BOARD_HDMI_INCAPABLE := true
 # frameworks/native/services/surfaceflinger
