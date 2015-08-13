@@ -179,7 +179,7 @@ BOARD_SEPOLICY_UNION := \
 ### TWRP RECOVERY
 ###########################################################
 
-TW_THEME := portrait_mdpi
+TW_THEME := portrait_hdpi
 
 # Use our own init.rc without setting up functionfs
 TARGET_RECOVERY_PIXEL_FORMAT := "BRGA_8888"
@@ -188,7 +188,6 @@ TARGET_RECOVERY_DEVICE_MODULES += prebuilt_file_contexts exyrngd
 TW_BRIGHTNESS_PATH := /sys/class/backlight/panel/brightness
 TW_MAX_BRIGHTNESS := 255
 
-BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
 BOARD_HAS_NO_REAL_SDCARD := true
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 RECOVERY_SDCARD_ON_DATA := true
@@ -201,4 +200,3 @@ TW_INCLUDE_L_CRYPTO := true
 # The kernel has exfat support.
 TW_NO_EXFAT_FUSE := true
 TW_EXCLUDE_SUPERSU := true
-TW_DISABLE_TTF := true
