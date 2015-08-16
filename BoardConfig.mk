@@ -10,7 +10,7 @@ TARGET_NO_BOOTLOADER := true
 
 # Platform
 TARGET_BOARD_PLATFORM := exynos5
-TARGET_SLSI_VARIANT := insignal
+TARGET_SLSI_VARIANT := cm
 TARGET_SOC := exynos5430
 
 # CPU
@@ -41,6 +41,8 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 #TARGET_PREBUILT_KERNEL := device/samsung/slte/kernel
 TARGET_KERNEL_CONFIG := cm_exynos5430-slte_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/slte
+# hardware/samsung_slsi/exynos/libhdmi_legacy
+TARGET_LINUX_KERNEL_VERSION := 3.10
 
 BOARD_HAS_NO_SELECT_BUTTON := true
 
