@@ -164,16 +164,15 @@ BOARD_SEPOLICY_DIRS := \
 	device/samsung/slte/sepolicy
 
 BOARD_SEPOLICY_UNION := \
-	app.te \
 	bluetooth.te \
 	cpboot-daemon.te \
+	device.te \
 	domain.te \
 	exyrngd.te \
 	file.te \
 	file_contexts \
 	gpsd.te \
 	kernel.te \
-	lmkd.te \
 	init.te \
 	macloader.te \
 	mediaserver.te \
