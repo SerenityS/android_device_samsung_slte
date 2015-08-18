@@ -269,9 +269,6 @@ PRODUCT_PACKAGES += \
 	mcDriverDaemon \
 	keystore.exynos5
 
-PRODUCT_PACKAGES += \
-	exyrngd
-
 ###########################################################
 ### PACKAGES
 ###########################################################

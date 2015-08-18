@@ -953,14 +953,6 @@ service mobicore /system/bin/mcDriverDaemon -r /system/app/FFFFFFFF0000000000000
     user drmrpc
     group drmrpc
 
-# ExyRng startup
-service exyrngd /system/bin/exyrngd -b
-    user root
-    group root
-    class main
-    seclabel u:r:exyrngd:s0
-    oneshot
-
 # virtual sdcard daemon running as media_rw (1023)
 service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
     class late_start

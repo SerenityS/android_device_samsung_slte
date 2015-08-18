@@ -168,7 +168,6 @@ BOARD_SEPOLICY_UNION := \
 	cpboot-daemon.te \
 	device.te \
 	domain.te \
-	exyrngd.te \
 	file.te \
 	file_contexts \
 	gpsd.te \
