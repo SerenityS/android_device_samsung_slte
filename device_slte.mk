@@ -224,6 +224,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
 	libhwjpeg
 
+# This fixes switching between front/back camera sensors
+PRODUCT_PROPERTY_OVERRIDES += \
+    camera2.portability.force_api=1
+
 ###########################################################
 ### TOUCHSCREEN
 ###########################################################
