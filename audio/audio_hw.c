@@ -1196,6 +1196,8 @@ static int out_set_parameters(struct audio_stream *stream, const char *kvpairs)
             }
 #endif
             out->device = val;
+            adev->out_device = val;
+            select_devices(adev);
 
             /* start SCO stream if needed */
             if (out->device & AUDIO_DEVICE_OUT_ALL_SCO)
