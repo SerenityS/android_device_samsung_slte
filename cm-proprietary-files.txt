@@ -89,6 +89,7 @@ lib/libmplmpu.so
 lib/libyasalgo.so
 
 ### Widevine
+lib/liboemcrypto.so
 vendor/lib/mediadrm/libdrmclearkeyplugin.so
 vendor/lib/mediadrm/libwvdrmengine.so
 vendor/lib/libWVStreamControlAPI_L1.so
