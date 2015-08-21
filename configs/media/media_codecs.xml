@@ -155,7 +155,7 @@ Only the three quirks included above are recognized at this point:
              <Limit name="bitrate" range="1-60000000" />
              <Feature name="adaptive-playback" />
         </MediaCodec>
-        <MediaCodec name="OMX.Exynos.VC1.Decoder" >
+        <MediaCodec name="OMX.Exynos.WMV.Decoder" >
             <Type name="video/wvc1" />
             <Type name="video/x-ms-wmv" />
             <Quirk name="requires-allocate-on-input-ports" />
