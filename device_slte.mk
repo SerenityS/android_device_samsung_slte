@@ -163,7 +163,17 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libcsc \
     libstagefrighthw \
-    libExynosOMX_Core
+    libExynosOMX_Core \
+    libOMX.Exynos.AVC.Decoder \
+    libOMX.Exynos.AVC.Encoder \
+    libOMX.Exynos.MPEG4.Decoder \
+    libOMX.Exynos.MPEG4.Encoder \
+    libOMX.Exynos.VP8.Decoder \
+    libOMX.Exynos.VP8.Encoder \
+    libOMX.Exynos.MPEG2.Decoder \
+    libOMX.Exynos.WMV.Decoder \
+    libOMX.Exynos.HEVC.Decoder \
+    libOMX.Exynos.MP3.Decoder
 
 # Power
 PRODUCT_PACKAGES += \
