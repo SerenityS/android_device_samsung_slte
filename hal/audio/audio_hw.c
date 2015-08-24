@@ -696,14 +696,14 @@ static void adev_set_wb_amr_callback(void *data, int enable)
 
 static void adev_set_call_audio_path(struct audio_device *adev)
 {
-    enum ril_audio_path device_type;
+    enum _AudioPath device_type;
 
     switch(adev->out_device) {
         case AUDIO_DEVICE_OUT_SPEAKER:
             device_type = SOUND_AUDIO_PATH_SPEAKER;
             break;
         case AUDIO_DEVICE_OUT_EARPIECE:
-            device_type = SOUND_AUDIO_PATH_EARPIECE;
+            device_type = SOUND_AUDIO_PATH_HANDSET;
             break;
         case AUDIO_DEVICE_OUT_WIRED_HEADSET:
             device_type = SOUND_AUDIO_PATH_HEADSET;
@@ -722,14 +722,13 @@ static void adev_set_call_audio_path(struct audio_device *adev)
             break;
         default:
             /* if output device isn't supported, use handset by default */
-            device_type = SOUND_AUDIO_PATH_EARPIECE;
+            device_type = SOUND_AUDIO_PATH_HANDSET;
             break;
     }
 
     ALOGV("%s: ril_set_call_audio_path(%d)", __func__, device_type);
 
-    /* TODO: Figure out which devices need EXTRA_VOLUME_PATH set */
-    ril_set_call_audio_path(&adev->ril, device_type, ORIGINAL_PATH);
+    ril_set_call_audio_path(&adev->ril, device_type);
 }
 
 /* must be called with hw device outputs list, output stream, and hw device mutexes locked */
@@ -1791,7 +1790,7 @@ static int adev_set_voice_volume(struct audio_hw_device *dev, float volume)
     adev->voice_volume = volume;
 
     if (adev->mode == AUDIO_MODE_IN_CALL) {
-        enum ril_sound_type sound_type;
+        enum _SoundType sound_type;
 
         switch (adev->out_device) {
             case AUDIO_DEVICE_OUT_SPEAKER:
@@ -1874,15 +1873,15 @@ static int adev_set_mode(struct audio_hw_device *dev, audio_mode_t mode)
 static int adev_set_mic_mute(struct audio_hw_device *dev, bool state)
 {
     struct audio_device *adev = (struct audio_device *)dev;
-    enum ril_mute_state mute_state = state ? TX_MUTE : TX_UNMUTE;
+    enum _MuteCondition mute_condition = state ? TX_MUTE : TX_UNMUTE;
 
     ALOGV("%s: set mic mute: %d\n", __func__, state);
 
-    adev->mic_mute = state;
-
     if (adev->in_call) {
-        ril_set_mute(&adev->ril, mute_state);
+        ril_set_mute(&adev->ril, mute_condition);
     }
+
+    adev->mic_mute = state;
 
     return 0;
 }
