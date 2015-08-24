@@ -306,17 +306,21 @@ int get_input_source_id(audio_source_t source, audio_devices_t in_device,
     case AUDIO_SOURCE_VOICE_COMMUNICATION:
         return IN_SOURCE_VOICE_COMMUNICATION;
     case AUDIO_SOURCE_VOICE_CALL:
+#ifdef USE_NOISE_SUPPRESSION
         if (noise_suppression) {
             if (wb_amr)
                 return IN_SOURCE_VOICE_CALL_NS_WB;
             else
                 return IN_SOURCE_VOICE_CALL_NS;
         } else {
+#endif
             if (wb_amr)
                 return IN_SOURCE_VOICE_CALL_WB;
             else
                 return IN_SOURCE_VOICE_CALL;
+#ifdef USE_NOISE_SUPPRESSION
         }
+#endif
     default:
         return IN_SOURCE_NONE;
     }
@@ -1851,6 +1855,7 @@ static int adev_set_parameters(struct audio_hw_device *dev, const char *kvpairs)
         }
     }
 
+#ifdef USE_NOISE_SUPPRESSION
     ret = str_parms_get_str(parms, "noise_suppression", value, sizeof(value));
     if (ret >= 0) {
         if (strcmp(value, "off") == 0) {
@@ -1863,6 +1868,7 @@ static int adev_set_parameters(struct audio_hw_device *dev, const char *kvpairs)
             ril_set_two_mic_control(&adev->ril, AUDIENCE, TWO_MIC_SOLUTION_ON);
         }
     }
+#endif
 
     pthread_mutex_unlock(&adev->lock);
 
@@ -1873,6 +1879,7 @@ static int adev_set_parameters(struct audio_hw_device *dev, const char *kvpairs)
 static char * adev_get_parameters(const struct audio_hw_device *dev,
                                   const char *keys)
 {
+#ifdef USE_NOISE_SUPPRESSION
     struct audio_device *adev = (struct audio_device *)dev;
     struct str_parms *parms;
     char value[32];
@@ -1891,6 +1898,7 @@ static char * adev_get_parameters(const struct audio_hw_device *dev,
         str_parms_destroy(parms);
         return str;
     }
+#endif
     return strdup("");
 }
 
