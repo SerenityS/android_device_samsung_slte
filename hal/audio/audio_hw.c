@@ -81,8 +81,8 @@ struct pcm_config pcm_config_fast = {
 struct pcm_config pcm_config_deep = {
     .channels = 2,
     .rate = 48000,
-    .period_size = 1024,
-    .period_count = 4,
+    .period_size = 3840,
+    .period_count = 2,
     .format = PCM_FORMAT_S16_LE,
 };
 
@@ -137,7 +137,7 @@ struct pcm_config pcm_config_voice_wide = {
 struct pcm_config pcm_config_hdmi_multi = {
     .channels = 6, /* changed when the stream is opened */
     .rate = HDMI_MULTI_DEFAULT_SAMPLING_RATE,
-    .period_size = 1024,
+    .period_size = 384,
     .period_count = 4,
     .format = PCM_FORMAT_S16_LE,
 };
