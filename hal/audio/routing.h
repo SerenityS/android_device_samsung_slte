@@ -42,12 +42,6 @@ enum {
     IN_SOURCE_CNT
 };
 
-enum {
-    ES325_MODE_DEFAULT,
-    ES325_MODE_LEVEL,
-    ES325_NUM_MODES,
-};
-
 struct route_config {
     const char * const output_route;
     const char * const input_route;
