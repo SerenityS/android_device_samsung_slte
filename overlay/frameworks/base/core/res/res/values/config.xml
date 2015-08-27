@@ -308,17 +308,10 @@
     <!-- ### MULTIUSER                                                  -->
     <!-- ############################################################## -->	
 
-    <!--  Maximum number of supported users -->
-    <integer name="config_multiuserMaximumUsers">8</integer>
-
-    <!-- Whether UI for multi user should be shown -->
-    <bool name="config_enableMultiUserUI">true</bool>	
-	
     <!-- ############################################################## -->
-    <!-- ### LID CONTROL		                                        -->
+    <!-- ### LID CONTROL                                                -->
     <!-- ############################################################## -->		
-	
-	    <!-- Indicate whether the lid state impacts the accessibility of
+    <!-- Indicate whether the lid state impacts the accessibility of
          the physical keyboard.  0 means it doesn't, 1 means it is accessible
          when the lid is open, 2 means it is accessible when the lid is
          closed.  The default is 0. -->
