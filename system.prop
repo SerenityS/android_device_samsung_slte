@@ -17,4 +17,4 @@ telephony.lteOnGsmDevice=1
 telephony.lteOnCdmaDevice=0
 
 # Audio workaround
-slte.audio.workaround=true
+persist.incall.workaround=true

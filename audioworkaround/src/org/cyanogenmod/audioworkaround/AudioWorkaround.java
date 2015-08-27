@@ -64,7 +64,7 @@ public class AudioWorkaround extends Activity {
         super.onCreate(savedInstanceState);
 
         try {
-            final String prop = getSystemProperties("slte.audio.workaround",
+            final String prop = getSystemProperties("persist.incall.workaround",
                                                     "false");
             int resId;
 
