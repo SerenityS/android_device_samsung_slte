@@ -653,21 +653,13 @@ static void stop_voice_call(struct audio_device *adev)
         status++;
     }
 
-    if (adev->pcm_sco_rx) {
-        pcm_stop(adev->pcm_sco_rx);
-        pcm_close(adev->pcm_sco_rx);
-        adev->pcm_sco_rx = NULL;
+    /* End SCO stream if needed */
+    if (adev->out_device & AUDIO_DEVICE_OUT_ALL_SCO) {
+        stop_bt_sco(adev);
         status++;
     }
 
-    if (adev->pcm_sco_tx) {
-        pcm_stop(adev->pcm_sco_tx);
-        pcm_close(adev->pcm_sco_tx);
-        adev->pcm_sco_tx = NULL;
-        status++;
-
-        ALOGV("%s: Successfully closed %d active PCMs", __func__, status);
-    }
+    ALOGV("%s: Successfully closed %d active PCMs", __func__, status);
 }
 
 static void adev_set_wb_amr_callback(void *data, int enable)
@@ -784,10 +776,6 @@ static int start_output_stream(struct stream_out *out)
         select_devices(adev);
     }
 
-    if (out->device & AUDIO_DEVICE_OUT_ALL_SCO) {
-        start_bt_sco(adev);
-    }
-
     if (out->device & AUDIO_DEVICE_OUT_AUX_DIGITAL) {
         set_hdmi_channels(adev, out->config.channels);
     }
@@ -826,10 +814,6 @@ static int start_input_stream(struct stream_in *in)
         adev->in_channel_mask = in->channel_mask;
 
         select_devices(adev);
-    }
-
-    if (in->device & AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET) {
-        start_bt_sco(adev);
     }
 
     /* initialize volume ramp */
@@ -1046,10 +1030,6 @@ static void do_out_standby(struct stream_out *out)
             /* force standby on low latency output stream so that it can reuse HDMI driver if
              * necessary when restarted */
             force_non_hdmi_out_standby(adev);
-        }
-
-        if (out->device & AUDIO_DEVICE_OUT_ALL_SCO) {
-            stop_bt_sco(adev);
         }
 
         /* re-calculate the set of active devices from other streams */
@@ -1399,9 +1379,6 @@ static void do_in_standby(struct stream_in *in)
     if (!in->standby) {
         pcm_close(in->pcm);
         in->pcm = NULL;
-
-        if (in->device & AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET)
-            stop_bt_sco(adev);
 
         in->dev->input_source = AUDIO_SOURCE_DEFAULT;
         in->dev->in_device = AUDIO_DEVICE_NONE;
@@ -1854,10 +1831,6 @@ static int adev_set_mode(struct audio_hw_device *dev, audio_mode_t mode)
 
             stop_voice_call(adev);
             ril_set_call_clock_sync(&adev->ril, SOUND_CLOCK_STOP);
-
-            if (adev->out_device & AUDIO_DEVICE_OUT_ALL_SCO) {
-                stop_bt_sco(adev);
-            }
 
             adev->input_source = AUDIO_SOURCE_DEFAULT;
 
