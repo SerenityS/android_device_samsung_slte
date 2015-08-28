@@ -27,11 +27,13 @@ import android.os.AsyncResult;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.SignalStrength;
 import android.telephony.SmsManager;
+
 import com.android.internal.telephony.uicc.IccCardApplicationStatus;
 import com.android.internal.telephony.uicc.IccCardStatus;
 import com.android.internal.telephony.uicc.IccRefreshResponse;
 import com.android.internal.telephony.gsm.SmsBroadcastConfigInfo;
 import com.android.internal.telephony.cdma.CdmaSmsBroadcastConfigInfo;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.io.IOException;
@@ -41,7 +43,7 @@ import java.io.IOException;
  *
  * {@hide}
  */
-public class SlteRIL extends RIL {
+public class SlteRIL extends RIL implements CommandsInterface {
 
     /**********************************************************
      * SAMSUNG REQUESTS
@@ -87,10 +89,8 @@ public class SlteRIL extends RIL {
         mQANElements = 6;
     }
 
-    public void
-    acceptCall(int index, Message result) {
-        RILRequest rr =
-            RILRequest.obtain(RIL_REQUEST_ANSWER, result);
+    public void acceptCall(int index, Message result) {
+        RILRequest rr = RILRequest.obtain(RIL_REQUEST_ANSWER, result);
 
         if (RILJ_LOGD) {
             riljLog(rr.serialString() + "> " + requestToString(rr.mRequest));
@@ -102,8 +102,7 @@ public class SlteRIL extends RIL {
     }
 
     @Override
-    public void
-    acceptCall(Message result) {
+    public void acceptCall(Message result) {
         acceptCall(0, result);
     }
 
@@ -149,8 +148,7 @@ public class SlteRIL extends RIL {
     }
 
     @Override
-    public void
-    dial(String address, int clirMode, UUSInfo uusInfo, Message result) {
+    public void dial(String address, int clirMode, UUSInfo uusInfo, Message result) {
         if (PhoneNumberUtils.isEmergencyNumber(address)) {
             dialEmergencyCall(address, clirMode, result);
             return;
@@ -178,8 +176,7 @@ public class SlteRIL extends RIL {
         send(rr);
     }
 
-    private void
-    dialEmergencyCall(String address, int clirMode, Message result) {
+    private void dialEmergencyCall(String address, int clirMode, Message result) {
         RILRequest rr;
 
         rr = RILRequest.obtain(RIL_REQUEST_DIAL_EMERGENCY_CALL, result);
@@ -196,8 +193,7 @@ public class SlteRIL extends RIL {
     }
 
     @Override
-    protected Object
-    responseIccCardStatus(Parcel p) {
+    protected Object responseIccCardStatus(Parcel p) {
         IccCardApplicationStatus appStatus;
 
         IccCardStatus cardStatus = new IccCardStatus();
@@ -237,8 +233,7 @@ public class SlteRIL extends RIL {
     }
 
     @Override
-    protected Object
-    responseCallList(Parcel p) {
+    protected Object responseCallList(Parcel p) {
         int num;
         int voiceSettings;
         ArrayList<DriverCall> response;
@@ -333,8 +328,7 @@ public class SlteRIL extends RIL {
     // RIL_UNSOL_RESPONSE_SIM_STATUS_CHANGED message after the SIM is
     // initialized, so delay the message until the radio is on.
     @Override
-    public void
-    getIccCardStatus(Message result) {
+    public void getIccCardStatus(Message result) {
         if (mState != RadioState.RADIO_ON) {
             mPendingGetSimStatus = result;
         } else {
@@ -353,8 +347,7 @@ public class SlteRIL extends RIL {
     }
 
     @Override
-    protected Object
-    responseSignalStrength(Parcel p) {
+    protected Object responseSignalStrength(Parcel p) {
         int gsmSignalStrength = p.readInt() & 0xff;
         int gsmBitErrorRate = p.readInt();
         int cdmaDbm = p.readInt();
@@ -395,8 +388,7 @@ public class SlteRIL extends RIL {
     }
 
     @Override
-    protected void
-    processUnsolicited (Parcel p) {
+    protected void processUnsolicited (Parcel p) {
         Object ret;
         int dataPosition = p.dataPosition(); // save off position within the Parcel
         int response = p.readInt();
@@ -496,63 +488,120 @@ public class SlteRIL extends RIL {
     public void getGsmBroadcastConfig(Message response) {
         Rlog.v(RILJ_LOG_TAG, "XMM7260RIL: getGsmBroadcastConfig");
 
-        CommandException e = new CommandException(CommandException.Error.REQUEST_NOT_SUPPORTED);
-        AsyncResult.forMessage(response, null, e);
-        response.sendToTarget();
+        if (response != null) {
+            CommandException e = new CommandException(CommandException.Error.REQUEST_NOT_SUPPORTED);
+            AsyncResult.forMessage(response, null, e);
+            response.sendToTarget();
+        }
     }
 
     @Override
     public void setGsmBroadcastConfig(SmsBroadcastConfigInfo[] config, Message response) {
         Rlog.v(RILJ_LOG_TAG, "XMM7260RIL: setGsmBroadcastConfig");
 
-        CommandException e = new CommandException(CommandException.Error.REQUEST_NOT_SUPPORTED);
-        AsyncResult.forMessage(response, null, e);
-        response.sendToTarget();
+        if (response != null) {
+            CommandException e = new CommandException(CommandException.Error.REQUEST_NOT_SUPPORTED);
+            AsyncResult.forMessage(response, null, e);
+            response.sendToTarget();
+        }
     }
 
     @Override
     public void setGsmBroadcastActivation(boolean activate, Message response) {
         Rlog.v(RILJ_LOG_TAG, "XMM7260RIL: setGsmBroadcastActivation");
 
-        CommandException e = new CommandException(CommandException.Error.REQUEST_NOT_SUPPORTED);
-        AsyncResult.forMessage(response, null, e);
-        response.sendToTarget();
+        if (response != null) {
+            CommandException e = new CommandException(CommandException.Error.REQUEST_NOT_SUPPORTED);
+            AsyncResult.forMessage(response, null, e);
+            response.sendToTarget();
+        }
     }
 
     @Override
     public void getCdmaBroadcastConfig(Message response) {
         Rlog.v(RILJ_LOG_TAG, "XMM7260RIL: getCdmaBroadcastConfig");
 
-        CommandException e = new CommandException(CommandException.Error.REQUEST_NOT_SUPPORTED);
-        AsyncResult.forMessage(response, null, e);
-        response.sendToTarget();
+        if (response != null) {
+            CommandException e = new CommandException(CommandException.Error.REQUEST_NOT_SUPPORTED);
+            AsyncResult.forMessage(response, null, e);
+            response.sendToTarget();
+        }
     }
 
     @Override
     public void setCdmaBroadcastConfig(CdmaSmsBroadcastConfigInfo[] configs, Message response) {
         Rlog.v(RILJ_LOG_TAG, "XMM7260RIL: setCdmaBroadcastConfig");
 
-        CommandException e = new CommandException(CommandException.Error.REQUEST_NOT_SUPPORTED);
-        AsyncResult.forMessage(response, null, e);
-        response.sendToTarget();
+        if (response != null) {
+            CommandException e = new CommandException(CommandException.Error.REQUEST_NOT_SUPPORTED);
+            AsyncResult.forMessage(response, null, e);
+            response.sendToTarget();
+        }
     }
 
     @Override
     public void setCdmaBroadcastActivation(boolean activate, Message response) {
         Rlog.v(RILJ_LOG_TAG, "XMM7260RIL: setCdmaBroadcastActivation");
 
-        CommandException e = new CommandException(CommandException.Error.REQUEST_NOT_SUPPORTED);
-        AsyncResult.forMessage(response, null, e);
-        response.sendToTarget();
+        if (response != null) {
+            CommandException e = new CommandException(CommandException.Error.REQUEST_NOT_SUPPORTED);
+            AsyncResult.forMessage(response, null, e);
+            response.sendToTarget();
+        }
     }
 
     @Override
     public void getCellInfoList(Message result) {
         Rlog.v(RILJ_LOG_TAG, "XMM7260RIL: getCellInfoList");
 
-        CommandException e = new CommandException(CommandException.Error.REQUEST_NOT_SUPPORTED);
-        AsyncResult.forMessage(result, null, e);
-        result.sendToTarget();
+        if (result != null) {
+            CommandException e = new CommandException(CommandException.Error.REQUEST_NOT_SUPPORTED);
+            AsyncResult.forMessage(result, null, e);
+            result.sendToTarget();
+        }
+    }
+
+    @Override
+    public void setDataAllowed(boolean allowed, Message result) {
+        Rlog.v(RILJ_LOG_TAG, "XMM7260RIL: setDataAllowed");
+
+        if (result != null) {
+            AsyncResult.forMessage(result, 0, null);
+            result.sendToTarget();
+        }
+    }
+
+    @Override
+    public void setCellInfoListRate(int rateInMillis, Message response) {
+        Rlog.v(RILJ_LOG_TAG, "XMM7260RIL: setCellInfoListRate");
+
+        if (response != null) {
+            CommandException e = new CommandException(CommandException.Error.REQUEST_NOT_SUPPORTED);
+            AsyncResult.forMessage(response, null, e);
+            response.sendToTarget();
+       }
+    }
+
+    private void constructGsmSendSmsRilRequest(RILRequest rr, String smscPDU, String pdu) {
+        rr.mParcel.writeInt(2);
+        rr.mParcel.writeString(smscPDU);
+        rr.mParcel.writeString(pdu);
+    }
+
+    /**
+     * The RIL can't handle the RIL_REQUEST_SEND_SMS_EXPECT_MORE
+     * request properly, so we use RIL_REQUEST_SEND_SMS instead.
+     */
+    @Override
+    public void sendSMSExpectMore(String smscPDU, String pdu, Message result) {
+        Rlog.v(RILJ_LOG_TAG, "XMM7260RIL: sendSMSExpectMore");
+
+        RILRequest rr = RILRequest.obtain(RIL_REQUEST_SEND_SMS, result);
+        constructGsmSendSmsRilRequest(rr, smscPDU, pdu);
+
+        if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest));
+
+        send(rr);
     }
 
 }
