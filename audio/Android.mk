@@ -40,7 +40,7 @@ LOCAL_ADDITIONAL_DEPENDENCIES += \
 LOCAL_SHARED_LIBRARIES := liblog libcutils libtinyalsa libaudioutils libdl \
 	libaudience_voicefx libaudioroute
 
-LOCAL_CFLAGS := -Wno-unused-parameter
+LOCAL_CFLAGS += -Wno-unused-parameter
 
 include $(BUILD_SHARED_LIBRARY)
 
@@ -58,6 +58,6 @@ LOCAL_C_INCLUDES += \
 
 LOCAL_SHARED_LIBRARIES := liblog libutils
 
-LOCAL_CFLAGS := -Wno-unused-parameter
+LOCAL_CFLAGS += -Wno-unused-parameter
 
 include $(BUILD_SHARED_LIBRARY)
