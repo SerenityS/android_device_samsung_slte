@@ -17,7 +17,7 @@
  */
 
 #define LOG_TAG "audio_hw_primary"
-/* #define LOG_NDEBUG 0 */
+#define LOG_NDEBUG 0
 
 #include <errno.h>
 #include <pthread.h>
@@ -420,8 +420,8 @@ static int set_hdmi_channels(struct audio_device *adev, int channels) {
 /* must be called with hw device mutex locked */
 static void do_select_devices(struct audio_device *adev)
 {
-    int output_device_id = get_output_device_id(adev->out_device);
-    int input_source_id = get_input_source_id(adev->input_source, adev->in_device, adev->wb_amr, adev->noise_suppression);
+    int output_device_id;
+    int input_source_id;
     const char *output_route = NULL;
     const char *input_route = NULL;
     int new_route_id;
@@ -431,6 +431,11 @@ static void do_select_devices(struct audio_device *adev)
     enable_hdmi_audio(adev, adev->out_device & AUDIO_DEVICE_OUT_AUX_DIGITAL);
 #endif
 
+    output_device_id = get_output_device_id(adev->out_device);
+    input_source_id = get_input_source_id(
+                        (adev->in_call ?
+                            AUDIO_SOURCE_VOICE_CALL : adev->input_source),
+                        adev->in_device, adev->wb_amr, adev->noise_suppression);
     new_route_id = (1 << (input_source_id + OUT_DEVICE_CNT)) + (1 << output_device_id);
     if ((new_route_id == adev->cur_route_id) && (adev->es325_mode == adev->es325_new_mode))
         return;
@@ -714,7 +719,8 @@ static void adev_enter_call(struct audio_device *adev)
     if (!adev->in_call) {
         ALOGV("%s: Entering IN_CALL mode", __func__);
 
-        adev->input_source = AUDIO_SOURCE_VOICE_CALL;
+        adev->in_call = true;
+
         do_select_devices(adev);
 
         start_voice_call(adev);
@@ -722,7 +728,6 @@ static void adev_enter_call(struct audio_device *adev)
         set_call_volume(adev);
 
         ril_set_call_clock_sync(&adev->ril, SOUND_CLOCK_START);
-        adev->in_call = true;
     }
 }
 
@@ -732,7 +737,6 @@ static void select_devices(struct audio_device *adev)
     if (adev->in_call) {
         ALOGV("%s: Changing IN_CALL mode", __func__);
 
-        adev->input_source = AUDIO_SOURCE_VOICE_CALL;
         do_select_devices(adev);
 
         start_voice_call(adev);
@@ -752,7 +756,6 @@ static void adev_leave_call(struct audio_device *adev)
         adev->in_call = false;
         ril_set_call_clock_sync(&adev->ril, SOUND_CLOCK_STOP);
 
-        adev->input_source = AUDIO_SOURCE_DEFAULT;
         do_select_devices(adev);
 
         stop_voice_call(adev);
@@ -1196,7 +1199,7 @@ static int out_set_parameters(struct audio_stream *stream, const char *kvpairs)
             }
 #endif
             out->device = val;
-            adev->out_device = val;
+            adev->out_device = output_devices(out) | val;
             select_devices(adev);
 
             /* start SCO stream if needed */
