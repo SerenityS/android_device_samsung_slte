@@ -1838,11 +1838,11 @@ static int adev_set_parameters(struct audio_hw_device *dev, const char *kvpairs)
     int ret;
 
     parms = str_parms_create_str(kvpairs);
-    ret = str_parms_get_str(parms, AUDIO_PARAMETER_KEY_BT_NREC, value,
-                            sizeof(value));
 
     pthread_mutex_lock(&adev->lock);
 
+    ret = str_parms_get_str(parms, AUDIO_PARAMETER_KEY_BT_NREC, value,
+                            sizeof(value));
     if (ret >= 0) {
         if (strcmp(value, AUDIO_PARAMETER_VALUE_ON) == 0) {
             adev->bluetooth_nrec = true;
@@ -1853,14 +1853,26 @@ static int adev_set_parameters(struct audio_hw_device *dev, const char *kvpairs)
 
     ret = str_parms_get_str(parms, "noise_suppression", value, sizeof(value));
     if (ret >= 0) {
-        if (strcmp(value, "off") == 0) {
-            ALOGV("%s: disabling two mic control", __func__);
-            adev->noise_suppression = false;
-            ril_set_two_mic_control(&adev->ril, AUDIENCE, TWO_MIC_SOLUTION_OFF);
-        } else {
+        /* noise_suppression=auto or noise_suppression=off */
+        if (!strcmp(value, "auto") || !strcmp(value, "true") || !strcmp(value, "on")) {
             ALOGV("%s: enabling two mic control", __func__);
             adev->noise_suppression = true;
             ril_set_two_mic_control(&adev->ril, AUDIENCE, TWO_MIC_SOLUTION_ON);
+        } else {
+            ALOGV("%s: disabling two mic control", __func__);
+            adev->noise_suppression = false;
+            ril_set_two_mic_control(&adev->ril, AUDIENCE, TWO_MIC_SOLUTION_OFF);
+        }
+    }
+
+    ret = str_parms_get_str(parms, "wide_voice_enable", value, sizeof(value));
+    if (ret >= 0) {
+        if (!strcmp(value, "true") || !strcmp(value, "on")) {
+            ALOGV("%s: enabling wide voice", __func__);
+            adev->wb_amr = true;
+        } else {
+            ALOGV("%s: disabling wide voice", __func__);
+            adev->wb_amr = false;
         }
     }
 
@@ -1873,24 +1885,6 @@ static int adev_set_parameters(struct audio_hw_device *dev, const char *kvpairs)
 static char * adev_get_parameters(const struct audio_hw_device *dev,
                                   const char *keys)
 {
-    struct audio_device *adev = (struct audio_device *)dev;
-    struct str_parms *parms;
-    char value[32];
-    int ret;
-    char *str;
-
-    parms = str_parms_create_str(keys);
-    ret = str_parms_get_str(parms, "noise_suppression", value, sizeof(value));
-    str_parms_destroy(parms);
-    if (ret >= 0) {
-        if (adev->noise_suppression)
-            parms = str_parms_create_str("noise_suppression=on");
-        else
-            parms = str_parms_create_str("noise_suppression=off");
-        str = str_parms_to_str(parms);
-        str_parms_destroy(parms);
-        return str;
-    }
     return strdup("");
 }
 
@@ -1934,7 +1928,6 @@ static int adev_set_mode(struct audio_hw_device *dev, audio_mode_t mode)
     if (adev->mode != mode) {
         adev->mode = mode;
         if (adev->mode == AUDIO_MODE_IN_CALL) {
-            adev->voice_volume = 1.0f;
             /* postpone to out_set_parameters() */
             //adev_enter_call(adev);
         } else {

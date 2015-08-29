@@ -232,7 +232,11 @@ INPUT_CHANNEL_MAP {
 
     <ctl name="RCV Switch" value="0" />
     <ctl name="SPK Switch" value="0" />
+      <ctl name="DSP1L Input 1" value="None" />
+      <ctl name="DSP1L Input 2" value="None" />
     <ctl name="HP Switch" value="0" />
+      <ctl name="DSP1 Aux 1" value="None" />
+      <ctl name="DSP1 Aux 2" value="None" />
     <ctl name="VPS Switch" value="0" />
     <ctl name="HDMI Switch" value="0" />
     <ctl name="Main Mic Switch" value="0" />
@@ -1196,14 +1200,12 @@ INPUT_CHANNEL_MAP {
     </path>
 
     <path name="scenario-two-mic-speaker-incall-nb">
-        <!-- <path name="scenario-builtin-mic-speaker-incall-nb" /> -->
-        <path name="scenario-builtin-mic-earpiece-incall-nb" />
+        <path name="scenario-builtin-mic-speaker-incall-nb" />
         <path name="scenario-back-mic-speaker-incall-nb" />
     </path>
 
     <path name="scenario-two-mic-speaker-incall-wb">
-        <!-- <path name="scenario-builtin-mic-speaker-incall-wb" /> -->
-        <path name="scenario-builtin-mic-earpiece-incall-wb" />
+        <path name="scenario-builtin-mic-speaker-incall-wb" />
         <path name="scenario-back-mic-speaker-incall-wb" />
     </path>
 
