@@ -1120,8 +1120,8 @@ INPUT_CHANNEL_MAP {
         <ctl name="IN1L Volume" value="14" />
         <ctl name="IN1L Digital Volume" value="142" />
         -->
-        <ctl name="IN1L Volume" value="24" />
-        <ctl name="IN1L Digital Volume" value="142" />
+        <ctl name="IN1L Volume" value="18" />
+        <ctl name="IN1L Digital Volume" value="128" />
     </path>
 
     <path name="volume-builtin-mic-communication-earpiece">
@@ -1704,11 +1704,13 @@ INPUT_CHANNEL_MAP {
         <path name="channel-stereo" />
 
         <path name="device-builtin-mic" />
-        <path name="scenario-builtin-mic-speaker-incall-nb" />
+        <!-- <path name="scenario-builtin-mic-speaker-incall-nb" /> -->
+        <path name="scenario-builtin-mic-earpiece-incall-nb" />
         <path name="volume-builtin-mic-incall-speaker" />
 
         <path name="device-back-mic" />
-        <path name="scenario-back-mic-speaker-incall-nb" />
+        <!-- <path name="scenario-back-mic-speaker-incall-nb" /> -->
+        <path name="scenario-back-mic-earpiece-incall-nb" />
         <path name="volume-back-mic-incall-speaker" />
     </path>
 
@@ -1716,11 +1718,13 @@ INPUT_CHANNEL_MAP {
         <path name="channel-stereo" />
 
         <path name="device-builtin-mic" />
-        <path name="scenario-builtin-mic-speaker-incall-wb" />
+        <!-- <path name="scenario-builtin-mic-speaker-incall-wb" /> -->
+        <path name="scenario-builtin-mic-earpiece-incall-wb" />
         <path name="volume-builtin-mic-incall-speaker" />
 
         <path name="device-back-mic" />
-        <path name="scenario-back-mic-speaker-incall-wb" />
+        <!-- <path name="scenario-back-mic-speaker-incall-wb" /> -->
+        <path name="scenario-back-mic-earpiece-incall-wb" />
         <path name="volume-back-mic-incall-speaker" />
     </path>
 
@@ -1728,11 +1732,13 @@ INPUT_CHANNEL_MAP {
         <path name="channel-stereo" />
 
         <path name="device-builtin-mic" />
-        <path name="scenario-builtin-mic-speaker-incall-nb" />
+        <!-- <path name="scenario-builtin-mic-speaker-incall-nb" /> -->
+        <path name="scenario-builtin-mic-earpiece-incall-nb" />
         <path name="volume-builtin-mic-incall-speaker" />
 
         <path name="device-back-mic" />
-        <path name="scenario-back-mic-speaker-incall-nb" />
+        <!-- <path name="scenario-back-mic-speaker-incall-nb" /> -->
+        <path name="scenario-back-mic-earpiece-incall-nb" />
         <path name="volume-back-mic-incall-speaker" />
     </path>
 
@@ -1740,11 +1746,13 @@ INPUT_CHANNEL_MAP {
         <path name="channel-stereo" />
 
         <path name="device-builtin-mic" />
-        <path name="scenario-builtin-mic-speaker-incall-wb" />
+        <!-- <path name="scenario-builtin-mic-speaker-incall-wb" /> -->
+        <path name="scenario-builtin-mic-earpiece-incall-wb" />
         <path name="volume-builtin-mic-incall-speaker" />
 
         <path name="device-back-mic" />
-        <path name="scenario-back-mic-speaker-incall-wb" />
+        <!-- <path name="scenario-back-mic-speaker-incall-wb" /> -->
+        <path name="scenario-back-mic-earpiece-incall-wb" />
         <path name="volume-back-mic-incall-speaker" />
     </path>
 
