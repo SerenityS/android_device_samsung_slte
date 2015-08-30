@@ -65,7 +65,6 @@ lib/omx/libOMX.Exynos.VP8.Decoder.so
 lib/omx/libOMX.Exynos.VP8.Encoder.so
 lib/omx/libOMX.Exynos.WMV.Decoder.so
 lib/omx/libOMX.Exynos.HEVC.Decoder.so
-lib/omx/libOMX.Exynos.MP3.Decoder.so
 
 ### Graphics
 vendor/lib/egl/libGLES_mali.so

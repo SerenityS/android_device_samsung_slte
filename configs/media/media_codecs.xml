@@ -177,14 +177,6 @@ Only the three quirks included above are recognized at this point:
             <Limit name="bitrate" range="1-80000000" />
             <Feature name="adaptive-playback" />
         </MediaCodec>
-        <!-- Audio -->
-        <MediaCodec name="OMX.Exynos.MP3.Decoder">
-            <Type name="audio/mpeg"/>
-            <Type name="audio/mpeg-L1"/>
-            <Type name="audio/mpeg-L2"/>
-            <Quirk name="needs-flush-before-disable" />
-            <Quirk name="supports-multiple-frames-per-input" />
-        </MediaCodec>
     </Decoders>
 
     <Encoders>

@@ -172,8 +172,7 @@ PRODUCT_PACKAGES += \
     libOMX.Exynos.VP8.Encoder \
     libOMX.Exynos.MPEG2.Decoder \
     libOMX.Exynos.WMV.Decoder \
-    libOMX.Exynos.HEVC.Decoder \
-    libOMX.Exynos.MP3.Decoder
+    libOMX.Exynos.HEVC.Decoder
 
 # Power
 PRODUCT_PACKAGES += \
