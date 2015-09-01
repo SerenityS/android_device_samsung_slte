@@ -22,6 +22,17 @@ TARGET_CPU_SMP := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
 OVERRIDE_RS_DRIVER := libRSDriverArm.so
 
+# Enable dex-preoptimization to speed up first boot sequence
+ifeq ($(HOST_OS),linux)
+  ifeq ($(TARGET_BUILD_VARIANT),user)
+    ifeq ($(WITH_DEXPREOPT),)
+      WITH_DEXPREOPT := true
+    endif
+  endif
+endif
+WITH_DEXPREOPT_BOOT_IMG_ONLY ?= true
+
+# BOOT
 TARGET_BOOTLOADER_BOARD_NAME := universal5430
 
 BOARD_KERNEL_BASE := 0x10000000
