@@ -68,6 +68,8 @@
  * output only supports 1 (stereo) and the multi channel HDMI output 2 (5.1 and 7.1) */
 #define MAX_SUPPORTED_CHANNEL_MASKS 2
 
+/* #define USE_NOISE_SUPPRESSION */
+
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
 
 struct pcm_config pcm_config = {
@@ -1854,6 +1856,7 @@ static int adev_set_parameters(struct audio_hw_device *dev, const char *kvpairs)
         }
     }
 
+#ifdef USE_NOISE_SUPPRESSION
     ret = str_parms_get_str(parms, "noise_suppression", value, sizeof(value));
     if (ret >= 0) {
         /* noise_suppression=auto or noise_suppression=off */
@@ -1867,6 +1870,7 @@ static int adev_set_parameters(struct audio_hw_device *dev, const char *kvpairs)
             ril_set_two_mic_control(&adev->ril, AUDIENCE, TWO_MIC_SOLUTION_OFF);
         }
     }
+#endif
 
     ret = str_parms_get_str(parms, "wide_voice_enable", value, sizeof(value));
     if (ret >= 0) {
