@@ -6,7 +6,7 @@ TARGET_OTA_ASSERT_DEVICE := slte,sltexx
 # Platform
 BOARD_VENDOR := samsung
 TARGET_BOARD_PLATFORM := exynos5
-TARGET_SLSI_VARIANT := cm
+TARGET_SLSI_VARIANT := insignal
 TARGET_SOC := exynos5430
 
 # Architecture
@@ -92,12 +92,11 @@ BOARD_USES_NEON_BLITANTIH := true
 USE_OPENGL_RENDERER := true
 BOARD_EGL_CFG := $(LOCAL_PATH)/configs/egl/egl.cfg
 BOARD_HDMI_INCAPABLE := true
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
-#COMMON_GLOBAL_CFLAGS += -DSURFACE_IS_BGR32
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 5
 COMMON_GLOBAL_CFLAGS += -DUSE_NATIVE_SEC_NV12TILED
 
 # HWCServices
-#BOARD_USES_HWC_SERVICES := true
+BOARD_USES_HWC_SERVICES := true
 
 # Hardware
 BOARD_HARDWARE_CLASS += hardware/samsung/cmhw
@@ -126,6 +125,10 @@ BOARD_USE_METADATABUFFERTYPE := true
 BOARD_USE_STOREMETADATA := true
 BOARD_USE_S3D_SUPPORT := true
 BOARD_USE_ENCODER_RGBINPUT_SUPPORT := true
+BOARD_USE_DUALDPB_MODE := true
+BOARD_USE_CSC_HW := false
+BOARD_USE_QOS_CTRL := false
+BOARD_USE_H264_PREPEND_SPS_PPS := false
 #
 BOARD_USE_VP8ENC_SUPPORT := true
 BOARD_USE_HEVCDEC_SUPPORT := true
@@ -167,8 +170,8 @@ BOARD_USES_SYNC_MODE_FOR_MEDIA := true
 ENABLE_WEBGL := true
 
 # WFD
-#BOARD_USES_WFD_SERVICE := true
-#BOARD_USES_WFD := true
+BOARD_USES_WFD_SERVICE := true
+BOARD_USES_WFD := true
 
 # Wifi
 BOARD_HAVE_SAMSUNG_WIFI          := true
@@ -210,4 +213,4 @@ TW_NO_EXFAT_FUSE := true
 #TW_DISABLE_TTF := true
 
 # inherit from the proprietary version
--include vendor/samsung/slte/BoardConfigVendor.mk	
+-include vendor/samsung/slte/BoardConfigVendor.mk
