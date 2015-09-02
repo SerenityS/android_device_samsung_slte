@@ -170,7 +170,6 @@ PRODUCT_PACKAGES += \
     libOMX.Exynos.MPEG4.Encoder \
     libOMX.Exynos.VP8.Decoder \
     libOMX.Exynos.VP8.Encoder \
-    libOMX.Exynos.MPEG2.Decoder \
     libOMX.Exynos.WMV.Decoder \
     libOMX.Exynos.HEVC.Decoder
 
