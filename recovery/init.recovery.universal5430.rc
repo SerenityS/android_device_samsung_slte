@@ -1,4 +1,4 @@
-on early-init
+on init
     start set_permissive
 
 on fs
