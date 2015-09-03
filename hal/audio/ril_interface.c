@@ -42,7 +42,7 @@ void ril_register_set_wb_amr_callback(void *function, void *data)
 set the wideband AMR state */
 static int ril_set_wb_amr_callback(void *ril_client __unused,
                                    const void *data,
-                                   size_t datalen)
+                                   size_t datalen __unused)
 {
     int enable = ((int *)data)[0];
 
