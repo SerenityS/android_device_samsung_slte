@@ -200,17 +200,17 @@ RECOVERY_GRAPHICS_USE_LINELENGTH := true
 RECOVERY_SDCARD_ON_DATA := true
 
 # TWRP Recovery
-#TARGET_RECOVERY_DEVICE_MODULES += prebuilt_file_contexts exyrngd
+TARGET_RECOVERY_DEVICE_MODULES += twrp.fstab init.recovery.usb.rc
 TW_THEME := portrait_mdpi
 TW_BRIGHTNESS_PATH := /sys/class/backlight/panel/brightness
 TW_MAX_BRIGHTNESS := 255
 TW_NO_REBOOT_BOOTLOADER := true
 TW_HAS_DOWNLOAD_MODE := true
-TW_INCLUDE_JB_CRYPTO := true
 TW_INCLUDE_L_CRYPTO := true
 # The kernel has exfat support.
 TW_NO_EXFAT_FUSE := true
-#TW_DISABLE_TTF := true
+# Provide our own init.recovery.usb.rc
+TW_EXCLUDE_DEFAULT_USB_INIT := true
 
 # inherit from the proprietary version
 -include vendor/samsung/slte/BoardConfigVendor.mk
