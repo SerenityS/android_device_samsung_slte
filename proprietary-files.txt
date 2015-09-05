@@ -21,6 +21,9 @@ etc/firmware/florida-dsp4-rx-anc-wb.wmfw
 # audio decoder
 vendor/firmware/seiren_fw_dram.bin
 vendor/firmware/seiren_fw_sram.bin
+# audio effect
+vendor/lib/liblvverx_3.21.15.so
+vendor/lib/liblvvetx_3.21.15.so
 
 ### Bluetooth
 vendor/firmware/bcm4350_V0301.0634.hcd
