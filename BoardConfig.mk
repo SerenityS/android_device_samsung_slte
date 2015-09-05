@@ -200,7 +200,8 @@ RECOVERY_GRAPHICS_USE_LINELENGTH := true
 RECOVERY_SDCARD_ON_DATA := true
 
 # TWRP Recovery
-#TARGET_RECOVERY_DEVICE_MODULES += twrp.fstab
+#TARGET_RECOVERY_DEVICE_MODULES += fstab.twrp
+#TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/etc/fstab.twrp
 TW_THEME := portrait_mdpi
 TW_BRIGHTNESS_PATH := /sys/class/backlight/panel/brightness
 TW_MAX_BRIGHTNESS := 255
