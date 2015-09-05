@@ -185,11 +185,11 @@ WIFI_DRIVER_FW_PATH_STA          := "/etc/wifi/bcmdhd_sta.bin"
 WIFI_DRIVER_FW_PATH_AP           := "/etc/wifi/bcmdhd_apsta.bin"
 
 # Recovery
-BOARD_HAS_DOWNLOAD_MODE := true
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/etc/fstab.universal5430
 TARGET_RECOVERY_PIXEL_FORMAT := BRGA_8888
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
+BOARD_HAS_DOWNLOAD_MODE := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_HAS_NO_REAL_SDCARD := true
 BOARD_RECOVERY_SWIPE := true
@@ -197,7 +197,7 @@ RECOVERY_GRAPHICS_USE_LINELENGTH := true
 RECOVERY_SDCARD_ON_DATA := true
 
 # TWRP Recovery
-TARGET_RECOVERY_DEVICE_MODULES += twrp.fstab init.recovery.usb.rc
+TARGET_RECOVERY_DEVICE_MODULES += twrp.fstab
 TW_THEME := portrait_mdpi
 TW_BRIGHTNESS_PATH := /sys/class/backlight/panel/brightness
 TW_MAX_BRIGHTNESS := 255
@@ -206,8 +206,6 @@ TW_HAS_DOWNLOAD_MODE := true
 TW_INCLUDE_L_CRYPTO := true
 # The kernel has exfat support.
 TW_NO_EXFAT_FUSE := true
-# Provide our own init.recovery.usb.rc
-TW_EXCLUDE_DEFAULT_USB_INIT := true
 
 # inherit from the proprietary version
 -include vendor/samsung/slte/BoardConfigVendor.mk
