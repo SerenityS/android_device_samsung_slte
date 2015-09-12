@@ -1115,7 +1115,7 @@ INPUT_CHANNEL_MAP {
         <ctl name="IN1L Volume" value="24" />
         <ctl name="IN1L Digital Volume" value="128" />
         -->
-        <ctl name="IN1L Volume" value="24" />
+        <ctl name="IN1L Volume" value="18" />
         <ctl name="IN1L Digital Volume" value="128" />
     </path>
 
@@ -1199,7 +1199,7 @@ INPUT_CHANNEL_MAP {
         <ctl name="IN3L Volume" value="17" />
         <ctl name="IN3L Digital Volume" value="128" />
         -->
-        <ctl name="IN3L Volume" value="11" />
+        <ctl name="IN3L Volume" value="9" />
         <ctl name="IN3L Digital Volume" value="110" />
     </path>
 
@@ -1208,7 +1208,7 @@ INPUT_CHANNEL_MAP {
         <ctl name="IN3L Volume" value="23" />
         <ctl name="IN3L Digital Volume" value="142" />
         -->
-        <ctl name="IN3L Volume" value="18" />
+        <ctl name="IN3L Volume" value="14" />
         <ctl name="IN3L Digital Volume" value="128" />
     </path>
 
