@@ -120,7 +120,7 @@ PRODUCT_PACKAGES += \
 ###########################################################
 
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/bluetooth/bcm4350_prepatch.hcd:system/vendor/firmware/bcm4350_prepatch.hcd
+	$(LOCAL_PATH)/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
 
 ###########################################################
 ### NFC
