@@ -41,3 +41,7 @@ ro.hwui.text_large_cache_height=1024
 
 # AUDIO
 af.fast_track_multiplier=1
+
+# ART
+# use 3 threads for dex2oat
+ro.sys.fw.dex2oat_thread_count=3
