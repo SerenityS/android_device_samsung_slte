@@ -525,7 +525,7 @@ static void start_bt_sco(struct audio_device *adev)
 
     adev->pcm_sco_rx = pcm_open(PCM_CARD,
                                 PCM_DEVICE_SCO,
-                                PCM_OUT,
+                                PCM_OUT | PCM_MONOTONIC,
                                 &pcm_config_sco);
     if (adev->pcm_sco_rx != NULL && !pcm_is_ready(adev->pcm_sco_rx)) {
         ALOGE("%s: cannot open PCM SCO RX stream: %s",
