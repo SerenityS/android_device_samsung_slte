@@ -1145,34 +1145,37 @@
     #######################################################
     -->
 
+    <!--
+    # Verbs are always applied first. A scenario might overwrite
+    # the verb setting.
+    -->
+
     <path name="verb-default">
         <ctl name="AIF2 Mode" value="Master" />
 
-        <!-- CP->RCV -->
-        <ctl name="HPOUT3L Input 1" value="AIF1RX1" />
-        <ctl name="HPOUT3R Input 1" value="AIF1RX2" />
-
-        <!-- CP->SPK -->
-        <ctl name="HPOUT2L Input 1" value="AIF1RX1" />
-        <ctl name="HPOUT2R Input 1" value="AIF1RX2" />
-
         <!-- CP->HP -->
-        <ctl name="HPOUT1L Input 1" value="AIF1RX1" />
-        <ctl name="HPOUT1R Input 1" value="AIF1RX2" />
+        <ctl name="HPOUT1L Input 1" value="None" />
+        <ctl name="HPOUT1R Input 1" value="None" />
     </path>
 
     <path name="verb-incall">
         <ctl name="AIF2 Mode" value="Slave" />
 
-        <!-- CP->RCV -->
-        <ctl name="HPOUT3L Input 1" value="ASRC2L" />
+        <!-- AP->RCV -->
+        <ctl name="HPOUT3L Input 1" value="AIF1RX1" />
+        <ctl name="HPOUT3R Input 1" value="AIF1RX2" />
 
-        <!-- CP->SPK -->
-        <ctl name="HPOUT2L Input 1" value="ASRC2L" />
+        <!-- AP->SPK -->
+        <ctl name="HPOUT2L Input 1" value="AIF1RX1" />
+        <ctl name="HPOUT2R Input 1" value="AIF1RX2" />
+
+        <!-- AP->HP -->
+        <ctl name="HPOUT1L Input 1" value="AIF1RX1" />
+        <ctl name="HPOUT1R Input 1" value="AIF1RX2" />
 
         <!-- CP->HP -->
         <ctl name="HPOUT1L Input 2" value="ASRC2L" />
-        <ctl name="HPOUT1L Input 2" value="ASRC2R" />
+        <ctl name="HPOUT1R Input 2" value="ASRC2R" />
     </path>
 
     <!--
@@ -1213,49 +1216,49 @@
     <!-- ### Playback ### -->
 
     <path name="voice-earpiece">
-        <path name="device-earpiece" />
         <path name="verb-incall" />
 
+        <path name="device-earpiece" />
         <path name="scenario-earpiece-incall-nb" />
         <path name="volume-earpiece-incall" />
     </path>
 
     <path name="voice-earpiece-wb">
-        <path name="device-earpiece" />
         <path name="verb-incall" />
 
+        <path name="device-earpiece" />
         <path name="scenario-earpiece-incall-wb" />
         <path name="volume-earpiece-incall" />
     </path>
 
     <path name="voice-speaker">
-        <path name="device-speaker" />
         <path name="verb-incall" />
 
+        <path name="device-speaker" />
         <path name="scenario-speaker-incall-nb" />
         <path name="volume-speaker-incall" />
     </path>
 
     <path name="voice-speaker-wb">
-        <path name="device-speaker" />
         <path name="verb-incall" />
 
+        <path name="device-speaker" />
         <path name="scenario-speaker-incall-wb" />
         <path name="volume-speaker-incall" />
     </path>
 
     <path name="voice-headphones">
-        <path name="device-headphones" />
         <path name="verb-incall" />
 
+        <path name="device-headphones" />
         <path name="scenario-headphones-incall-nb" />
         <path name="volume-headphones-incall" />
     </path>
 
     <path name="voice-headphones-wb">
-        <path name="device-headphones" />
         <path name="verb-incall" />
 
+        <path name="device-headphones" />
         <path name="scenario-headphones-incall-wb" />
         <path name="volume-headphones-incall" />
     </path>
@@ -1289,25 +1292,25 @@
     </path>
 
     <path name="media-earpiece">
-        <path name="device-earpiece" />
         <path name="verb-default" />
 
+        <path name="device-earpiece" />
         <path name="scenario-earpiece-default" />
         <path name="volume-earpiece-default" />
     </path>
 
     <path name="media-speaker">
-        <path name="device-speaker" />
         <path name="verb-default" />
 
+        <path name="device-speaker" />
         <path name="scenario-speaker-default" />
         <path name="volume-speaker-default" />
     </path>
 
     <path name="media-headphones">
-        <path name="device-headphones" />
         <path name="verb-default" />
 
+        <path name="device-headphones" />
         <path name="scenario-headphones-default" />
         <path name="volume-headphones-default" />
     </path>
@@ -1327,49 +1330,49 @@
     </path>
 
     <path name="voice-rec-speaker">
-        <path name="device-speaker" />
         <path name="verb-default" />
 
+        <path name="device-speaker" />
         <path name="scenario-speaker-record" />
         <path name="volume-speaker-default" />
     </path>
 
     <path name="voice-rec-headphones">
-        <path name="device-headphones" />
         <path name="verb-default" />
 
+        <path name="device-headphones" />
         <path name="scenario-headphones-default" />
         <path name="volume-headphones-default" />
     </path>
 
     <path name="communication-speaker">
-        <path name="device-speaker" />
         <path name="verb-default" />
 
+        <path name="device-speaker" />
         <path name="scenario-speaker-default" />
         <path name="volume-speaker-default" />
     </path>
 
     <path name="communication-earpiece">
-        <path name="device-earpiece" />
         <path name="verb-default" />
 
+        <path name="device-earpiece" />
         <path name="scenario-earpiece-loopback" />
         <path name="volume-earpiece-default" />
     </path>
 
     <path name="communication-headphones">
-        <path name="device-headphones" />
         <path name="verb-default" />
 
+        <path name="device-headphones" />
         <path name="scenario-headphones-default" />
         <path name="volume-headphones-default" />
     </path>
 
     <path name="speaker-and-headphones">
-        <path name="device-speaker" />
         <path name="verb-default" />
 
+        <path name="device-speaker" />
         <path name="scenario-speaker-and-headphones" />
         <path name="volume-speaker-default" />
 
