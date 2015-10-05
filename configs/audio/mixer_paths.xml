@@ -760,8 +760,6 @@
         <ctl name="DSP3 Rate" value="SYNCCLK rate 2" />
         <ctl name="AIF1TX1 Input 3" value="None" />
         <ctl name="AIF1TX2 Input 3" value="None" />
-        <ctl name="LHPF1 Input 1" value="None" />
-        <ctl name="LHPF2 Input 1" value="None" />
         <ctl name="DSP2L Input 1" value="None" />
         <ctl name="DSP2L Input 2" value="None" />
         <ctl name="DSP2 Aux 2" value="None" />
