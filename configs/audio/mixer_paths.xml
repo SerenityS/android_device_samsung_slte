@@ -342,6 +342,17 @@
         <ctl name="HPOUT2R Input 1" value="DSP4.1" />
         <ctl name="HPOUT2L Input 3" value="ISRC2INT1" />
         <ctl name="HPOUT2R Input 3" value="ISRC2INT1" />
+
+        <ctl name="DSP1 Firmware" value="EDAC" />
+        <ctl name="DSP1 Rate" value="SYNCCLK rate 1" />
+        <ctl name="DSP1 Aux 1" value="AIF1RX1" />
+        <ctl name="DSP1 Aux 2" value="AIF1RX2" />
+        <ctl name="LHPF3 Input 1" value="None" />
+        <ctl name="LHPF3 Input 2" value="None" />
+        <ctl name="HPOUT1L Input 1" value="DSP1.3" />
+        <ctl name="HPOUT1R Input 1" value="DSP1.4" />
+        <ctl name="HPOUT1L Input 2" value="ASRC2L" />
+        <ctl name="HPOUT1R Input 2" value="ASRC2R" />
     </path>
 
     <path name="scenario-speaker-incall-nb">
@@ -1398,12 +1409,9 @@
         <path name="verb-default" />
 
         <path name="device-speaker" />
+        <path name="device-headphones" />
         <path name="scenario-speaker-and-headphones" />
         <path name="volume-speaker-default" />
-
-        <path name="device-headphones" />
-
-        <path name="scenario-headphones-default" />
         <path name="volume-headphones-default" />
     </path>
 
