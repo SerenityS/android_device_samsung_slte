@@ -442,17 +442,22 @@
     <!-- ### Scenario ### -->
 
     <path name="scenario-headphones-default">
-        <ctl name="ISRC2INT1 Input" value="ASRC2L" />
+        <ctl name="ASRC RATE 1" value="SYNCCLK rate 1" />
+        <ctl name="HPOUT1 DRE Switch" value="1" />
+        <ctl name="DSP1 Firmware" value="EDAC" />
+        <ctl name="DSP1 Rate" value="SYNCCLK rate 1" />
+        <ctl name="DSP1 Aux 1" value="AIF1RX1" />
+        <ctl name="DSP1 Aux 2" value="AIF1RX2" />
         <ctl name="LHPF3 Input 1" value="None" />
         <ctl name="LHPF3 Input 2" value="None" />
-        <ctl name="HPOUT1 DRE Switch" value="0" />
-        <ctl name="HPOUT1L Input 1" value="AIF1RX1" />
-        <ctl name="HPOUT1R Input 1" value="AIF1RX2" />
-        <ctl name="HPOUT1L Input 2" value="ISRC2INT1" />
-        <ctl name="HPOUT1R Input 2" value="ISRC2INT1" />
+        <ctl name="HPOUT1L Input 1" value="DSP1.3" />
+        <ctl name="HPOUT1R Input 1" value="DSP1.4" />
+        <ctl name="HPOUT1L Input 2" value="ASRC2L" />
+        <ctl name="HPOUT1R Input 2" value="ASRC2R" />
     </path>
 
     <path name="scenario-headphones-incall-nb">
+        <ctl name="ASRC RATE 1" value="SYNCCLK rate 3" />
         <ctl name="HPOUT1 DRE Switch" value="0" />
         <ctl name="ASRC2L Input" value="AIF2RX1" />
         <ctl name="ISRC2INT1 Input" value="ASRC2L" />
@@ -467,6 +472,7 @@
     </path>
 
     <path name="scenario-headphones-incall-wb">
+        <ctl name="ASRC RATE 1" value="SYNCCLK rate 3" />
         <ctl name="HPOUT1 DRE Switch" value="0" />
         <ctl name="ASRC2L Input" value="AIF2RX1" />
         <ctl name="ISRC2INT1 Input" value="ASRC2L" />
