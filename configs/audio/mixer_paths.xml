@@ -326,8 +326,8 @@
         <ctl name="LHPF3 Input 2" value="None" />
         <ctl name="HPOUT2L Input 1" value="DSP4.1" />
         <ctl name="HPOUT2R Input 1" value="DSP4.1" />
-        <ctl name="HPOUT2L Input 3" value="ISRC2INT1" />
-        <ctl name="HPOUT2R Input 3" value="ISRC2INT1" />
+        <ctl name="HPOUT2L Input 3" value="None" />
+        <ctl name="HPOUT2R Input 3" value="None" />
     </path>
 
     <path name="scenario-speaker-and-headphones">
