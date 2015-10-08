@@ -25,7 +25,7 @@
 #include <linux/time.h>
 #include <stdbool.h>
 
-#define LOG_TAG "Exynos5430PowerHAL"
+#define LOG_TAG "PowerHAL"
 /* #define LOG_NDEBUG 0 */
 #include <utils/Log.h>
 
@@ -242,7 +242,7 @@ static void exynos5430_power_set_interactive(struct power_module *module, int on
     char buf[80];
     int rc;
 
-    ALOGV("power_set_interactive: %d\n", on);
+    ALOGV("%s: Turn it %s\n", __func__, on ? "on" : "off");
 
     /*
      * Lower maximum frequency when screen is off.  CPU 0 and 1 share a
@@ -260,8 +260,6 @@ static void exynos5430_power_set_interactive(struct power_module *module, int on
     sysfs_write(exynos5430_pwr->touchscreen_power_path, on ? "1" : "0");
     sysfs_write(exynos5430_pwr->touchkey_power_path, on ? "1" : "0");
     sysfs_write(exynos5430_pwr->gpio_keys_power_path, on ? "1" : "0");
-
-    ALOGV("power_set_interactive: %d done\n", on);
 }
 
 static struct timespec timespec_diff(struct timespec lhs, struct timespec rhs)
