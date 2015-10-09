@@ -483,8 +483,9 @@ static void select_devices(struct audio_device *adev)
         }
     }
 
-    ALOGV("select_devices() devices: %#x, input src: %d, "
-          "output route: %s input route %s",
+    ALOGV("***** %s: devices=%#x, input src=%d -> "
+          "output route: %s, input route: %s",
+          __func__,
           adev->out_device, adev->input_source,
           output_route ? output_route : "none",
           input_route ? input_route : "none");
@@ -682,7 +683,6 @@ static void start_call(struct audio_device *adev)
     if (adev->in_call) {
         return;
     }
-    ALOGV("%s: Entering IN_CALL mode", __func__);
 
     adev->in_call = true;
 
@@ -725,8 +725,6 @@ static void stop_call(struct audio_device *adev)
     if (!adev->in_call) {
         return;
     }
-
-    ALOGV("%s: Leaving IN_CALL mode", __func__);
 
     adev->in_call = false;
 
@@ -1698,10 +1696,12 @@ static int adev_open_output_stream(struct audio_hw_device *dev,
         out->pcm_device = PCM_DEVICE;
         type = OUTPUT_HDMI;
     } else if (flags & AUDIO_OUTPUT_FLAG_DEEP_BUFFER) {
+        ALOGV("*** %s: Deep buffer pcm config", __func__);
         out->config = pcm_config_deep;
         out->pcm_device = PCM_DEVICE_DEEP;
         type = OUTPUT_DEEP_BUF;
     } else {
+        ALOGV("*** %s: Fast buffer pcm config", __func__);
         out->config = pcm_config_fast;
         out->pcm_device = PCM_DEVICE;
         type = OUTPUT_LOW_LATENCY;
@@ -1797,7 +1797,7 @@ static int adev_set_parameters(struct audio_hw_device *dev, const char *kvpairs)
     /* FIXME: This does not work with LL, see workaround in this HAL */
     ret = str_parms_get_str(parms, "noise_suppression", value, sizeof(value));
     if (ret >= 0) {
-        ALOGV("%s: noise_suppression=%s", __func__, value);
+        ALOGV("*** %s: noise_suppression=%s", __func__, value);
 
         /* value is either off or auto */
         if (strcmp(value, "off") == 0) {
@@ -1876,10 +1876,10 @@ static int adev_set_mode(struct audio_hw_device *dev, audio_mode_t mode)
     adev->mode = mode;
 
     if (adev->mode == AUDIO_MODE_IN_CALL) {
-        ALOGV("%s: Entering IN_CALL mode", __func__);
+        ALOGV("*** %s: Entering IN_CALL mode", __func__);
         start_call(adev);
     } else {
-        ALOGV("%s: Leaving IN_CALL mode", __func__);
+        ALOGV("*** %s: Leaving IN_CALL mode", __func__);
         stop_call(adev);
     }
 
@@ -1893,7 +1893,7 @@ static int adev_set_mic_mute(struct audio_hw_device *dev, bool state)
     struct audio_device *adev = (struct audio_device *)dev;
     enum _MuteCondition mute_condition = state ? TX_MUTE : TX_UNMUTE;
 
-    ALOGV("%s: set mic mute: %d\n", __func__, state);
+    ALOGV("*** %s: set mic mute: %d\n", __func__, state);
 
     if (adev->in_call) {
         ril_set_mute(&adev->ril, mute_condition);
