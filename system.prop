@@ -43,5 +43,5 @@ ro.hwui.text_large_cache_height=1024
 af.fast_track_multiplier=1
 
 # ART
-# use 3 threads for dex2oat
-ro.sys.fw.dex2oat_thread_count=3
+# use 4 threads for dex2oat
+ro.sys.fw.dex2oat_thread_count=4
