@@ -18,16 +18,19 @@
     <ctl name="Noise Gate Threshold Volume"  value="3" />
 
     <!-- RCV(Mono) -->
+    <!-- need to change scenario to DSP -->
     <ctl name="HPOUT3L Input 1" value="AIF1RX1" />
     <ctl name="HPOUT3R Input 1" value="AIF1RX2" />
     <ctl name="HPOUT3 Digital Switch" value="1" />
 
     <!-- HP(stereo) -->
+    <!-- need to change scenario to DSP -->
     <ctl name="HPOUT1L Input 1" value="AIF1RX1" />
     <ctl name="HPOUT1R Input 1" value="AIF1RX2" />
     <ctl name="HPOUT1 Digital Switch" value="1" />
 
     <!-- VPS(stereo) -->
+    <!-- need to change scenario to DSP -->
     <ctl name="HPOUT2L Input 1" value="AIF1RX1" />
     <ctl name="HPOUT2R Input 1" value="AIF1RX2" />
     <ctl name="HPOUT2 Digital Switch" value="1" />
@@ -173,8 +176,10 @@
 
     <!-- Disable Speaker -->
     <ctl name="SPK Switch" value="0" />
-    <ctl name="DSP1L Input 1" value="None" />
-    <ctl name="DSP1L Input 2" value="None" />
+    <ctl name="DSP4 Aux 2" value="None" />
+    <ctl name="DSP4 Aux 3" value="None" />
+    <ctl name="DSP4L Input 1" value="None" />
+    <ctl name="DSP4L Input 2" value="None" />
 
     <!-- Disable Headphones -->
     <ctl name="HP Switch" value="0" />
@@ -326,8 +331,8 @@
         <ctl name="LHPF3 Input 2" value="None" />
         <ctl name="HPOUT2L Input 1" value="DSP4.1" />
         <ctl name="HPOUT2R Input 1" value="DSP4.1" />
-        <ctl name="HPOUT2L Input 3" value="None" />
-        <ctl name="HPOUT2R Input 3" value="None" />
+        <ctl name="HPOUT2L Input 3" value="ISRC2INT1" />
+        <ctl name="HPOUT2R Input 3" value="ISRC2INT1" />
     </path>
 
     <path name="scenario-speaker-and-headphones">
