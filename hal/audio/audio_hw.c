@@ -3,7 +3,7 @@
  * Copyright (C) 2013-2015 The CyanogenMod Project
  *               Daniel Hillenbrand <codeworkx@cyanogenmod.com>
  *               Guillaume "XpLoDWilD" Lesniak <xplodgui@gmail.com>
- *               Andreas Schneider <asn@cryptomilk.org>
+ * Copyright (c) 2015      Andreas Schneider <asn@cryptomilk.org>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -180,6 +180,9 @@ struct audio_device {
     int cur_route_id;     /* current route ID: combination of input source
                            * and output device IDs */
     audio_mode_t mode;
+
+    const char *active_output_device;
+    const char *active_input_device;
 
     /* Call audio */
     struct pcm *pcm_voice_rx;
@@ -432,13 +435,15 @@ static int set_hdmi_channels(struct audio_device *adev, int channels) {
     return ret;
 }
 
-/* must be called with hw device mutex locked */
 static void select_devices(struct audio_device *adev)
 {
     int output_device_id = get_output_device_id(adev->out_device);
     int input_source_id = get_input_source_id(adev->input_source, adev->wb_amr);
     const char *output_route = NULL;
+    const char *output_device = NULL;
     const char *input_route = NULL;
+    const char *input_device = NULL;
+    char current_device[64] = {0};
     int new_route_id;
 
 #ifndef HDMI_INCAPABLE
@@ -457,8 +462,12 @@ static void select_devices(struct audio_device *adev)
         if (output_device_id != OUT_DEVICE_NONE) {
             input_route =
                     route_configs[input_source_id][output_device_id]->input_route;
+            input_device =
+                    route_configs[input_source_id][output_device_id]->input_device;
             output_route =
                     route_configs[input_source_id][output_device_id]->output_route;
+            output_device =
+                    route_configs[input_source_id][output_device_id]->output_device;
         } else {
             switch (adev->in_device) {
             case AUDIO_DEVICE_IN_WIRED_HEADSET & ~AUDIO_DEVICE_BIT_IN:
@@ -474,11 +483,15 @@ static void select_devices(struct audio_device *adev)
 
             input_route =
                 (route_configs[input_source_id][output_device_id])->input_route;
+            input_device =
+                (route_configs[input_source_id][output_device_id])->input_device;
         }
     } else {
         if (output_device_id != OUT_DEVICE_NONE) {
             output_route =
                     (route_configs[IN_SOURCE_MIC][output_device_id])->output_route;
+            output_device =
+                    (route_configs[IN_SOURCE_MIC][output_device_id])->output_device;
         }
     }
 
@@ -490,7 +503,7 @@ static void select_devices(struct audio_device *adev)
           input_route ? input_route : "none");
 
     /*
-     * The Arizona Kernel doc describes firmware loading:
+     * The Arizona driver documentation describes firmware loading this way:
      *
      * To load a firmware, or to reboot the ADSP with different firmware you
      * must:
@@ -500,15 +513,36 @@ static void select_devices(struct audio_device *adev)
      * - Connect the ADSP to an active audio path so it will be powered-up
      */
 
-    /* Turn off all devices by resetting to default mixer state */
-    audio_route_reset(adev->ar);
+    /*
+     * Disable the output and input device
+     */
+    if (adev->active_output_device != NULL) {
+        snprintf(current_device,
+                 sizeof(current_device),
+                 "%s-disable",
+                 adev->active_output_device);
+        audio_route_apply_path(adev->ar, current_device);
+    }
+
+    if (adev->active_input_device != NULL) {
+        snprintf(current_device,
+                 sizeof(current_device),
+                 "%s-disable",
+                 adev->active_input_device);
+        audio_route_apply_path(adev->ar, current_device);
+    }
     audio_route_update_mixer(adev->ar);
 
     /*
-     * Now apply the new audio routes
-     *
-     * Set the routes, firmware and volumes first and activate the device as the
-     * last step.
+     * Reset the audio routes to deactivate active audio paths
+     */
+    audio_route_reset(adev->ar);
+    audio_route_update_mixer(adev->ar);
+
+    usleep(50);
+
+    /*
+     * Apply the new audio routes and set volumes
      */
     if (output_route != NULL) {
         audio_route_apply_path(adev->ar, output_route);
@@ -516,7 +550,34 @@ static void select_devices(struct audio_device *adev)
     if (input_route != NULL) {
         audio_route_apply_path(adev->ar, input_route);
     }
+    audio_route_update_mixer(adev->ar);
 
+    usleep(50);
+
+    /*
+     * Turn on the devices
+     */
+    if (output_device != NULL) {
+        snprintf(current_device,
+                 sizeof(current_device),
+                 "%s-enable",
+                 output_device);
+        audio_route_apply_path(adev->ar, current_device);
+        adev->active_output_device = output_device;
+    } else {
+        adev->active_output_device = NULL;
+    }
+
+    if (input_device != NULL) {
+        snprintf(current_device,
+                 sizeof(current_device),
+                 "%s-enable",
+                 input_device);
+        audio_route_apply_path(adev->ar, current_device);
+        adev->active_input_device = input_device;
+    } else {
+        adev->active_input_device = NULL;
+    }
     audio_route_update_mixer(adev->ar);
 }
 
