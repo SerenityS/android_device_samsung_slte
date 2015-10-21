@@ -322,23 +322,17 @@ static int get_input_source_id(audio_source_t source, bool wb_amr)
     case AUDIO_SOURCE_DEFAULT:
         return IN_SOURCE_NONE;
     case AUDIO_SOURCE_MIC:
-        ALOGV("%s: AUDIO_SOURCE_MIC\n", __func__);
         return IN_SOURCE_MIC;
     case AUDIO_SOURCE_CAMCORDER:
-        ALOGV("%s: IN_SOURCE_CAMCORDER\n", __func__);
         return IN_SOURCE_CAMCORDER;
     case AUDIO_SOURCE_VOICE_RECOGNITION:
-        ALOGV("%s: IN_SOURCE_VOICE_RECOGNITION\n", __func__);
         return IN_SOURCE_VOICE_RECOGNITION;
     case AUDIO_SOURCE_VOICE_COMMUNICATION:
-        ALOGV("%s: AUDIO_SOURCE_VOICE_COMMUNICATION\n", __func__);
         return IN_SOURCE_VOICE_COMMUNICATION;
     case AUDIO_SOURCE_VOICE_CALL:
         if (wb_amr) {
-            ALOGV("%s: AUDIO_SOURCE_VOICE_CALL WIDEBAND\n", __func__);
             return IN_SOURCE_VOICE_CALL_WB;
         }
-        ALOGV("%s: AUDIO_SOURCE_VOICE_CALL\n", __func__);
         return IN_SOURCE_VOICE_CALL;
     default:
         return IN_SOURCE_NONE;
@@ -433,6 +427,16 @@ static int set_hdmi_channels(struct audio_device *adev, int channels) {
         ALOGE("V4L2_CID_TV_SET_NUM_CHANNELS ioctl error (%d)", errno);
 
     return ret;
+}
+
+static bool route_changed(struct audio_device *adev)
+{
+    int output_device_id = get_output_device_id(adev->out_device);
+    int input_source_id = get_input_source_id(adev->input_source, adev->wb_amr);
+    int new_route_id;
+
+    new_route_id = (1 << (input_source_id + OUT_DEVICE_CNT)) + (1 << output_device_id);
+    return new_route_id != adev->cur_route_id;
 }
 
 static void select_devices(struct audio_device *adev)
@@ -767,8 +771,7 @@ static void start_call(struct audio_device *adev)
 
     adev->in_call = true;
 
-    if (adev->out_device == AUDIO_DEVICE_NONE ||
-        adev->out_device == AUDIO_DEVICE_OUT_SPEAKER) {
+    if (adev->out_device == AUDIO_DEVICE_NONE) {
         adev->out_device = AUDIO_DEVICE_OUT_EARPIECE;
     }
     adev->input_source = AUDIO_SOURCE_VOICE_CALL;
@@ -840,7 +843,7 @@ static void adev_set_wb_amr_callback(void *data, int enable)
         adev->wb_amr = enable;
 
         /* reopen the modem PCMs at the new rate */
-        if (adev->in_call) {
+        if (adev->in_call && route_changed(adev)) {
             ALOGV("%s: %s Incall Wide Band support",
                   __func__,
                   enable ? "Turn on" : "Turn off");
@@ -1302,7 +1305,19 @@ static int out_set_parameters(struct audio_stream *stream, const char *kvpairs)
 
             out->device = val;
             adev->out_device = output_devices(out) | val;
-            select_devices(adev);
+
+            /*
+             * If we switch from earpiece to speaker, we need to fully reset the
+             * modem audio path.
+             */
+            if (adev->in_call) {
+                if (route_changed(adev)) {
+                    stop_call(adev);
+                    start_call(adev);
+                }
+            } else {
+                select_devices(adev);
+            }
 
             /* start SCO stream if needed */
             if (val & AUDIO_DEVICE_OUT_ALL_SCO) {
