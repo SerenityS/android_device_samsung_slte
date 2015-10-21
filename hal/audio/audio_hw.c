@@ -1221,16 +1221,18 @@ static int out_set_parameters(struct audio_stream *stream, const char *kvpairs)
                 do_out_standby(out);
             }
 
-            out->device = val;
-            adev->out_device = output_devices(out) | val;
-            select_devices(adev);
-
+#ifndef HDMI_INCAPABLE
             if (!out->standby && (out == adev->outputs[OUTPUT_HDMI] ||
                 !adev->outputs[OUTPUT_HDMI] ||
                 adev->outputs[OUTPUT_HDMI]->standby)) {
                 adev->out_device = output_devices(out) | val;
                 select_devices(adev);
             }
+#endif
+
+            out->device = val;
+            adev->out_device = output_devices(out) | val;
+            select_devices(adev);
 
             /* start SCO stream if needed */
             if (val & AUDIO_DEVICE_OUT_ALL_SCO) {
