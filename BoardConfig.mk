@@ -176,26 +176,6 @@ BOARD_HARDWARE_CLASS += hardware/samsung/cmhw
 BOARD_SEPOLICY_DIRS := \
 	device/samsung/slte/sepolicy
 
-BOARD_SEPOLICY_UNION := \
-	bluetooth.te \
-	cpboot-daemon.te \
-	device.te \
-	domain.te \
-	file.te \
-	file_contexts \
-	gpsd.te \
-	kernel.te \
-	init.te \
-	macloader.te \
-	mediaserver.te \
-	recovery.te \
-	system_server.te \
-	rild.te \
-	ueventd.te \
-	uncrypt.te \
-	vold.te \
-	wpa.te
-
 ###########################################################
 ### CYANOGEN RECOVERY
 ###########################################################
