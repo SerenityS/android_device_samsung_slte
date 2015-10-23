@@ -53,8 +53,10 @@
 ####################################
 # data files
 /data/nfc(/.*)?              u:object_r:nfc_data_file:s0
-/data/\.cid\.info            u:object_r:wifi_data_file:s0
-/data/\.wifiver\.info        u:object_r:wifi_data_file:s0
+/data/.cid.info              u:object_r:wifi_data_file:s0
+/data/.wifiver.info          u:object_r:wifi_data_file:s0
+
+/data/misc/radio(/.*)?       u:object_r:radio_data_file:s0
 
 ####################################
 # sysfs files
