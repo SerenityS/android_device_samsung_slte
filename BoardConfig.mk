@@ -200,11 +200,14 @@ BOARD_SEPOLICY_UNION := \
 ### CYANOGEN RECOVERY
 ###########################################################
 
+TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/ramdisk/fstab.universal5430
 BOARD_HAS_DOWNLOAD_MODE := true
 
 ###########################################################
 ### TWRP RECOVERY
 ###########################################################
+
+#TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/twrp.fstab
 
 TW_THEME := portrait_hdpi
 
