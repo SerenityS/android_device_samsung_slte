@@ -269,6 +269,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PACKAGES += \
 	mcDriverDaemon \
+	stlport \
 	keystore.exynos5
 
 ###########################################################
