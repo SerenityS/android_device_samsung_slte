@@ -450,6 +450,9 @@ public class SlteRIL extends RIL {
             case RIL_UNSOL_AM:
                 ret = responseString(p);
                 break;
+            case RIL_UNSOL_STK_SEND_SMS_RESULT:
+                ret = responseInts(p);
+                break;
             default:
                 // Rewind the Parcel
                 p.setDataPosition(dataPosition);
