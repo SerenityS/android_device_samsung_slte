@@ -234,7 +234,6 @@
     </path>
 
     <path name="scenario-earpiece-incall-nb">
-        <ctl name="ASRC RATE 1" value="SYNCCLK rate 3" />
         <ctl name="DSP4 Rate" value="SYNCCLK rate 3" />
         <ctl name="DSP4 Aux 2" value="None" />
         <ctl name="DSP4 Aux 3" value="None" />
@@ -254,7 +253,6 @@
     </path>
 
     <path name="scenario-earpiece-incall-wb">
-        <ctl name="ASRC RATE 1" value="SYNCCLK rate 3" />
         <ctl name="DSP4 Rate" value="SYNCCLK rate 3" />
         <ctl name="DSP4 Aux 2" value="None" />
         <ctl name="DSP4 Aux 3" value="None" />
@@ -274,7 +272,6 @@
     </path>
 
     <path name="scenario-earpiece-loopback">
-        <ctl name="ASRC RATE 1" value="SYNCCLK rate 3" />
         <ctl name="ISRC2INT1 Input" value="ASRC2L" />
         <ctl name="LHPF3 Input 1" value="None" />
         <ctl name="LHPF3 Input 2" value="None" />
@@ -366,7 +363,6 @@
     </path>
 
     <path name="scenario-speaker-incall-nb">
-        <ctl name="ASRC RATE 1" value="SYNCCLK rate 3" />
         <ctl name="DSP4 Rate" value="SYNCCLK rate 3" />
         <ctl name="DSP4 Aux 2" value="None" />
         <ctl name="DSP4 Aux 3" value="None" />
@@ -388,7 +384,6 @@
     </path>
 
     <path name="scenario-speaker-incall-wb">
-        <ctl name="ASRC RATE 1" value="SYNCCLK rate 3" />
         <ctl name="DSP4 Rate" value="SYNCCLK rate 3" />
         <ctl name="DSP4 Aux 2" value="None" />
         <ctl name="DSP4 Aux 3" value="None" />
@@ -415,7 +410,6 @@
         <ctl name="DSP4 Aux 1" value="None" />
         <ctl name="DSP4 Aux 2" value="None" />
         <ctl name="DSP4 Aux 3" value="None" />
-        <ctl name="ASRC RATE 1" value="SYNCCLK rate 3" />
         <ctl name="ISRC2INT1 Input" value="ASRC2L" />
         <ctl name="LHPF3 Input 1" value="None" />
         <ctl name="LHPF3 Input 2" value="None" />
@@ -484,7 +478,6 @@
     </path>
 
     <path name="scenario-headphones-incall-nb">
-        <ctl name="ASRC RATE 1" value="SYNCCLK rate 3" />
         <ctl name="HPOUT1 DRE Switch" value="0" />
         <ctl name="ASRC2L Input" value="AIF2RX1" />
         <ctl name="ISRC2INT1 Input" value="ASRC2L" />
@@ -499,7 +492,6 @@
     </path>
 
     <path name="scenario-headphones-incall-wb">
-        <ctl name="ASRC RATE 1" value="SYNCCLK rate 3" />
         <ctl name="HPOUT1 DRE Switch" value="0" />
         <ctl name="ASRC2L Input" value="AIF2RX1" />
         <ctl name="ISRC2INT1 Input" value="ASRC2L" />
@@ -959,29 +951,6 @@
         <ctl name="IN1L Digital Volume" value="128" />
     </path>
 
-    <!-- ### Param ### -->
-
-    <!-- TODO -->
-    <path name="param-builtin-mic-earpiece-incall-nb">
-        <ctl name="DSP3 XM f002:0" value="0 0 0 0 0 0 0 71 0 0 0 0 0 0 0 0 0 0 0 80 0 0 0 80 0 0 1 0 0 0 0 1 0 0 0 3 0 0 0 2 0 0 0 0 0 0 1 0 0 0 0 3 0 0 0 122 0 0 0 120 0 4 0 0 0 4 0 0 0 0 0 0 0 0 35 22 0 14 202 78 0 8 0 0 0 0 0 0 0 16 0 0 0 0 0 0 0 16 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 8 0 0 0 8 0 0 0 0 0 0 0 0 0 0 0 5 85 85 0 8 0 0 0 0 0 64 0 0 0 64 0 1 0 0 0 1 0 0 0 5 71 174 0 0 0 0 0 12 0 0 0 0 0 11 0 0 0 64 0 0 64 0 0 16 0 0 0 0 0 1 0 0 0 8 0 0 0 16 0 6 102 102 0 255 0 0 0 0 64 0 0 0 0 0 0 0 0 0 0 0 0 5 0 16 0 0 0 0 0 5 0 0 0 0 0 13 0 0 0 1 0 0 0 1 153 153 0 1 153 153 0 1 153 153 0 1 153 153 0 1 153 153 0 1 153 153 0 1 153 153 0 16 0 0 0 16 0 0 0 16 0 0 0 16 0 0 0 16 0 0 0 16 0 0 0 0 0 0 0 11 51 51 0 8 0 0 0 0 0 4 0 0 0 5 0 15 92 40 0 15 92 40 0 15 92 40 0 15 92 40 0 15 174 20 0 15 174 20 0 15 174 20 0 0 0 0 0 15 133 30 0 15 133 30 0 15 133 30 0 15 133 30 0 15 215 10 0 15 215 10 0 16 0 0 0 0 0 0 0 9 153 153 0 0 204 205 0 0 163 215 0 0 122 225 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 8 0 8 0 0 0 2 0 0 0 0 0 48 0 6 0 0 0 1 153 154 0 8 0 0 0 8 0 0 0 1 0 0 0 0 32 0 0 2 66 147 0 2 66 147 0 0 32 0 0 1 0 0 0 15 194 143 0 1 153 154 0 0 0 16 0 0 128 0 0 0 0 0 0 1 64 0 0 0 41 95 0 6 0 0 0 0 0 7 0 0 0 9 0 1 153 153" />
-        <ctl name="DSP3 XM f002:1" value="0 14 79 175 0 4 0 0 0 4 0 0 0 0 16 0 0 15 128 0 0 6 0 0 0 15 246 0 0 1 208 0 0 3 0 0 0 5 64 0 0 13 192 0 0 0 0 0 0 0 0 0 0 0 68 68 0 0 68 68 0 0 68 68 0 0 68 68 0 0 68 68 0 0 68 68 0 0 0 2 0 3 51 51 0 0 224 0 0 0 4 76 0 0 51 64 0 0 0 37 0 0 0 0 0 0 0 0 0 0 0 12 0 149 208 122 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 7 92 40 0 0 160 0 0 0 64 0 0 0 128 0 0 2 64 0 0 2 64 0 0 0 0 3 0 0 0 65 0 4 0 0 0 0 0 120 0 0 128 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10 90" />
-    </path>
-
-    <path name="param-builtin-mic-earpiece-incall-wb">
-        <ctl name="DSP3 XM f003:0" value="0 0 0 0 0 0 0 71 0 0 0 0 0 0 0 1 0 0 0 160 0 0 0 160 0 0 2 0 0 0 0 1 0 0 0 3 0 0 0 2 0 0 0 0 0 0 2 0 0 0 0 3 0 0 0 242 0 0 0 240 0 4 0 0 0 4 0 0 0 0 0 0 0 0 35 22 0 15 98 57 0 8 0 0 0 0 0 0 0 16 0 0 0 0 0 0 0 16 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 8 0 0 0 8 0 0 0 0 0 0 0 0 0 0 0 5 85 85 0 8 0 0 0 0 0 64 0 0 0 64 0 1 0 0 0 1 0 0 0 5 71 174 0 0 0 0 0 12 0 0 0 0 0 11 0 0 0 96 0 0 64 0 0 16 0 0 0 0 0 1 0 0 0 8 0 0 0 16 0 8 0 0 0 255 0 0 0 0 64 0 0 0 0 0 0 0 0 0 0 0 0 5 0 16 0 0 0 0 0 5 0 0 0 0 0 13 0 0 0 1 0 0 0 3 51 51 0 3 51 51 0 3 51 51 0 3 51 51 0 3 51 51 0 3 51 51 0 3 51 51 0 3 51 51 0 3 51 51 0 16 0 0 0 16 0 0 0 16 0 0 0 16 0 0 0 0 0 0 0 11 51 51 0 8 0 0 0 0 0 9 0 0 0 3 0 14 102 102 0 14 102 102 0 14 102 102 0 14 102 102 0 14 102 102 0 14 102 102 0 16 0 0 0 0 0 0 0 14 102 102 0 14 102 102 0 14 102 102 0 14 102 102 0 14 102 102 0 14 102 102 0 16 0 0 0 0 0 0 0 9 153 153 0 0 204 205 0 0 163 215 0 0 122 225 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 8 0 8 0 0 0 2 0 0 0 0 0 48 0 12 0 0 0 2 20 122 0 8 0 0 0 8 0 0 0 1 0 0 0 0 32 0 0 1 203 148 0 1 203 148 0 0 32 0 0 1 0 0 0 15 112 163 0 1 153 154 0 0 0 16 0 1 0 0 0 0 0 0 0 1 64 0 0 0 41 95 0 6 0 0 0 0 0 6 0 0 0 9 0 4 0 0" />
-        <ctl name="DSP3 XM f003:1" value="0 2 79 103 0 4 0 0 0 4 0 0 0 0 16 0 0 15 128 0 0 6 0 0 0 15 246 0 0 1 208 0 0 3 0 0 0 5 64 0 0 13 192 0 0 0 0 0 0 0 0 0 0 0 68 68 0 0 68 68 0 0 68 68 0 0 68 68 0 0 68 68 0 0 68 68 0 0 0 2 0 3 51 51 0 0 218 192 0 0 4 76 0 0 51 64 0 0 0 37 0 0 0 0 0 0 0 0 0 0 0 25 0 43 160 244 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 7 215 10 0 0 160 0 0 0 64 0 0 0 128 0 0 2 64 0 0 0 40 246 0 0 0 3 0 0 0 65 0 4 0 0 0 0 0 126 0 0 128 0 0 0 0 1 0 0 10 90" />
-    </path>
-
-    <path name="param-builtin-mic-speaker-incall-nb">
-        <ctl name="DSP3 XM f002:0" value="0 0 0 1 0 0 0 71 0 0 0 0 0 0 0 0 0 0 0 80 0 0 0 80 0 0 1 0 0 0 0 1 0 0 0 3 0 0 0 2 0 0 0 0 0 0 1 0 0 0 0 3 0 0 0 122 0 0 0 120 0 5 166 112 0 4 0 0 0 0 0 0 0 0 45 51 0 14 202 78 0 8 0 0 0 0 0 0 0 16 0 0 0 0 0 0 0 16 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 8 0 0 0 8 0 0 0 0 0 0 0 0 0 0 0 5 85 85 0 8 0 0 0 0 0 64 0 0 0 64 0 0 96 0 0 0 96 0 0 6 0 0 0 0 0 0 0 8 0 0 0 0 0 9 0 0 0 96 0 0 64 0 0 16 0 0 0 0 0 1 0 0 0 8 0 0 0 16 0 8 0 0 0 255 0 0 0 0 64 0 0 0 0 0 0 0 0 0 0 0 0 5 0 16 0 0 0 0 0 5 0 0 0 0 0 2 0 0 0 1 0 0 0 0 64 0 0 2 0 0 0 2 51 51 0 3 51 51 0 3 51 51 0 4 0 0 0 5 0 0 0 7 153 153 0 16 0 0 0 16 0 0 0 16 0 0 0 16 0 0 0 16 0 0 0 0 0 0 0 11 51 51 0 8 51 51 0 0 0 6 0 0 0 6 0 15 215 10 0 15 215 10 0 15 215 10 0 15 102 102 0 15 102 102 0 15 102 102 0 15 102 102 0 0 0 0 0 1 153 153 0 1 153 153 0 1 153 153 0 1 153 153 0 1 153 153 0 1 153 153 0 1 153 153 0 0 0 0 0 14 102 102 0 5 153 153 0 4 0 0 0 2 102 102 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 8 0 8 0 0 0 2 0 0 0 0 0 48 0 12 0 0 0 6 102 102 0 6 102 102 0 6 102 102 0 1 0 0 0 0 32 0 0 3 148 250 0 3 148 250 0 0 32 0 0 1 0 0 0 15 202 192 0 2 0 0 0 0 0 16 0 0 166 102 0 0 0 0 0 0 0 20 0 0 41 95 0 4 0 0 0 0 0 5 0 0 0 64 0 0 153 153" />
-        <ctl name="DSP3 XM f002:1" value="0 14 79 175 0 4 0 0 0 4 0 0 0 0 16 0 0 15 128 0 0 6 0 0 0 15 246 0 0 1 208 0 0 3 0 0 0 5 64 0 0 13 192 0 0 0 0 0 0 0 0 0 0 0 68 68 0 0 68 68 0 0 68 68 0 0 68 68 0 0 68 68 0 0 68 68 0 0 0 2 0 0 248 0 0 8 102 96 0 0 1 128 0 0 51 64 0 0 0 37 0 0 0 0 0 0 0 0 0 0 0 12 0 149 208 122 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 4 0 0 0 0 1 0 0 0 64 0 0 0 128 0 0 2 64 0 0 0 40 246 0 0 0 3 0 0 0 65 0 12 0 0 0 0 0 126 0 0 128 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10 90" />
-    </path>
-
-    <path name="param-builtin-mic-speaker-incall-wb">
-        <ctl name="DSP3 XM f003:0" value="0 0 0 1 0 0 0 71 0 0 0 0 0 0 0 1 0 0 0 160 0 0 0 160 0 0 2 0 0 0 0 1 0 0 0 3 0 0 0 2 0 0 0 0 0 0 2 0 0 0 0 3 0 0 0 242 0 0 0 240 0 5 166 112 0 4 0 0 0 0 0 0 0 0 42 172 0 15 98 57 0 8 0 0 0 0 0 0 0 16 0 0 0 0 0 0 0 16 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 8 0 0 0 8 0 0 0 0 0 0 0 0 0 0 0 5 85 85 0 8 0 0 0 0 0 64 0 0 0 64 0 0 64 0 0 0 64 0 0 6 0 0 0 0 0 0 0 8 0 0 0 0 0 9 0 0 0 96 0 0 64 0 0 16 0 0 0 0 0 1 0 0 0 8 0 0 0 16 0 8 0 0 0 255 0 0 0 0 32 0 0 8 0 0 0 2 0 0 0 0 0 5 0 16 0 0 0 0 0 5 0 0 0 0 0 1 153 153 0 1 0 0 0 0 128 0 0 0 128 0 0 0 128 0 0 1 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 16 0 0 0 16 0 0 0 16 0 0 0 16 0 0 0 16 0 0 0 16 0 0 0 0 0 0 0 11 51 51 0 9 153 153 0 0 0 6 0 0 0 6 0 15 215 10 0 15 215 10 0 15 235 133 0 15 235 133 0 15 235 133 0 16 0 0 0 16 0 0 0 0 0 0 0 15 235 133 0 15 235 133 0 15 235 133 0 15 235 133 0 15 235 133 0 16 0 0 0 16 0 0 0 0 0 0 0 15 51 51 0 5 153 153 0 4 0 0 0 2 102 102 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 8 0 8 0 0 0 2 0 0 0 0 0 48 0 10 0 0 0 8 204 204 0 10 0 0 0 10 0 0 0 1 0 0 0 0 32 0 0 2 137 44 0 2 137 44 0 0 32 0 0 1 0 0 0 15 194 143 0 3 51 51 0 0 0 16 0 0 204 204 0 0 0 0 0 0 0 20 0 0 41 95 0 4 0 0 0 0 0 5 0 0 0 32 0 0 153 153" />
-        <ctl name="DSP3 XM f003:1" value="0 14 79 103 0 4 0 0 0 4 0 0 0 0 16 0 0 15 128 0 0 6 0 0 0 15 246 0 0 1 208 0 0 3 0 0 0 5 64 0 0 13 192 0 0 0 0 0 0 0 0 0 0 0 68 68 0 0 68 68 0 0 68 68 0 0 68 68 0 0 68 68 0 0 68 68 0 0 0 2 0 0 248 0 0 8 102 96 0 0 1 128 0 0 51 64 0 0 0 37 0 0 0 0 0 0 0 0 0 0 0 25 0 43 160 244 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 4 0 0 0 0 1 0 0 0 64 0 0 0 128 0 0 2 64 0 0 0 40 246 0 0 0 3 0 0 0 65 0 12 0 0 0 0 0 126 0 0 128 0 0 0 0 0 0 0 10 90" />
-    </path>
-
     <!--
     #######################################################
     ### Back Mic
@@ -1067,12 +1036,16 @@
 
     <path name="scenario-two-mic-earpiece-default">
         <path name="scenario-builtin-mic-default" />
-        <path name="scenario-back-mic-default" />
+
+        <!-- back mic -->
+        <ctl name="LHPF2 Input 1" value="IN3L" />
     </path>
 
     <path name="scenario-two-mic-speaker-default">
         <path name="scenario-builtin-mic-default" />
-        <path name="scenario-back-mic-default" />
+
+        <!-- back mic -->
+        <ctl name="LHPF2 Input 1" value="IN3L" />
     </path>
 
     <path name="scenario-two-mic-earpiece-incall-nb">
@@ -1106,6 +1079,11 @@
     </path>
 
     <!-- ### Volume ### -->
+
+    <path name="volume-two-mic-default">
+        <path name="volume-builtin-mic-default" />
+        <path name="volume-back-mic-default" />
+    </path>
 
     <path name="volume-two-mic-incall">
         <path name="volume-builtin-mic-incall" />
@@ -1601,7 +1579,10 @@
         <path name="channel-left" />
 
         <path name="scenario-builtin-mic-default" />
-        <path name="scenario-back-mic-default" />
+
+        <!-- back mic -->
+        <ctl name="LHPF2 Input 1" value="IN3L" />
+
         <path name="volume-two-mic-default" />
     </path>
 
