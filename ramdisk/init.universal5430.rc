@@ -994,24 +994,3 @@ service cs_service /system/bin/cs
 
 on property:sys.mobicoredaemon.enable=true
     start cs_service
-
-# IPSec for VOLTE
-service ipsec-daemon /system/bin/IPSecService
-    class main
-    socket ipsec_socket stream 660 root system
-    user root
-    group system
-
-# Modem Logging daemon
-service ML-daemon /system/bin/mlexe
-    class main
-    user root
-    group system radio inet net_raw
-
-# SSWAP
-service swapon /sbin/sswap -s
-    class core
-    user root
-    group root
-    seclabel u:r:sswap:s0
-    oneshot
