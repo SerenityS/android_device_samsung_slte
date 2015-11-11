@@ -6,6 +6,8 @@ on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug
 
 on init
+    export LD_PRELOAD "/system/lib/libsamsung_symbols.so"
+
     symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
     symlink /sdcard1 /storage/sdcard1
