@@ -225,7 +225,8 @@ PRODUCT_COPY_FILES += \
 ###########################################################
 
 PRODUCT_PACKAGES += \
-	libhwjpeg
+	libhwjpeg \
+	libsamsung_symbols
 
 # This fixes switching between front/back camera sensors
 PRODUCT_PROPERTY_OVERRIDES += \
