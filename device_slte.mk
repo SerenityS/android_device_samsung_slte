@@ -209,7 +209,8 @@ PRODUCT_PACKAGES += \
 
 # Packages
 PRODUCT_PACKAGES += \
-    SamsungServiceMode
+    SamsungServiceMode \
+    SamsungDoze
 
 # ANT+
 PRODUCT_PACKAGES += \
