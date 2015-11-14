@@ -187,6 +187,7 @@ BOARD_HAS_DOWNLOAD_MODE := true
 ### TWRP RECOVERY
 ###########################################################
 
+#RECOVERY_VARIANT := twrp
 #TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/twrp.fstab
 
 TW_THEME := portrait_hdpi
