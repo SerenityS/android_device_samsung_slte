@@ -169,6 +169,9 @@ PRODUCT_PACKAGES += \
     libOMX.Exynos.WMV.Decoder \
     libOMX.Exynos.HEVC.Decoder
 
+PRODUCT_PROPERTY_OVERRIDES += \
+	persist.sys.media.use-awesome=true
+
 # Power
 PRODUCT_PACKAGES += \
     power.universal5430
