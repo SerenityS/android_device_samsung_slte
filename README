@@ -13,12 +13,12 @@ Copyright (C) 2014-2015 Andreas Schneider <asn@cryptomilk.org>
 
 * Description
 
-  This repository is for CM-12.1 on Samsung Galaxy Alpha (slte)
+  This repository is for CM-13.0 on Samsung Galaxy Alpha (slte)
 
     THIS IS WORK IN PROGRESS.
 
 
-* How To Build CM-12.1 for Samsung Galaxy Alpha
+* How To Build CM-13.0 for Samsung Galaxy Alpha
 
   - Make a workspace
 
@@ -28,7 +28,7 @@ Copyright (C) 2014-2015 Andreas Schneider <asn@cryptomilk.org>
 
   - Do repo init & sync
 
-  $ repo init -u git://github.com/CyanogenMod/android.git -b cm-12.1
+  $ repo init -u git://github.com/CyanogenMod/android.git -b cm-13.0
 
 
   - Create .repo/local_manifests/roomservice.xml with the following content:
@@ -37,8 +37,7 @@ Copyright (C) 2014-2015 Andreas Schneider <asn@cryptomilk.org>
   <manifest>
       <remote  name="cryptomilk" fetch="git://git.cryptomilk.org/" />
 
-      <remove-project name="CyanogenMod/android_bootable_recovery" />
-      <project name="omnirom/android_bootable_recovery" revision="android-5.1" path="bootable/recovery" remote="github" />
+      <project name="omnirom/android_bootable_recovery" revision="android-6.0" path="bootable/recovery-twrp" remote="github" />
 
       <project name="CyanogenMod/android_packages_apps_SamsungServiceMode" path="packages/apps/SamsungServiceMode" remote="github" />
       <project name="CyanogenMod/android_hardware_samsung" path="hardware/samsung" remote="github" />
