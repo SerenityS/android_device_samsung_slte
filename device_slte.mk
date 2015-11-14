@@ -143,8 +143,8 @@ PRODUCT_PACKAGES += \
     AudioWorkaround
 
 # Bluetooth
-#PRODUCT_COPY_FILES += \
-#    $(LOCAL_PATH)/bluetooth/bcm4350_prepatch.hcd:system/vendor/firmware/bcm4350_prepatch.hcd
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
 
 # Media profile
 PRODUCT_COPY_FILES += \
