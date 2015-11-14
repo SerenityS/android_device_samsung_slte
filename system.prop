@@ -2,9 +2,6 @@
 # system.prop for slte
 #
 
-# CBD
-ro.cbd.version=5.0
-
 # Screen
 ro.sf.lcd_density=320
 
@@ -15,6 +12,8 @@ ro.telephony.ril_class=SlteRIL
 ro.telephony.default_network=9
 telephony.lteOnGsmDevice=1
 telephony.lteOnCdmaDevice=0
+ro.ril.hsxpa=1
+ro.ril.gprsclass=10
 
 # Audio workaround
 persist.incall.workaround=true

@@ -1,7 +1,7 @@
 LOCAL_PATH := device/samsung/slte
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := slte,sltexx
+TARGET_OTA_ASSERT_DEVICE := slte,sltexx,slteskt
 
 # Platform
 BOARD_VENDOR := samsung
@@ -36,14 +36,14 @@ BOARD_FLASH_BLOCK_SIZE := 4096
 # Kernel
 #TARGET_PREBUILT_KERNEL := device/samsung/slte/kernel
 TARGET_KERNEL_SOURCE := kernel/samsung/slte
-TARGET_KERNEL_CONFIG := cm_exynos5430-slte_defconfig
+TARGET_KERNEL_CONFIG := cm_exynos5430-slteskt_defconfig
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
 #BOARD_KERNEL_CMDLINE := The bootloader ignores the cmdline from the boot.img
 BOARD_KERNEL_SEPARATED_DT := false
 #BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt device/samsung/slte/dtb.img
-BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/mkbootimg.mk
-BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt out/target/product/$(TARGET_DEVICE)/dt.img
+#BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/mkbootimg.mk
+BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt device/samsung/slte/dtb.img
 
 # Include path
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include

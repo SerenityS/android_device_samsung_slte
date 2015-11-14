@@ -28,8 +28,8 @@ PRODUCT_PACKAGES += \
     init.universal5430.usb.rc \
     init.universal5430.wifi.rc \
     ueventd.universal5430.rc \
+    init.universal5430.baseband.rc \
     init.sec.boot.sh
-    #init.samsung.rc \
 
 # Recovery
 PRODUCT_PACKAGES += \
@@ -104,13 +104,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # RIL
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/ril/bin/cbd:system/bin/cbd \
-    $(LOCAL_PATH)/ril/bin/cbd_44:system/bin/cbd_44 \
-    $(LOCAL_PATH)/ril/bin/cbd_50:system/bin/cbd_50 \
-
-PRODUCT_PACKAGES += \
-    libsecril-client \
-    libsecril-client-sap
+    $(LOCAL_PATH)/ril/sbin/cbd:root/sbin/cbd \
 
 # dex-opt to cache
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -137,6 +131,8 @@ PRODUCT_PACKAGES += \
 # Audio
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/mixer_paths.xml:system/etc/mixer_paths.xml \
+    $(LOCAL_PATH)/audio/default_gain.conf:system/etc/default_gain.conf \
+    $(LOCAL_PATH)/audio/tinyucm.conf:system/etc/tinyucm.conf \
     $(LOCAL_PATH)/configs/audio/audio_policy.conf:system/etc/audio_policy.conf \
     $(LOCAL_PATH)/configs/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf
 
@@ -144,7 +140,6 @@ PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.usb.default \
     audio.r_submix.default \
-    audio.primary.universal5430 \
     AudioWorkaround
 
 # Bluetooth

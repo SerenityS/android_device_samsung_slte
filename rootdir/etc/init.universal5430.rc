@@ -1,6 +1,7 @@
 import init.universal5430.wifi.rc
 import init.universal5430.usb.rc
 import init.samsung.rc
+import init.universal5430.baseband.rc
 
 on init
     # See storage config details at http://source.android.com/tech/storage/
@@ -942,12 +943,6 @@ on fs
 
 # ARGOSD network_throughput
     chown system system /dev/network_throughput
-
-# CP Boot Daemon (CBD)
-service cpboot-daemon /system/bin/cbd
-    class main
-    user root
-    group radio cache inet misc audio sdcard_r sdcard_rw log shell
 
 service netmgrd /system/bin/netmgrd
     class late_start

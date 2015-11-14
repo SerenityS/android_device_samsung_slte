@@ -1,14 +1,7 @@
 LOCAL_PATH := $(call my-dir)
 
 ## Build and run dtbtool
-DTBHTOOL := $(HOST_OUT_EXECUTABLES)/dtbhTool$(HOST_EXECUTABLE_SUFFIX)
 INSTALLED_DTIMAGE_TARGET := $(PRODUCT_OUT)/dt.img
-
-$(INSTALLED_DTIMAGE_TARGET): $(DTBHTOOL) $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr $(INSTALLED_KERNEL_TARGET)
-	@echo -e ${CL_CYN}"Start DT image: $@"${CL_RST}
-	$(call pretty,"Target dt image: $(INSTALLED_DTIMAGE_TARGET)")
-	$(hide) $(DTBHTOOL) -o $(INSTALLED_DTIMAGE_TARGET) --pagesize $(BOARD_KERNEL_PAGESIZE) --dt_dir $(KERNEL_OUT)/arch/arm/boot/dts/
-	@echo -e ${CL_CYN}"Made DT image: $@"${CL_RST}
 
 ## Overload bootimg generation: Same as the original, + --dt arg
 $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(INSTALLED_DTIMAGE_TARGET)

@@ -1,0 +1,22 @@
+on fs
+
+# CP Boot Daemon (CBD)
+service cpboot-daemon /sbin/cbd -d -t ss300 -b s -m l -p 13
+    class main
+    user root
+    group radio cache inet misc audio sdcard_r sdcard_rw log shell
+    seclabel u:r:cpboot-daemon:s0
+
+on property:persist.sys.cpboot=disable
+    stop cpboot-daemon
+
+# MOBILE OFFICE Permanent memory access
+    mkdir /efs/security 0771 root root
+    chown radio system /efs/security
+    chmod 0771 /efs/security
+
+on property:ro.debuggable=1
+	write /sys/kernel/debug/tracing/buffer_size_kb 1408
+	write /sys/kernel/debug/tracing/set_event modem_if:mif_log
+	write /sys/kernel/debug/tracing/tracing_on 1
+
