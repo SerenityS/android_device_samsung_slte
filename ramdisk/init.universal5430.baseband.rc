@@ -22,6 +22,12 @@ on fs
     chmod 0660 /sys/devices/virtual/misc/umts_dm0/dm_state
     chown radio system /sys/devices/virtual/misc/umts_dm0/dm_state
 
+service hwrev-parser /sbin/hwrevision
+    class core
+    user root
+    group root
+    oneshot
+
 # CP Boot Daemon (CBD)
 service cpboot-daemon /system/bin/cbd -d -t ss300 -b s -m l -p 13
     class main
@@ -29,8 +35,13 @@ service cpboot-daemon /system/bin/cbd -d -t ss300 -b s -m l -p 13
     group radio cache inet misc audio sdcard_r sdcard_rw log shell
     seclabel u:r:cpboot-daemon:s0
 
-on property:persist.sys.cpboot=disable
+on property:ro.cbd.disable=1
     stop cpboot-daemon
+    stop ril-daemon
+
+on property:ro.cbd.restart=1
+    restart cpboot-daemon
+    restart ril-daemon
 
 on property:ro.debuggable=1
     write /sys/kernel/debug/tracing/buffer_size_kb 1408
