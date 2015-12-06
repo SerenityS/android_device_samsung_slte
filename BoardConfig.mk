@@ -73,6 +73,8 @@ BOARD_HDMI_INCAPABLE := true
 # misses the time to swap buffers (in cases where it takes 16ms or
 # less). Use 3 to avoid timing issues.
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
+# frameworks/native/libs/ui/GraphicBuffer.cpp
+BOARD_EGL_NEEDS_HANDLE_VALUE := true
 
 # GSC
 BOARD_USES_ONLY_GSC0_GSC1 := true
