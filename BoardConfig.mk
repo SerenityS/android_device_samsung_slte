@@ -162,6 +162,8 @@ BOARD_PROVIDES_LIBRIL := true
 BOARD_MODEM_TYPE := xmm7260
 # RIL.java overwrite
 BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril
+# frameworks/native/libs/binder/Parcel.cpp
+COMMON_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
 
 ### SENSORS
 TARGET_HAS_LEGACY_BODY_SENSOR := true
