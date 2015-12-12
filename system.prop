@@ -17,7 +17,7 @@ ro.telephony.ril_class=SlteRIL
 
 ro.ril.hsxpa=1
 ro.ril.gprsclass=10
-ro.ril.qanelements=5
+ro.ril.telephony.mqanelements=5
 
 #
 # HWC
