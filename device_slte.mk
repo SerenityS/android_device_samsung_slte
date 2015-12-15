@@ -221,6 +221,9 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/gps/SuplRootCert:system/etc/SuplRootCert \
 	$(LOCAL_PATH)/configs/gps/gps.xml:system/etc/gps.xml
 
+PRODUCT_PACKAGES += \
+    libdmitry
+
 ###########################################################
 ### CAMERA
 ###########################################################
