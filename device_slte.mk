@@ -83,7 +83,7 @@ PRODUCT_PACKAGES += \
 ### RADIO
 ###########################################################
 
-# cpboot-daemon for xmm7260 modem
+# cpboot-daemon for SS300 modem
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/ril/sbin/cbd:system/bin/cbd
 

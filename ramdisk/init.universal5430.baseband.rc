@@ -23,7 +23,7 @@ on fs
     chown radio system /sys/devices/virtual/misc/umts_dm0/dm_state
 
 # CP Boot Daemon (CBD)
-service cpboot-daemon /system/bin/cbd -d -t xmm72xx_lli -b l -m l -p 13
+service cpboot-daemon /system/bin/cbd -d -t ss300 -b s -m l -p 13
     class main
     user root
     group radio cache inet misc audio sdcard_r sdcard_rw log shell
