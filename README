@@ -49,19 +49,10 @@ Copyright (C) 2014-2015 Andreas Schneider <asn@cryptomilk.org>
 
       <project name="SerenityS/android_kernel_samsung_slte.git" path="kernel/samsung/slte" remote="github" />
       <project name="SerenityS/android_device_samsung_slte.git" path="device/samsung/slte" remote="github" />
+      <project name="SerenityS/android_vendor_samsung_slte.git" path="vendor/samsung/slte" remote="github" />
   </manifest>
 
   $ repo sync
-
-  - Copy proprietary vendor files
-
-  There are two options to to that. Connect your device with adb enabled and run:
-
-    ./extract-files.sh
-
-  Or if you have the system image unpacked on your disk, then simply run:
-
-    STOCK_ROM_DIR=/path/to/system ./extract-files.sh
 
   - Setup environment
 
@@ -79,6 +70,8 @@ Copyright (C) 2014-2015 Andreas Schneider <asn@cryptomilk.org>
 
   CyanogenMod
   TeamWin
+  cryptomilk(Andreas Schneider)
+  raymanfx (Christopher N. Hesse)
 
 ----
 EOF
