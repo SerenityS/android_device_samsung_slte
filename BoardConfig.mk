@@ -8,6 +8,9 @@ LOCAL_PATH := device/samsung/slte
 TARGET_ARCH := arm
 TARGET_NO_BOOTLOADER := true
 
+# Assert
+TARGET_OTA_ASSERT_DEVICE := slte,sltexx,slteskt
+
 # Platform
 TARGET_BOARD_PLATFORM := exynos5
 TARGET_SLSI_VARIANT := cm
