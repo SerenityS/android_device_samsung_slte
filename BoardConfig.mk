@@ -131,8 +131,10 @@ BOARD_NFC_HAL_SUFFIX := $(TARGET_BOOTLOADER_BOARD_NAME)
 ### CAMERA
 # frameworks/av/services/camera/libcameraservice
 BOARD_NEEDS_MEMORYHEAPION := true
-# hardware/samsung/exynos/libcsc
+# hardware/samsung_slsi-cm/exynos5/libgscaler
 BOARD_USES_SCALER := true
+BOARD_USES_DT := true
+BOARD_USES_DT_SHORTNAME := true
 # frameworks/av/camera, camera blob support
 COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CAMERA_HARDWARE
 # frameworks/av/media/libstagefright, for libwvm.so
