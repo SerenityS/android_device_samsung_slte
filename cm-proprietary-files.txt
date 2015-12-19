@@ -1,6 +1,7 @@
 ### Bluetooth
 vendor/firmware/bcm4350_V0301.0634.hcd
 vendor/firmware/bcm4350_V0301.0636_wisol.hcd
+vendor/firmware/bcm4350_V0301.0636.hcd
 
 ### Wifi
 etc/wifi/bcmdhd_apsta.bin
