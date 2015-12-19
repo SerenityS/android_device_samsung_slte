@@ -1,7 +1,7 @@
 ### Bluetooth
 vendor/firmware/bcm4350_V0301.0634.hcd
 vendor/firmware/bcm4350_V0301.0636_wisol.hcd
-vendor/firmware/bcm4350_V0301.0636.hcd
+vendor/firmware/bcm4350_V0301.0646.hcd
 
 ### Wifi
 etc/wifi/bcmdhd_apsta.bin
@@ -158,6 +158,7 @@ vendor/lib/libwvm.so
 ### RIL
 lib/libsecnativefeature.so
 lib/libsec-ril.so
+lib/libsecril-client.so
 
 ### Mobicore
 bin/cs
