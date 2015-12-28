@@ -10,6 +10,10 @@ $(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
 # Inherit device configuration
 $(call inherit-product, device/samsung/slte/device_slte.mk)
 
+# Boot animation
+TARGET_SCREEN_HEIGHT := 1280
+TARGET_SCREEN_WIDTH := 720
+
 ## Device identifier. This must come after all inclusions
 PRODUCT_NAME := cm_slte
 PRODUCT_DEVICE := slte
