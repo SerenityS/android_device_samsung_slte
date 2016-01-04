@@ -979,6 +979,7 @@ on charger
     setprop sys.usb.config charging
 
 service charger /charger
+    seclabel u:r:healthd:s0
     class charger
 
 on property:ro.securestorage.support=true
