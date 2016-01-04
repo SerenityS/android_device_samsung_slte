@@ -22,7 +22,8 @@ on fs
     chmod 0660 /sys/devices/virtual/misc/umts_dm0/dm_state
     chown radio system /sys/devices/virtual/misc/umts_dm0/dm_state
 
-service hwrev-parser /sbin/hwrevision
+# Parse hardware revision (needs to happen before cbd starts)
+service modemloader /system/bin/modemloader
     class core
     user root
     group root
