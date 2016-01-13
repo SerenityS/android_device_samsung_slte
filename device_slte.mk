@@ -231,7 +231,8 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
 	libhwjpeg \
-	libsamsung_symbols
+	libsamsung_symbols \
+	libdmitry
 
 # This fixes switching between front/back camera sensors
 PRODUCT_PROPERTY_OVERRIDES += \
