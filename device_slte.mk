@@ -75,8 +75,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PACKAGES += \
 	libion_exynos \
-	gralloc.exynos5 \
-	hwcomposer.exynos5
+	gralloc.exynos5
 
 ###########################################################
 ### RADIO
@@ -166,22 +165,6 @@ PRODUCT_PACKAGES += \
 ### OMX/MEDIA
 ###########################################################
 
-PRODUCT_PACKAGES += \
-	libstagefrighthw \
-	libExynosOMX_Core
-
-PRODUCT_PACKAGES += \
-	libOMX.Exynos.AVC.Decoder \
-	libOMX.Exynos.HEVC.Decoder \
-	libOMX.Exynos.MPEG4.Decoder \
-	libOMX.Exynos.VP8.Decoder \
-	libOMX.Exynos.WMV.Decoder
-
-PRODUCT_PACKAGES += \
-	libOMX.Exynos.AVC.Encoder \
-	libOMX.Exynos.MPEG4.Encoder \
-	libOMX.Exynos.VP8.Encoder
-
 PRODUCT_COPY_FILES += \
 	frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
 	frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
@@ -202,13 +185,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
 	lights.universal5430
-
-###########################################################
-### MEMTRACK
-###########################################################
-
-PRODUCT_PACKAGES += \
-	memtrack.exynos5
 
 ###########################################################
 ### GPS
@@ -263,7 +239,6 @@ PRODUCT_PACKAGES += \
 ###########################################################
 
 PRODUCT_PACKAGES += \
-	mcDriverDaemon \
 	stlport \
 	keystore.exynos5
 
@@ -274,6 +249,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	SamsungServiceMode \
 	Torch
+
+# call Samsung LSI board support package
+$(call inherit-product, hardware/samsung_slsi-cm/exynos5/exynos5.mk)
+$(call inherit-product, hardware/samsung_slsi-cm/exynos5433/exynos5433.mk)
 
 $(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 $(call inherit-product-if-exists, build/target/product/full.mk)
