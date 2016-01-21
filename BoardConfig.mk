@@ -23,7 +23,10 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT := cortex-a15
 TARGET_CPU_SMP := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
-OVERRIDE_RS_DRIVER := libRSDriverArm.so
+
+# RENDERSCRIPT
+BOARD_OVERRIDE_RS_CPU_VARIANT_32 := cortex-a15
+#OVERRIDE_RS_DRIVER := libRSDriverArm.so
 
 # Enable dex-preoptimization to speed up first boot sequence
 ifeq ($(HOST_OS),linux)
@@ -80,7 +83,7 @@ NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 BOARD_EGL_NEEDS_HANDLE_VALUE := true
 
 # GSC
-BOARD_USES_ONLY_GSC0_GSC1 := true
+#BOARD_USES_ONLY_GSC0_GSC1 := true
 
 # BOOT ANIMATION
 TARGET_BOOTANIMATION_PRELOAD := true
@@ -138,8 +141,10 @@ BOARD_NFC_HAL_SUFFIX := $(TARGET_BOOTLOADER_BOARD_NAME)
 ### CAMERA
 # frameworks/av/services/camera/libcameraservice
 BOARD_NEEDS_MEMORYHEAPION := true
-# hardware/samsung/exynos/libcsc
+# hardware/samsung_slsi-cm/exynos5/libgscaler
 BOARD_USES_SCALER := true
+BOARD_USES_DT := true
+BOARD_USES_DT_SHORTNAME := true
 # frameworks/av/camera, camera blob support
 COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CAMERA_HARDWARE
 # frameworks/av/media/libstagefright, for libwvm.so
@@ -172,6 +177,11 @@ TARGET_IGNORE_RO_BOOT_REVISION := true
 
 # RIL.java overwrite
 BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril
+# frameworks/native/libs/binder/Parcel.cpp
+COMMON_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
+
+### SENSORS
+TARGET_NO_SENSOR_PERMISSION_CHECK := true
 
 ### FONTS
 EXTENDED_FONT_FOOTPRINT := true

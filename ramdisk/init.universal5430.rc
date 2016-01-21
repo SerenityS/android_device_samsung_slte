@@ -7,7 +7,7 @@ on early-init
 
 on init
     export LD_PRELOAD "/system/lib/libsamsung_symbols.so"
-    #export LD_SHIM_LIBS "/system/lib/libexynoscamera.so|libsamsung_symbols.so:/system/vendor/lib/libRSDriverArm.so|libsamsung_symbols.so"
+    export LD_SHIM_LIBS "/system/bin/gpsd|libdmitry.so"
 
     symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
@@ -985,6 +985,7 @@ on charger
     setprop sys.usb.config charging
 
 service charger /charger
+    seclabel u:r:healthd:s0
     class charger
 
 on property:ro.securestorage.support=true

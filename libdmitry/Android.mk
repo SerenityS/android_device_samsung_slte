@@ -1,4 +1,5 @@
-# Copyright (C) 2015 The CyanogenMod Project
+# Copyright (C) 2015 The Android Open Source Project
+# Written by Dmitry Grinberg
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,17 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 LOCAL_PATH := $(call my-dir)
+
 
 include $(CLEAR_VARS)
 
-LOCAL_SRC_FILES := \
-    Fence.cpp
-
-LOCAL_SHARED_LIBRARIES := libui
-
-LOCAL_MODULE := libsamsung_symbols
+LOCAL_SHARED_LIBRARIES := liblog libcutils libgui libbinder libutils
+LOCAL_SRC_FILES := libdmitry.c
+LOCAL_MODULE := libdmitry
 LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_CLASS := SHARED_LIBRARIES
-
 include $(BUILD_SHARED_LIBRARY)

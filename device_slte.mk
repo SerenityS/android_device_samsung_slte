@@ -108,6 +108,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
 	libnetcmdiface \
 	macloader \
+	wifiloader \
 	hostapd \
 	libwpa_client \
 	wpa_supplicant
@@ -218,6 +219,9 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/gps/gps.conf:system/etc/gps.conf \
 	$(LOCAL_PATH)/configs/gps/SuplRootCert:system/etc/SuplRootCert \
 	$(LOCAL_PATH)/configs/gps/gps.xml:system/etc/gps.xml
+
+PRODUCT_PACKAGES += \
+    libdmitry
 
 ###########################################################
 ### CAMERA
