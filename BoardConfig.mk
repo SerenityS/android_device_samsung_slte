@@ -180,9 +180,6 @@ BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril
 # frameworks/native/libs/binder/Parcel.cpp
 COMMON_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
 
-### SENSORS
-TARGET_NO_SENSOR_PERMISSION_CHECK := true
-
 ### FONTS
 EXTENDED_FONT_FOOTPRINT := true
 
