@@ -253,7 +253,7 @@ PRODUCT_PACKAGES += \
 
 # call Samsung LSI board support package
 $(call inherit-product, hardware/samsung_slsi-cm/exynos5/exynos5.mk)
-$(call inherit-product, hardware/samsung_slsi-cm/exynos5433/exynos5433.mk)
+$(call inherit-product, hardware/samsung_slsi-cm/exynos5430/exynos5430.mk)
 
 $(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 $(call inherit-product-if-exists, build/target/product/full.mk)
