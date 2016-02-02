@@ -230,6 +230,9 @@ PRODUCT_PACKAGES += \
 ###########################################################
 
 PRODUCT_PACKAGES += \
+	Snap
+
+PRODUCT_PACKAGES += \
 	libhwjpeg \
 	libsamsung_symbols \
 	libdmitry
