@@ -17,6 +17,7 @@ PRODUCT_PACKAGES += \
     fstab.universal5430 \
     init.universal5430.rc \
     init.universal5430.baseband.rc \
+    init.universal5430.power.rc \
     init.universal5430.usb.rc \
     init.universal5430.wifi.rc \
     ueventd.universal5430.rc \
