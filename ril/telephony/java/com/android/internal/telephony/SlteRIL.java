@@ -19,12 +19,13 @@ package com.android.internal.telephony;
 import static com.android.internal.telephony.RILConstants.*;
 
 import android.content.Context;
-import android.telephony.Rlog;
 import android.media.AudioManager;
+import android.os.AsyncResult;
 import android.os.Message;
 import android.os.Parcel;
-import android.os.AsyncResult;
+import android.os.SystemProperties;
 import android.telephony.PhoneNumberUtils;
+import android.telephony.Rlog;
 import android.telephony.SignalStrength;
 import android.telephony.SmsManager;
 
@@ -80,13 +81,13 @@ public class SlteRIL extends RIL implements CommandsInterface {
     public SlteRIL(Context context, int preferredNetworkType, int cdmaSubscription) {
         super(context, preferredNetworkType, cdmaSubscription, null);
         mAudioManager = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE);
-        mQANElements = 6;
+        mQANElements = SystemProperties.getInt("ro.ril.telephony.mqanelements", 6);
     }
 
     public SlteRIL(Context context, int preferredNetworkType, int cdmaSubscription, Integer instanceId) {
         super(context, preferredNetworkType, cdmaSubscription, instanceId);
         mAudioManager = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE);
-        mQANElements = 6;
+        mQANElements = SystemProperties.getInt("ro.ril.telephony.mqanelements", 6);
     }
 
     public void acceptCall(int index, Message result) {
