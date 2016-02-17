@@ -158,6 +158,14 @@ vendor/lib/libwvm.so
 lib/libsecnativefeature.so
 lib/libsec-ril.so
 
+### FINGERPRINT
+bin/vcsFPService
+lib/libfpasmtztransport.so
+lib/libvalAuth.so
+lib/libvcsfp.so
+lib/libvfmClient.so
+lib/libvfmtztransport.so
+
 ### Mobicore
 bin/cs
 app/FFFFFFFF000000000000000000000001.drbin

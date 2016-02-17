@@ -1,3 +1,6 @@
+### default type for anything under /firmware.
+type firmware_file, fs_type, contextmount_type;
+
 ### efs types
 type app_efs_file, file_type;
 type baro_delta_factoryapp_efs_file, file_type;
