@@ -17,6 +17,7 @@ PRODUCT_PACKAGES += \
     fstab.universal5430 \
     init.universal5430.rc \
     init.universal5430.baseband.rc \
+    init.universal5430.power.rc \
     init.universal5430.usb.rc \
     init.universal5430.wifi.rc \
     ueventd.universal5430.rc
@@ -204,8 +205,12 @@ PRODUCT_PACKAGES += \
 ###########################################################
 
 PRODUCT_PACKAGES += \
+	Snap
+
+PRODUCT_PACKAGES += \
 	libhwjpeg \
-	libsamsung_symbols
+	libsamsung_symbols \
+	libdmitry
 
 # This fixes switching between front/back camera sensors
 PRODUCT_PROPERTY_OVERRIDES += \

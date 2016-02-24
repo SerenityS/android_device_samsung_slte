@@ -155,7 +155,13 @@ COMMON_GLOBAL_CFLAGS += -DEXYNOS5_ENHANCEMENTS
 COMMON_GLOBAL_CFLAGS += -DUSE_NATIVE_SEC_NV12TILED
 BOARD_USE_SAMSUNG_CAMERAFORMAT_NV21 := true
 
-# CHARGER
+### LIGHTS
+TARGET_PROVIDES_LIBLIGHT := false
+
+### POWER
+TARGET_POWERHAL_VARIANT := samsung
+
+### CHARGER
 # system/core/init/Android.mk
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 # system/core/healthd/Android.mk
