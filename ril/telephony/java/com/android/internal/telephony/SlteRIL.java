@@ -241,7 +241,6 @@ public class SlteRIL extends RIL {
             dc.als = p.readInt();
             dc.isVoice = (0 != p.readInt());
 
-            boolean isVideo = (0 != p.readInt());   // Samsung
             int call_type = p.readInt();            // Samsung CallDetails
             int call_domain = p.readInt();          // Samsung CallDetails
             String csv = p.readString();            // Samsung CallDetails
@@ -412,7 +411,7 @@ public class SlteRIL extends RIL {
 
         /* Remap incorrect respones or ignore them */
         switch (origResponse) {
-            case 1040:
+            case 11055:
                 newResponse = RIL_UNSOL_ON_SS;
                 break;
             case 1041:
