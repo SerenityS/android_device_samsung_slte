@@ -5111,7 +5111,9 @@ typedef struct {
  * "data" is const RIL_StkCcUnsolSsResponse *
  *
  */
+#if 0
 #define RIL_UNSOL_ON_SS 1043
+#endif
 
 /**
  * RIL_UNSOL_STK_CC_ALPHA_NOTIFY
@@ -5173,6 +5175,8 @@ typedef struct {
 #define RIL_UNSOL_UTS_GETSMSMSG 11051
 #define RIL_UNSOL_UTS_GET_UNREAD_SMS_STATUS 11052
 #define RIL_UNSOL_MIP_CONNECT_STATUS 11053
+
+#define RIL_UNSOL_ON_SS 11055
 
 /* SNDMGR */
 
