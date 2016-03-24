@@ -48,7 +48,7 @@ public class SlteRIL extends RIL {
     private static final int RIL_UNSOL_AM = 11010;
     private static final int RIL_UNSOL_SIM_PB_READY = 11021;
 
-    private static final int RIL_REQUEST_DIAL_EMERGENCY_CALL = 10016;
+    private static final int RIL_REQUEST_DIAL_EMERGENCY_CALL = 10001;
 
     private static final int RIL_REQUEST_SIM_TRANSMIT_BASIC = 10026;
     private static final int RIL_REQUEST_SIM_OPEN_CHANNEL = 10027;
