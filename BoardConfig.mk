@@ -90,6 +90,9 @@ MAX_EGL_CACHE_KEY_SIZE := 12*1024
 # of the device.
 MAX_EGL_CACHE_SIZE := 2048*1024
 
+# Use Exynos BGRA mixer
+BOARD_USE_BGRA_8888 := true
+
 # GSC
 #BOARD_USES_ONLY_GSC0_GSC1 := true
 
