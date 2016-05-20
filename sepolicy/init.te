@@ -2,6 +2,9 @@
 
 domain_trans(init, rootfs, cpboot-daemon)
 
+# Mount debugfs on /sys/kernel/debug.
+allow init debugfs:dir mounton;
+
 # /dev/block/mmcblk0p[0-9]
 allow init emmcblk_device:blk_file rw_file_perms;
 
