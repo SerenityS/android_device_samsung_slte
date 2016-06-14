@@ -1479,14 +1479,12 @@
     <path name="communication-earpiece">
         <path name="verb-default" />
 
-        <path name="scenario-earpiece-loopback" />
+        <path name="scenario-earpiece-default" />
         <path name="volume-earpiece-default" />
     </path>
 
     <path name="communication-headphones">
-        <!--
         <path name="verb-default" />
-        -->
 
         <path name="scenario-headphones-default" />
         <path name="volume-headphones-default" />
