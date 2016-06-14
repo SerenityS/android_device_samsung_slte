@@ -180,15 +180,15 @@ const struct route_config media_bt_sco_headset_out = {
 const struct route_config camcorder_speaker = {
     "media-speaker",
     "device-speaker",
-    "media-builtin-mic",
-    "device-builtin-mic",
+    "media-second-mic",
+    "device-back-mic",
 };
 
 const struct route_config camcorder_headphones = {
     "media-headphones",
-    "none",
+    "device-headphones",
     "media-second-mic",
-    "none",
+    "device-back-mic",
 };
 
 const struct route_config voice_rec_speaker = {
