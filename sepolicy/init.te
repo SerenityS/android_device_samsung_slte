@@ -1,7 +1,5 @@
 ### init
 
-domain_trans(init, rootfs, cpboot-daemon)
-
 # Mount debugfs on /sys/kernel/debug.
 allow init debugfs:dir mounton;
 
