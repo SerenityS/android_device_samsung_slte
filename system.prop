@@ -19,6 +19,9 @@ ro.ril.hsxpa=1
 ro.ril.gprsclass=10
 ro.ril.telephony.mqanelements=5
 
+# Allow sim to enter low power mode
+persist.radio.add_power_save=1
+
 #
 # HWC
 #
