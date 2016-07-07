@@ -74,6 +74,10 @@ TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 USE_OPENGL_RENDERER := true
 # hwcomposer insignal
 BOARD_HDMI_INCAPABLE := true
+
+# mixer
+BOARD_USE_BGRA_8888 := true
+
 # frameworks/native/services/surfaceflinger
 # Android keeps 2 surface buffers at all time in case the hwcomposer
 # misses the time to swap buffers (in cases where it takes 16ms or
