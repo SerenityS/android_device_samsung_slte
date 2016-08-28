@@ -240,9 +240,14 @@ ENABLE_WEBGL := true
 ### CMHW
 BOARD_HARDWARE_CLASS += hardware/samsung/cmhw
 
-# SELINUX
+### SELINUX
 BOARD_SEPOLICY_DIRS := \
     $(LOCAL_PATH)/sepolicy
+
+### SECCOMP
+# frameworks/av/services/{mediacodec,mediaextractor}/minijail
+BOARD_SEPOLICY_DIRS += \
+    $(LOCAL_PATH)/seccomp
 
 ###########################################################
 ### CYANOGEN RECOVERY
