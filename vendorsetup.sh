@@ -1,0 +1,2 @@
+add_lunch_combo cm_sltexx-eng
+add_lunch_combo cm_sltexx-userdebug

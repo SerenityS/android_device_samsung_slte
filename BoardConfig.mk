@@ -1,12 +1,13 @@
 USE_CAMERA_STUB := true
 
 # inherit from the proprietary version
--include vendor/samsung/slte/BoardConfigVendor.mk
+-include vendor/samsung/sltexx/BoardConfigVendor.mk
 
-LOCAL_PATH := device/samsung/slte
+LOCAL_PATH := device/samsung/sltexx
 
 TARGET_ARCH := arm
 TARGET_NO_BOOTLOADER := true
+TARGET_NO_RADIOIMAGE := true
 
 # Platform
 TARGET_BOARD_PLATFORM := exynos5
@@ -46,7 +47,7 @@ BOARD_KERNEL_PAGESIZE := 2048
 #BOARD_KERNEL_CMDLINE := The bootloader ignores the cmdline from the boot.img
 #BOARD_KERNEL_SEPARATED_DT := true
 # Extracted with libbootimg
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt device/samsung/slte/dtb.img
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt device/samsung/sltexx/dtb.img
 
 # fix this up by examining /proc/mtd on a running device
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00a00000
@@ -162,13 +163,13 @@ BOARD_USES_SCALER := true
 BOARD_USES_DT := true
 BOARD_USES_DT_SHORTNAME := true
 # frameworks/av/camera, camera blob support
-COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CAMERA_HARDWARE
+# FIXME COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CAMERA_HARDWARE
 # frameworks/av/media/libstagefright, for libwvm.so
-COMMON_GLOBAL_CFLAGS += -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL
+# FIXME COMMON_GLOBAL_CFLAGS += -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL
 # device specific gralloc header
-COMMON_GLOBAL_CFLAGS += -DEXYNOS5_ENHANCEMENTS
+# FIXME COMMON_GLOBAL_CFLAGS += -DEXYNOS5_ENHANCEMENTS
 # frameworks/av/media/libstagefright
-COMMON_GLOBAL_CFLAGS += -DUSE_NATIVE_SEC_NV12TILED
+# FIXME COMMON_GLOBAL_CFLAGS += -DUSE_NATIVE_SEC_NV12TILED
 BOARD_USE_SAMSUNG_CAMERAFORMAT_NV21 := true
 
 ### LIGHTS
@@ -197,7 +198,7 @@ BOARD_MODEM_TYPE := xmm7260
 # RIL.java overwrite
 BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril
 # frameworks/native/libs/binder/Parcel.cpp
-COMMON_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
+# FIXME COMMON_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
 
 ### SENSORS
 TARGET_NO_SENSOR_PERMISSION_CHECK := true
@@ -213,7 +214,7 @@ BOARD_HARDWARE_CLASS += hardware/samsung/cmhw
 
 # SELINUX
 BOARD_SEPOLICY_DIRS := \
-	device/samsung/slte/sepolicy
+    $(LOCAL_PATH)/sepolicy
 
 ###########################################################
 ### CYANOGEN RECOVERY

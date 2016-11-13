@@ -5,9 +5,9 @@ $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 
 $(call inherit-product-if-exists, vendor/samsung/slte/slte-vendor.mk)
 
-DEVICE_PACKAGE_OVERLAYS += device/samsung/slte/overlay
+LOCAL_PATH := device/samsung/sltexx
 
-LOCAL_PATH := device/samsung/slte
+DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 ###########################################################
 ### RAMDISK
