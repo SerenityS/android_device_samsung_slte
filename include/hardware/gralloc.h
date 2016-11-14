@@ -409,9 +409,19 @@ typedef struct alloc_device_t {
 /** convenience API for opening and closing a supported device */
 
 static inline int gralloc_open(const struct hw_module_t* module, 
-        struct alloc_device_t** device) {
-    return module->methods->open(module, 
-            GRALLOC_HARDWARE_GPU0, (struct hw_device_t**)device);
+                               struct alloc_device_t** device)
+{
+    struct hw_device_t **hwd;
+
+#ifdef __cplusplus
+    hwd = reinterpret_cast<struct hw_device_t**>(device);
+#else
+    hwd = (struct hw_device_t**)device;
+#endif
+
+    return module->methods->open(module,
+                                 GRALLOC_HARDWARE_GPU0,
+                                 hwd);
 }
 
 static inline int gralloc_close(struct alloc_device_t* device) {
