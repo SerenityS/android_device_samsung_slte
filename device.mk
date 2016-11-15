@@ -269,7 +269,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
 	mcDriverDaemon \
-	stlport \
+	libstlport \
 	keystore.exynos5
 
 ###########################################################
