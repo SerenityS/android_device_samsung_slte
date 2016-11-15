@@ -144,25 +144,11 @@ enum {
     GRALLOC_USAGE_PRIVATE_3             = 0x80000000,
     GRALLOC_USAGE_PRIVATE_MASK          = 0xF0000000,
 
-#ifdef EXYNOS4_ENHANCEMENTS
-    /* SAMSUNG */
-    GRALLOC_USAGE_PRIVATE_NONECACHE     = 0x00800000,
-
-    GRALLOC_USAGE_HW_FIMC1              = 0x01000000,
-    GRALLOC_USAGE_HW_ION                = 0x02000000,
-    GRALLOC_USAGE_YUV_ADDR              = 0x04000000,
-    GRALLOC_USAGE_CAMERA                = 0x08000000,
-    /* SEC Private usage , for Overlay path at HWC */
-    GRALLOC_USAGE_HWC_HWOVERLAY         = 0x20000000,
-#endif
-
-#ifdef EXYNOS5_ENHANCEMENTS
     /* buffer will be used by the HW IPs when sysmmu is off */
     GRALLOC_USAGE_PHYSICALLY_LINEAR     = 0x01000000,
 
     GRALLOC_USAGE_GPU_BUFFER            = 0x00800000,
     GRALLOC_USAGE_PRIVATE_NONSECURE     = 0x02000000,
-#endif
 };
 
 /*****************************************************************************/
