@@ -5,6 +5,8 @@ USE_CAMERA_STUB := true
 
 LOCAL_PATH := device/samsung/sltexx
 
+TARGET_OTA_ASSERT_DEVICE := slte,sltexx,slteskt
+
 TARGET_ARCH := arm
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
@@ -56,7 +58,7 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 209715200
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 #TARGET_PREBUILT_KERNEL := device/samsung/slte/kernel
-TARGET_KERNEL_CONFIG := cm_exynos5430-slte_defconfig
+TARGET_KERNEL_CONFIG := cm_exynos5430-slteskt_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/slte
 # hardware/samsung_slsi/exynos/libhdmi_legacy
 TARGET_LINUX_KERNEL_VERSION := 3.10
