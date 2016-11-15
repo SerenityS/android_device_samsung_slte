@@ -1,7 +1,7 @@
 Device configuration for the Samsung Galaxy Alpha
 
 Copyright (C) 2014-2015 The CyanogenMod Project
-Copyright (C) 2014-2015 Andreas Schneider <asn@cryptomilk.org>
+Copyright (C) 2014-2017 Andreas Schneider <asn@cryptomilk.org>
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -13,12 +13,12 @@ Copyright (C) 2014-2015 Andreas Schneider <asn@cryptomilk.org>
 
 * Description
 
-  This repository is for CM-13.0 on Samsung Galaxy Alpha (slte)
+  This repository is for cm-14.1 on Samsung Galaxy Alpha (slte)
 
     THIS IS WORK IN PROGRESS.
 
 
-* How To Build CM-13.0 for Samsung Galaxy Alpha
+* How To Build cm-14.1 for Samsung Galaxy Alpha
 
   - Make a workspace
 
@@ -28,7 +28,7 @@ Copyright (C) 2014-2015 Andreas Schneider <asn@cryptomilk.org>
 
   - Do repo init & sync
 
-  $ repo init -u git://github.com/CyanogenMod/android.git -b cm-13.0
+  $ repo init -u git://github.com/CyanogenMod/android.git -b cm-14.1
 
 
   - Create .repo/local_manifests/roomservice.xml with the following content:
@@ -50,7 +50,7 @@ Copyright (C) 2014-2015 Andreas Schneider <asn@cryptomilk.org>
       <project name="projects/android/android_hardware_samsung_slsi_exynos5430" path="hardware/samsung_slsi/exynos5430" remote="cryptomilk" />
 
       <project name="projects/android/android_kernel_samsung_slte.git" path="kernel/samsung/slte" remote="cryptomilk" />
-      <project name="projects/android/android_device_samsung_slte.git" path="device/samsung/slte" remote="cryptomilk" />
+      <project name="projects/android/android_device_samsung_sltexx.git" path="device/samsung/sltexx" remote="cryptomilk" />
   </manifest>
 
   $ repo sync
@@ -68,7 +68,7 @@ Copyright (C) 2014-2015 Andreas Schneider <asn@cryptomilk.org>
   - Setup environment
 
   $ source build/envsetup.sh
-  $ lunch cm_slte-userdebug
+  $ lunch cm_sltexx-userdebug
 
 
   - Build CM
