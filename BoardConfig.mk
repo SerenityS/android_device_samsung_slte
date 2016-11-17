@@ -171,6 +171,8 @@ TARGET_GLOBAL_CFLAGS += -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL
 # frameworks/av/media/libstagefright
 TARGET_GLOBAL_CFLAGS += -DUSE_NATIVE_SEC_NV12TILED
 BOARD_USE_SAMSUNG_CAMERAFORMAT_NV21 := true
+# frameworks/av/{cameraserver,libstagefright,mediaserver}
+TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 
 ### LIGHTS
 TARGET_PROVIDES_LIBLIGHT := false
