@@ -35,6 +35,13 @@ extern "C" {
         return calloc(size, 1);
     }
 
+    long SSL_CTX_ctrl(void *ctx __unused, int cmd, long larg __unused, void *parg __unused)
+    {
+        ALOGE("SSL_CTX_ctrl cmd: %d", cmd);
+
+        return 0;
+    }
+
     void _ZN7android13SensorManagerC1ERKNS_8String16E(void* obj, const String16& opPackageName);
     void _ZN7android13SensorManagerC1Ev(void* obj)
     {
