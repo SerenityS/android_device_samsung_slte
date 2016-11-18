@@ -220,7 +220,7 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/gps/gps.xml:system/etc/gps.xml
 
 PRODUCT_PACKAGES += \
-    libdmitry
+    libshim_gpsd
 
 ###########################################################
 ### CAMERA
@@ -231,8 +231,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
 	libhwjpeg \
-	libsamsung_symbols \
-	libdmitry
+	libsamsung_symbols
 
 ###########################################################
 ### TOUCHSCREEN
