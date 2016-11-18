@@ -3,3 +3,8 @@ on init
 
 on fs
     mkdir /data/property 0700 root root
+
+on post-fs-data
+    # Remove symlinks to avoid issues with migrate after nandroid restores
+    rm /data/data/com.android.providers.telephony/databases
+    rm /data/data/com.android.providers.telephony/shared_prefs
