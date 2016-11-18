@@ -37,7 +37,8 @@ Copyright (C) 2014-2017 Andreas Schneider <asn@cryptomilk.org>
   <manifest>
       <remote  name="cryptomilk" fetch="git://git.cryptomilk.org/" />
 
-      <project name="omnirom/android_bootable_recovery" revision="android-6.0" path="bootable/recovery-twrp" remote="github" />
+      <project name="omnirom/android_bootable_recovery" path="bootable/recovery-twrp" remote="github" revision="android-7.1" />
+      <project name="omnirom/android_external_busybox" path="external/busybox" remote="github" revision="android-7.1" />
 
       <project name="CyanogenMod/android_external_stlport" path="external/stlport" remote="github" />
 
