@@ -22,8 +22,8 @@
 /dev/video30              0660   media      graphics
 
 # mscalers
-/dev/video50              0660   media      graphics
-/dev/video51              0660   media      graphics
+/dev/video50              0660   media      media
+/dev/video51              0660   media      media
 
 /dev/video55              0666   system     graphics
 /dev/fimg2d               0666   system     graphics
