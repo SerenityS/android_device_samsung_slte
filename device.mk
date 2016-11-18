@@ -231,7 +231,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
 	libhwjpeg \
-	libsamsung_symbols
+	libshim_camera
 
 ###########################################################
 ### TOUCHSCREEN
