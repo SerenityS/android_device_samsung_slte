@@ -1,7 +1,9 @@
 ### init
 
+#allow init kernel:security { setcheckreqprot };
+
 # Mount debugfs on /sys/kernel/debug.
-allow init debugfs:dir mounton;
+allow init debugfs_type:dir { mounton };
 
 # /dev/block/mmcblk0p[0-9]
 allow init emmcblk_device:blk_file rw_file_perms;
