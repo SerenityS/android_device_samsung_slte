@@ -206,6 +206,13 @@ on post-fs-data
 # CPU Idle
     chown system radio /sys/module/cpuidle/parameters/enable_mask
 
+# Vibrator
+    chown system system /sys/devices/virtual/timed_output/vibrator/pwm_default
+    chown system system /sys/devices/virtual/timed_output/vibrator/pwm_max
+    chown system system /sys/devices/virtual/timed_output/vibrator/pwm_min
+    chown system system /sys/devices/virtual/timed_output/vibrator/pwm_threshold
+    chown system system /sys/devices/virtual/timed_output/vibrator/pwm_value
+
 #Private Mode
 service privatemode /system/bin/sdcard /data/privatemode /mnt/shell/privatemode 1000 1000
     class late_start

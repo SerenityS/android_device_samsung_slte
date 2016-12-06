@@ -98,6 +98,9 @@
 # rild
 /sys/devices/virtual/misc/multipdp(/.*)     u:object_r:sysfs_multipdp_writable:s0
 
+# vibrator
+/sys/class/timed_output/vibrator/pwm_value  u:object_r:sysfs_vibrator_writeable:s0
+
 ####################################
 # deamons
 #

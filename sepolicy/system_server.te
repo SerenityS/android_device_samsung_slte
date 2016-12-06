@@ -21,3 +21,6 @@ allow system_server efs_file:file r_file_perms;
 allow system_server self:capability { sys_module };
 allow system_server wifi_efs_file:dir r_dir_perms;
 allow system_server wifi_efs_file:file r_file_perms;
+
+# /sys/class/timed_output/vibrator/pwm_value
+allow system_server sysfs_vibrator_writeable:file rw_file_perms;
