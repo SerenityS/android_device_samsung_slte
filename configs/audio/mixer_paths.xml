@@ -1484,7 +1484,9 @@
     </path>
 
     <path name="communication-headphones">
+        <!--
         <path name="verb-default" />
+        -->
 
         <path name="scenario-headphones-default" />
         <path name="volume-headphones-default" />
