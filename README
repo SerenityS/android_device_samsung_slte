@@ -50,21 +50,12 @@ Copyright (C) 2014-2017 Andreas Schneider <asn@cryptomilk.org>
       <project name="CyanogenMod/android_hardware_samsung_slsi-cm_openmax" path="hardware/samsung_slsi-cm/openmax" />
       <project name="projects/android/android_hardware_samsung_slsi_exynos5430" path="hardware/samsung_slsi/exynos5430" remote="cryptomilk" />
 
-      <project name="projects/android/android_kernel_samsung_slte.git" path="kernel/samsung/slte" remote="cryptomilk" />
-      <project name="projects/android/android_device_samsung_sltexx.git" path="device/samsung/sltexx" remote="cryptomilk" />
+       <project name="SerenityS/android_kernel_samsung_slte" path="kernel/samsung/slte" />
+       <project name="SerenityS/android_device_samsung_sltexx" path="device/samsung/sltexx" />
+       <project name="SerenityS/android_vendor_samsung_sltexx" path="vendor/samsung/slte" />
   </manifest>
 
   $ repo sync
-
-  - Copy proprietary vendor files
-
-  There are two options to to that. Connect your device with adb enabled and run:
-
-    ./extract-files.sh
-
-  Or if you have the system image unpacked on your disk, then simply run:
-
-    STOCK_ROM_DIR=/path/to/system ./extract-files.sh
 
   - Setup environment
 
