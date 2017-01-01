@@ -5,7 +5,7 @@ $(call inherit-product, device/samsung/sltexx/device.mk)
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_NAME := cm_sltexx
+PRODUCT_NAME := lineage_sltexx
 PRODUCT_DEVICE := sltexx
 PRODUCT_BRAND := samsung
 PRODUCT_MODEL := SM-G850F
