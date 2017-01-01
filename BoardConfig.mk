@@ -134,7 +134,6 @@ BOARD_USES_WFD := true
 # frameworks/base/cmds/bootanimation
 TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := true
-TARGET_BOOTANIMATION_MULTITHREAD_DECODE := true
 
 ### OMX (insignal)
 BOARD_USE_DMA_BUF := true
