@@ -263,6 +263,11 @@ TW_THEME := portrait_hdpi
 TARGET_RECOVERY_PIXEL_FORMAT := "BRGA_8888"
 TARGET_RECOVERY_DEVICE_MODULES += prebuilt_file_contexts init.recovery.usb.rc
 
+# Add logcat support
+TWRP_INCLUDE_LOGCAT := true
+# Use toolbox instead of busybox
+TW_USE_TOOLBOX := true
+
 TW_BRIGHTNESS_PATH := /sys/class/backlight/panel/brightness
 TW_MAX_BRIGHTNESS := 255
 
@@ -273,7 +278,8 @@ RECOVERY_SDCARD_ON_DATA := true
 TW_NO_REBOOT_BOOTLOADER := true
 TW_HAS_DOWNLOAD_MODE := true
 
-TW_INCLUDE_L_CRYPTO := true
+# Enable support for encrypted fs
+TW_INCLUDE_CRYPTO := true
 
 # Provide our own init.recovery.usb.rc
 TW_EXCLUDE_DEFAULT_USB_INIT := true
