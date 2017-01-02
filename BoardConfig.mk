@@ -204,6 +204,7 @@ TARGET_PROVIDES_LIBLIGHT := false
 TARGET_POWERHAL_VARIANT := samsung
 
 ### CHARGER
+WITH_CM_CHARGER := true
 # system/core/init/Android.mk
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 # system/core/healthd/Android.mk
