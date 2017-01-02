@@ -4,7 +4,7 @@
 ro.product.model=SM-G850F
 ro.product.brand=samsung
 ro.product.name=sltexx
-ro.product.device=slte
+ro.product.device=sltexx
 
 ro.sf.lcd_density=320
 
