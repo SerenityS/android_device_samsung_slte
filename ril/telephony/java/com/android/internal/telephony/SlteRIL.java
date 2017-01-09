@@ -155,6 +155,8 @@ public class SlteRIL extends RIL {
 
         if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest));
 
+        mMetrics.writeRilDial(mInstanceId, rr.mSerial, clirMode, uusInfo);
+
         send(rr);
     }
 
@@ -171,6 +173,8 @@ public class SlteRIL extends RIL {
         rr.mParcel.writeInt(0);        // Unknown
 
         if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest));
+
+        mMetrics.writeRilDial(mInstanceId, rr.mSerial, clirMode, uusInfo);
 
         send(rr);
     }
