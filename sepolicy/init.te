@@ -17,4 +17,3 @@ allow init sdcardd_exec:file r_file_perms;
 # LD_SHIM_LIBS
 allow init gpsd:process { noatsecure };
 allow init mediaserver:process { noatsecure };
-allow init mediadrmserver:process { noatsecure };
