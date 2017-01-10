@@ -3,7 +3,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 
-$(call inherit-product-if-exists, vendor/samsung/slte/slte-vendor.mk)
+$(call inherit-product, vendor/samsung/slte/slte-vendor.mk)
 
 LOCAL_PATH := device/samsung/sltexx
 
@@ -247,9 +247,8 @@ PRODUCT_COPY_FILES += \
 ###########################################################
 
 PRODUCT_PACKAGES += \
-	charger_res_images \
-	cm_charger_res_images \
-	charger
+    charger_res_images \
+    charger
 
 ###########################################################
 ### MTP
@@ -277,7 +276,3 @@ PRODUCT_PACKAGES += \
 
 $(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 $(call inherit-product-if-exists, build/target/product/full.mk)
-
-PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
-PRODUCT_NAME := full_slte
-PRODUCT_DEVICE := slte

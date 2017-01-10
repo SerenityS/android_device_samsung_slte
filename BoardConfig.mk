@@ -152,9 +152,11 @@ BOARD_USE_ENCODER_RGBINPUT_SUPPORT := true
 BOARD_USE_VP8ENC_SUPPORT := true
 BOARD_USE_HEVCDEC_SUPPORT := true
 
-BOARD_USE_WMA_CODEC := true
 BOARD_USE_ALP_AUDIO := true
 BOARD_USE_SEIREN_AUDIO := true
+
+# libaudioflinger
+BOARD_AUDIO_ALLOW_FAST_SW_EFFECT := true
 
 # WIFI
 BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
@@ -206,6 +208,7 @@ TARGET_PROVIDES_LIBLIGHT := false
 TARGET_POWERHAL_VARIANT := samsung
 
 ### CHARGER
+WITH_CM_CHARGER := true
 # system/core/init/Android.mk
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 # system/core/healthd/Android.mk
@@ -265,6 +268,11 @@ TW_THEME := portrait_hdpi
 TARGET_RECOVERY_PIXEL_FORMAT := "BRGA_8888"
 TARGET_RECOVERY_DEVICE_MODULES += prebuilt_file_contexts init.recovery.usb.rc
 
+# Add logcat support
+TWRP_INCLUDE_LOGCAT := true
+# Use toolbox instead of busybox
+TW_USE_TOOLBOX := true
+
 TW_BRIGHTNESS_PATH := /sys/class/backlight/panel/brightness
 TW_MAX_BRIGHTNESS := 255
 
@@ -275,7 +283,8 @@ RECOVERY_SDCARD_ON_DATA := true
 TW_NO_REBOOT_BOOTLOADER := true
 TW_HAS_DOWNLOAD_MODE := true
 
-TW_INCLUDE_L_CRYPTO := true
+# Enable support for encrypted fs
+TW_INCLUDE_CRYPTO := true
 
 # Provide our own init.recovery.usb.rc
 TW_EXCLUDE_DEFAULT_USB_INIT := true
