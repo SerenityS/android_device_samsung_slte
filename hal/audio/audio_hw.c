@@ -178,14 +178,21 @@ struct audio_device {
     audio_devices_t out_device; /* "or" of stream_out.device for all active output streams */
     audio_devices_t in_device;
     bool mic_mute;
-    struct audio_route *ar;
     audio_source_t input_source;
     int cur_route_id;     /* current route ID: combination of input source
                            * and output device IDs */
     audio_mode_t mode;
 
-    const char *active_output_device;
-    const char *active_input_device;
+    struct audio_route *audio_route;
+    struct {
+        const char *device;
+        const char *route;
+        int dev_id;
+    } active_output;
+    struct {
+        const char *device;
+        const char *route;
+    } active_input;
 
     /* Call audio */
     struct pcm *pcm_voice_rx;
@@ -681,69 +688,59 @@ static void select_devices(struct audio_device *adev)
     /*
      * Disable the output and input device
      */
-    if (adev->active_output_device != NULL) {
-        snprintf(current_device,
-                 sizeof(current_device),
-                 "%s-disable",
-                 adev->active_output_device);
-        audio_route_apply_path(adev->ar, current_device);
+    if (adev->active_output.route != NULL) {
+        disable_audio_route(adev, adev->active_output.route);
+    }
+    if (adev->active_output.device != NULL) {
+        disable_audio_device(adev, adev->active_output.device);
+        output_device_off(adev->active_output.dev_id);
     }
 
-    if (adev->active_input_device != NULL) {
-        snprintf(current_device,
-                 sizeof(current_device),
-                 "%s-disable",
-                 adev->active_input_device);
-        audio_route_apply_path(adev->ar, current_device);
+    if (adev->active_input.route != NULL) {
+        disable_audio_route(adev, adev->active_input.route);
     }
-    audio_route_update_mixer(adev->ar);
+    if (adev->active_input.device != NULL) {
+        disable_audio_device(adev, adev->active_input.device);
+        input_devices_off();
+    }
+
+    /* TODO: Tell the modem what we plan to do */
 
     /*
-     * Reset the audio routes to deactivate active audio paths
+     * Apply the new audio routes
      */
-    audio_route_reset(adev->ar);
-    audio_route_update_mixer(adev->ar);
 
-    usleep(50);
-
-    /*
-     * Apply the new audio routes and set volumes
-     */
+    /* OUTPUT */
     if (output_route != NULL) {
-        audio_route_apply_path(adev->ar, output_route);
-    }
-    if (input_route != NULL) {
-        audio_route_apply_path(adev->ar, input_route);
-    }
-    audio_route_update_mixer(adev->ar);
-
-    usleep(50);
-
-    /*
-     * Turn on the devices
-     */
-    if (output_device != NULL) {
-        snprintf(current_device,
-                 sizeof(current_device),
-                 "%s-enable",
-                 output_device);
-        audio_route_apply_path(adev->ar, current_device);
-        adev->active_output_device = output_device;
+        enable_audio_route(adev, output_route);
+        adev->active_output.route = output_route;
     } else {
-        adev->active_output_device = NULL;
+        adev->active_output.route = NULL;
+    }
+
+    if (output_device != NULL) {
+        enable_audio_device(adev, output_device);
+        adev->active_output.device = output_device;
+        adev->active_output.dev_id = output_device_id;
+    } else {
+        adev->active_output.device = NULL;
+        adev->active_output.dev_id = -1;
+    }
+
+    /* INPUT */
+    if (input_route != NULL) {
+        enable_audio_route(adev, input_route);
+        adev->active_input.route = input_route;
+    } else {
+        adev->active_input.route = NULL;
     }
 
     if (input_device != NULL) {
-        snprintf(current_device,
-                 sizeof(current_device),
-                 "%s-enable",
-                 input_device);
-        audio_route_apply_path(adev->ar, current_device);
-        adev->active_input_device = input_device;
+        enable_audio_device(adev, input_device);
+        adev->active_input.device = input_device;
     } else {
-        adev->active_input_device = NULL;
+        adev->active_input.device = NULL;
     }
-    audio_route_update_mixer(adev->ar);
 }
 
 static void force_non_hdmi_out_standby(struct audio_device *adev)
@@ -2390,7 +2387,7 @@ static int adev_close(hw_device_t *device)
 {
     struct audio_device *adev = (struct audio_device *)device;
 
-    audio_route_free(adev->ar);
+    audio_route_free(adev->audio_route);
 
     if (adev->hdmi_drv_fd >= 0) {
         close(adev->hdmi_drv_fd);
@@ -2438,8 +2435,9 @@ static int adev_open(const hw_module_t* module, const char* name,
     adev->hw_device.close_input_stream = adev_close_input_stream;
     adev->hw_device.dump = adev_dump;
 
-    adev->ar = audio_route_init(MIXER_CARD, NULL);
+    adev->audio_route = audio_route_init(MIXER_CARD, NULL);
     adev->input_source = AUDIO_SOURCE_DEFAULT;
+    adev->active_output.dev_id = -1;
     /* adev->cur_route_id initial value is 0 and such that first device
      * selection is always applied by select_devices() */
 
