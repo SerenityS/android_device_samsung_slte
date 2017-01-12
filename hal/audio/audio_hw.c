@@ -4,6 +4,7 @@
  *               Daniel Hillenbrand <codeworkx@cyanogenmod.com>
  *               Guillaume "XpLoDWilD" Lesniak <xplodgui@gmail.com>
  * Copyright (c) 2015-2017 Andreas Schneider <asn@cryptomilk.org>
+ * Copyright (c) 2015-2017 Christopher N. Hesse <raymanfx@gmail.org>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -228,6 +229,7 @@ struct stream_out {
     audio_channel_mask_t supported_channel_masks[HDMI_MAX_SUPPORTED_CHANNEL_MASKS + 1];
     bool muted;
     uint64_t written; /* total frames written, not cleared when entering standby */
+    int64_t last_write_time_us;
 
     struct audio_device *dev;
 };
@@ -245,6 +247,7 @@ struct stream_in {
     int16_t *buffer;
     size_t frames_in;
     int64_t frames_read; /* total frames read, not cleared when entering standby */
+    int64_t last_read_time_us;
     int read_status;
 
     audio_source_t input_source;
@@ -1458,8 +1461,28 @@ exit:
 final_exit:
 
     if (ret != 0) {
-        usleep(bytes * 1000000 / audio_stream_out_frame_size(stream) /
-               out_get_sample_rate(&stream->common));
+        struct timespec t = { .tv_sec = 0, .tv_nsec = 0 };
+        clock_gettime(CLOCK_MONOTONIC, &t);
+        const int64_t now = (t.tv_sec * 1000000000LL + t.tv_nsec) / 1000;
+        const int64_t elapsed_time_since_last_write = now - out->last_write_time_us;
+        int64_t sleep_time = bytes * 1000000LL / audio_stream_out_frame_size(stream) /
+                   out_get_sample_rate(&stream->common) - elapsed_time_since_last_write;
+        if (sleep_time > 0) {
+            usleep(sleep_time);
+        } else {
+            // we don't sleep when we exit standby (this is typical for a real alsa buffer).
+            sleep_time = 0;
+        }
+        out->last_write_time_us = now + sleep_time;
+        // last_write_time_us is an approximation of when the (simulated) alsa
+        // buffer is believed completely full. The usleep above waits for more space
+        // in the buffer, but by the end of the sleep the buffer is considered
+        // topped-off.
+        //
+        // On the subsequent out_write(), we measure the elapsed time spent in
+        // the mixer. This is subtracted from the sleep estimate based on frames,
+        // thereby accounting for drain in the alsa buffer during mixing.
+        // This is a crude approximation; we don't handle underruns precisely.
     }
 
     return bytes;
@@ -1743,8 +1766,28 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
 
 exit:
     if (ret != 0) {
-        usleep(bytes * 1000000 / audio_stream_in_frame_size(stream) /
-               in_get_sample_rate(&stream->common));
+        struct timespec t = { .tv_sec = 0, .tv_nsec = 0 };
+        clock_gettime(CLOCK_MONOTONIC, &t);
+        const int64_t now = (t.tv_sec * 1000000000LL + t.tv_nsec) / 1000;
+
+        // we do a full sleep when exiting standby.
+        const bool standby = in->last_read_time_us == 0;
+        const int64_t elapsed_time_since_last_read = standby ?
+                0 : now - in->last_read_time_us;
+        int64_t sleep_time = bytes * 1000000LL / audio_stream_in_frame_size(stream) /
+                in_get_sample_rate(&stream->common) - elapsed_time_since_last_read;
+        if (sleep_time > 0) {
+            usleep(sleep_time);
+        } else {
+            sleep_time = 0;
+        }
+        in->last_read_time_us = now + sleep_time;
+        // last_read_time_us is an approximation of when the (simulated) alsa
+        // buffer is drained by the read, and is empty.
+        //
+        // On the subsequent in_read(), we measure the elapsed time spent in
+        // the recording thread. This is subtracted from the sleep estimate based on frames,
+        // thereby accounting for fill in the alsa buffer during the interim.
         memset(buffer, 0, bytes);
     }
 
