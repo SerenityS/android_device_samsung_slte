@@ -122,6 +122,8 @@ struct pcm_config pcm_config_in = {
     .period_size = AUDIO_CAPTURE_PERIOD_SIZE,
     .period_count = AUDIO_CAPTURE_PERIOD_COUNT,
     .format = PCM_FORMAT_S16_LE,
+    .stop_threshold = INT_MAX,
+    .avail_min = 0,
 };
 
 struct pcm_config pcm_config_in_low_latency = {
@@ -130,6 +132,8 @@ struct pcm_config pcm_config_in_low_latency = {
     .period_size = AUDIO_CAPTURE_LOW_LATENCY_PERIOD_SIZE,
     .period_count = AUDIO_CAPTURE_LOW_LATENCY_PERIOD_COUNT,
     .format = PCM_FORMAT_S16_LE,
+    .stop_threshold = INT_MAX,
+    .avail_min = 0,
 };
 
 struct pcm_config pcm_config_sco = {
