@@ -6,7 +6,8 @@ net_domain(cpboot-daemon)
 init_daemon_domain(cpboot-daemon)
 
 wakelock_use(cpboot-daemon)
-unix_socket_connect(cpboot-daemon, property, init)
+allow cpboot-daemon init:unix_stream_socket connectto;
+allow cpboot-daemon property_socket:sock_file write;
 
 allow cpboot-daemon self:capability { dac_override setuid setgid };
 

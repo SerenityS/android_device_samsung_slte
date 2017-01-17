@@ -212,12 +212,8 @@
 
     <!-- ### Device ### -->
 
-    <path name="device-earpiece-enable">
+    <path name="device-earpiece">
         <ctl name="RCV Switch" value="1" />
-    </path>
-
-    <path name="device-earpiece-disable">
-        <ctl name="RCV Switch" value="0" />
     </path>
 
     <!-- ### Scenario ### -->
@@ -307,15 +303,8 @@
 
     <!-- ### Device ### -->
 
-    <path name="device-speaker-enable">
+    <path name="device-speaker">
         <ctl name="SPK Switch" value="1" />
-    </path>
-
-    <path name="device-speaker-disable">
-        <ctl name="SPK Switch" value="0" />
-        <ctl name="VI SENSING Switch" value="0" />
-        <ctl name="DSP1L Input 1" value="None" />
-        <ctl name="DSP1L Input 2" value="None" />
     </path>
 
     <!-- ### Scenario ### -->
@@ -448,16 +437,9 @@
 
     <!-- ### Device ### -->
 
-    <path name="device-headphones-enable">
-        <ctl name="HP Switch" value="1" />
+    <path name="device-headphones">
         <ctl name="VI SENSING Switch" value="0" />
-    </path>
-
-    <path name="device-headphones-disable">
-        <ctl name="HP Switch" value="0" />
-        <ctl name="DSP1 Aux 1" value="None" />
-        <ctl name="DSP1 Aux 2" value="None" />
-        <ctl name="HPOUT1 DRE Switch" value="0" />
+        <ctl name="HP Switch" value="1" />
     </path>
 
     <!-- ### Scenario ### -->
@@ -534,18 +516,9 @@
     -->
 
     <!-- ### Device ### -->
-    <path name="device-sco-enable">
+    <path name="device-sco">
         <ctl name="ASRC RATE 1" value="SYNCCLK rate 2" />
         <ctl name="VI SENSING Switch" value="0" />
-    </path>
-
-    <path name="device-sco-disable">
-        <ctl name="ASRC1L Input" value="None" />
-        <ctl name="ASRC1R Input" value="None" />
-        <ctl name="AIF3TX1 Input 1" value="None" />
-        <ctl name="AIF3TX2 Input 1" value="None" />
-        <ctl name="AIF3TX1 Input 2" value="None" />
-        <ctl name="AIF3TX2 Input 2" value="None" />
     </path>
 
     <!-- ### Scenario ### -->
@@ -610,18 +583,9 @@
 
     <!-- ### Device ### -->
 
-    <path name="device-sco-headset-out-enable">
+    <path name="device-sco-headset-out">
         <ctl name="ASRC RATE 1" value="SYNCCLK rate 2" />
         <ctl name="VI SENSING Switch" value="0" />
-    </path>
-
-    <path name="device-sco-headset-out-disable">
-        <ctl name="ASRC1L Input" value="None" />
-        <ctl name="ASRC1R Input" value="None" />
-        <ctl name="AIF3TX1 Input 1" value="None" />
-        <ctl name="AIF3TX2 Input 1" value="None" />
-        <ctl name="AIF3TX1 Input 2" value="None" />
-        <ctl name="AIF3TX2 Input 2" value="None" />
     </path>
 
     <!-- ### Scenario ### -->
@@ -678,18 +642,9 @@
 
     <!-- ### Device ### -->
 
-    <path name="device-sco-carkit-enable">
+    <path name="device-sco-carkit">
         <ctl name="ASRC RATE 1" value="SYNCCLK rate 2" />
         <ctl name="VI SENSING Switch" value="0" />
-    </path>
-
-    <path name="device-sco-carkit-disable">
-        <ctl name="ASRC1L Input" value="None" />
-        <ctl name="ASRC1R Input" value="None" />
-        <ctl name="AIF3TX1 Input 1" value="None" />
-        <ctl name="AIF3TX2 Input 1" value="None" />
-        <ctl name="AIF3TX1 Input 2" value="None" />
-        <ctl name="AIF3TX2 Input 2" value="None" />
     </path>
 
     <!-- ### Scenario ### -->
@@ -722,13 +677,9 @@
     -->
 
     <!-- ### Device ### -->
-    <path name="device-aux-digital-enable">
+    <path name="device-aux-digital">
         <ctl name="ASRC RATE 1" value="SYNCCLK rate 1" />
         <ctl name="HDMI Switch" value="1" />
-    </path>
-
-    <path name="device-aux-digital-disable">
-        <ctl name="HDMI Switch" value="0" />
     </path>
 
     <!-- ### Scenario ### -->
@@ -745,13 +696,9 @@
 
     <!-- ### Device ### -->
 
-    <path name="device-analogue-dock-enable">
+    <path name="device-analogue-dock">
         <ctl name="ASRC RATE 1" value="SYNCCLK rate 1" />
         <ctl name="VPS Switch" value="1" />
-    </path>
-
-    <path name="device-analogue-dock-disable">
-        <ctl name="VPS Switch" value="0" />
     </path>
 
     <!-- ### Scenario ### -->
@@ -773,12 +720,8 @@
 
     <!-- ### Device ### -->
 
-    <path name="device-builtin-mic-enable">
+    <path name="device-builtin-mic">
         <ctl name="Main Mic Switch" value="1" />
-    </path>
-
-    <path name="device-builtin-mic-disable">
-        <ctl name="Main Mic Switch" value="0" />
     </path>
 
     <!-- ### Scenario ### -->
@@ -959,12 +902,8 @@
 
     <!-- ### Device ### -->
 
-    <path name="device-back-mic-enable">
+    <path name="device-back-mic">
         <ctl name="Sub Mic Switch" value="1" />
-    </path>
-
-    <path name="device-back-mic-disable">
-        <ctl name="Sub Mic Switch" value="0" />
     </path>
 
     <!-- ### Scenario ### -->
@@ -1022,14 +961,9 @@
 
     <!-- ### Device ### -->
 
-    <path name="device-two-mic-enable">
-        <path name="device-builtin-mic-enable" />
-        <path name="device-back-mic-enable" />
-    </path>
-
-    <path name="device-two-mic-disable">
-        <path name="device-builtin-mic-disable" />
-        <path name="device-back-mic-disable" />
+    <path name="device-two-mic">
+        <path name="device-builtin-mic" />
+        <path name="device-back-mic" />
     </path>
 
     <!-- ### Scenario ### -->
@@ -1097,12 +1031,8 @@
     -->
 
     <!-- ### Device ### -->
-    <path name="device-third-mic-enable">
+    <path name="device-third-mic">
         <ctl name="Third Mic Switch" value="1" />
-    </path>
-
-    <path name="device-third-mic-disable">
-        <ctl name="Third Mic Switch" value="0" />
     </path>
 
     <!-- ### Scenario ### -->
@@ -1130,12 +1060,8 @@
     -->
 
     <!-- ### Device ### -->
-    <path name="device-headset-mic-enable">
+    <path name="device-headset-mic">
         <ctl name="Headset Mic Switch" value="1" />
-    </path>
-
-    <path name="device-headset-mic-disable">
-        <ctl name="Headset Mic Switch" value="0" />
     </path>
 
     <!-- ### Scenario ### -->
@@ -1202,14 +1128,9 @@
     -->
 
     <!-- ### Device ### -->
-    <path name="device-sco-headset-mic-enable">
+    <path name="device-sco-headset-mic">
         <ctl name="ASRC RATE 1" value="SYNCCLK rate 2" />
         <ctl name="DSP3 Virtual Input" value="None" />
-    </path>
-
-    <path name="device-sco-headset-mic-disable">
-        <ctl name="ASRC1L Input" value="AIF3RX1" />
-        <ctl name="ASRC1R Input" value="AIF3RX2" />
     </path>
 
     <!-- ### Scenario ### -->

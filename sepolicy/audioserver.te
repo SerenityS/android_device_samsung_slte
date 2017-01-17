@@ -1,2 +1,5 @@
 # Allow rild to connect to gpsd
 unix_socket_connect(audioserver, property, rild)
+
+# /d/asoc/Pacific WM5110 Sound/dapm/
+allow audioserver debugfs_asoc:file r_file_perms;
