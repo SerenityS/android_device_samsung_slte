@@ -506,9 +506,9 @@ static void output_device_off(int out_device_id)
     }
 out:
     if (ok) {
-        ALOGV("%s: Output device turned off!\n", __func__);
+        ALOGV("%s: Output device %s turned off!\n", __func__, device);
     } else {
-        ALOGE("%s: Failed to wait for device to turn off", __func__);
+        ALOGE("%s: Failed to wait for %s to turn off", __func__, device);
         usleep(50);
     }
 }
@@ -559,7 +559,7 @@ static void input_devices_off(void)
     }
 out:
     if (ok) {
-        ALOGV("%s: Input device turned off!\n", __func__);
+        ALOGV("%s: Input devices turned off!\n", __func__);
     } else {
         ALOGE("%s: Failed to wait for device to turn off", __func__);
         usleep(50);
@@ -693,20 +693,20 @@ static void select_devices(struct audio_device *adev)
     /*
      * Disable the output and input device
      */
+    if (adev->active_output.route != NULL) {
+        disable_audio_route(adev, adev->active_output.route);
+    }
     if (adev->active_output.device != NULL) {
         disable_audio_device(adev, adev->active_output.device);
         output_device_off(adev->active_output.dev_id);
     }
-    if (adev->active_output.route != NULL) {
-        disable_audio_route(adev, adev->active_output.route);
-    }
 
+    if (adev->active_input.route != NULL) {
+        disable_audio_route(adev, adev->active_input.route);
+    }
     if (adev->active_input.device != NULL) {
         disable_audio_device(adev, adev->active_input.device);
         input_devices_off();
-    }
-    if (adev->active_input.route != NULL) {
-        disable_audio_route(adev, adev->active_input.route);
     }
 
     /*
@@ -720,6 +720,8 @@ static void select_devices(struct audio_device *adev)
     /*
      * Apply the new audio routes
      */
+
+    /* OUTPUT */
     if (output_route != NULL) {
         enable_audio_route(adev, output_route);
         adev->active_output.route = output_route;
@@ -727,23 +729,21 @@ static void select_devices(struct audio_device *adev)
         adev->active_output.route = NULL;
     }
 
-    if (input_route != NULL) {
-        enable_audio_route(adev, input_route);
-        adev->active_input.route = input_route;
-    } else {
-        adev->active_input.route = NULL;
-    }
-
-    /*
-     * Turn on the devices
-     */
     if (output_device != NULL) {
         enable_audio_device(adev, output_device);
         adev->active_output.device = output_device;
         adev->active_output.dev_id = output_device_id;
     } else {
         adev->active_output.device = NULL;
-        adev->active_output.dev_id = 0;
+        adev->active_output.dev_id = -1;
+    }
+
+    /* INPUT */
+    if (input_route != NULL) {
+        enable_audio_route(adev, input_route);
+        adev->active_input.route = input_route;
+    } else {
+        adev->active_input.route = NULL;
     }
 
     if (input_device != NULL) {
@@ -2451,6 +2451,7 @@ static int adev_open(const hw_module_t* module, const char* name,
 
     adev->audio_route = audio_route_init(MIXER_CARD, NULL);
     adev->input_source = AUDIO_SOURCE_DEFAULT;
+    adev->active_output.dev_id = -1;
     /* adev->cur_route_id initial value is 0 and such that first device
      * selection is always applied by select_devices() */
 
