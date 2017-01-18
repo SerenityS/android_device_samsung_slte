@@ -22,6 +22,9 @@ TARGET_CPU_VARIANT := cortex-a15
 TARGET_CPU_SMP := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
 
+# system/core libcutils
+ENABLE_SCHEDBOOST := true
+
 # RENDERSCRIPT
 BOARD_OVERRIDE_RS_CPU_VARIANT_32 := cortex-a15
 #OVERRIDE_RS_DRIVER := libRSDriverArm.so
