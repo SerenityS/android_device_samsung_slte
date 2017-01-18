@@ -272,7 +272,8 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
 	SamsungServiceMode \
-	Torch
+	Torch \
+	su
 
 $(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 $(call inherit-product-if-exists, build/target/product/full.mk)
