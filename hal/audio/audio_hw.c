@@ -21,6 +21,7 @@
 
 #define LOG_TAG "audio_hw_primary"
 #define LOG_NDEBUG 0
+//#define ALOG_TRACE 1
 
 #include <errno.h>
 #include <pthread.h>
@@ -48,6 +49,12 @@
 
 #include "routing.h"
 #include "ril_interface.h"
+
+#ifdef ALOG_TRACE
+#define ALOGT ALOGV
+#else
+#define ALOGT(a...) do { } while(0)
+#endif
 
 #define PCM_CARD 0
 #define PCM_CARD_SPDIF 1
