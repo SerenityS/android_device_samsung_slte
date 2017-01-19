@@ -264,6 +264,7 @@ struct stream_in {
     struct resampler_itfe *resampler;
     struct resampler_buffer_provider buf_provider;
     int16_t *buffer;
+    size_t buffer_size;
     size_t frames_in;
     int64_t frames_read; /* total frames read, not cleared when entering standby */
     int64_t last_read_time_us;
@@ -1217,6 +1218,8 @@ static int start_input_stream(struct stream_in *in)
     }
 
     in->frames_in = 0;
+    in->buffer_size = 0;
+
     /* in call routing must go through set_parameters */
     if (!adev->in_call) {
         adev->input_source = in->input_source;
@@ -1255,7 +1258,7 @@ static size_t get_input_buffer_size(unsigned int sample_rate,
 }
 
 static int get_next_buffer(struct resampler_buffer_provider *buffer_provider,
-                                   struct resampler_buffer* buffer)
+                           struct resampler_buffer* buffer)
 {
     struct stream_in *in;
     size_t i;
@@ -1275,11 +1278,19 @@ static int get_next_buffer(struct resampler_buffer_provider *buffer_provider,
     }
 
     if (in->frames_in == 0) {
+        size_t size_in_bytes = pcm_frames_to_bytes(in->pcm,
+                                                   in->config->period_size);
+        if (in->buffer_size < in->config->period_size) {
+            in->buffer_size = in->config->period_size;
+            in->buffer = (int16_t *)realloc(in->buffer, size_in_bytes);
+            ALOG_ASSERT((in->buffer != NULL),
+                        "%s: failed to reallocate read_buf", __func__);
+        }
         in->read_status = pcm_read(in->pcm,
-                                   (void*)in->buffer,
-                                   pcm_frames_to_bytes(in->pcm, in->config->period_size));
+                                   (void *)in->buffer,
+                                   size_in_bytes);
         if (in->read_status != 0) {
-            ALOGE("get_next_buffer() pcm_read error %d", in->read_status);
+            ALOGE("%s: pcm_read error %d", __func__, in->read_status);
             buffer->raw = NULL;
             buffer->frame_count = 0;
             return in->read_status;
