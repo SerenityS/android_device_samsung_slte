@@ -72,7 +72,7 @@
 
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
 
-#define DAPM_PATH "/d/asoc/Pacific WM5110 Sound/dapm"
+#define DEVICE_DAPM_PATH "/d/asoc/Pacific WM5110 Sound/dapm"
 
 /*
  * Set the deep-buffer and low-latency output buffer sizes to
@@ -486,7 +486,7 @@ static void output_device_off(int out_device_id)
     if (device == NULL) {
         goto out;
     }
-    snprintf(dapm, sizeof(dapm), "%s/%s", DAPM_PATH, device);
+    snprintf(dapm, sizeof(dapm), "%s/%s", DEVICE_DAPM_PATH, device);
 
     ALOGV("%s: Check if %s is turned off\n", __func__, device);
 
@@ -540,7 +540,7 @@ static void input_devices_off(void)
         char dapm[64] = {0};
         int j;
 
-        snprintf(dapm, sizeof(dapm), "%s/%s", DAPM_PATH, audio_inputs[i]);
+        snprintf(dapm, sizeof(dapm), "%s/%s", DEVICE_DAPM_PATH, audio_inputs[i]);
 
         for (j = 0; j < 20; j++) {
             const char *p;
