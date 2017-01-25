@@ -12,7 +12,8 @@ PRODUCT_MODEL := SM-G850F
 PRODUCT_MANUFACTURER := samsung
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRODUCT_NAME=sltexx
+    PRODUCT_NAME=sltexx \
+    PRODUCT_DEVICE=slte
 
 # Set screen resolution for bootanimation
 # vendor/cm/config/common_full_phone.mk
