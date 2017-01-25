@@ -885,7 +885,7 @@
 
     <path name="volume-builtin-mic-default">
         <ctl name="IN1L Volume" value="30" />
-        <ctl name="IN1L Digital Volume" value="134" />
+        <ctl name="IN1L Digital Volume" value="150" />
         <ctl name="LHPF1 Input 1 Volume" value="32" />
     </path>
 
