@@ -206,6 +206,9 @@ BOARD_USE_SAMSUNG_CAMERAFORMAT_NV21 := true
 # frameworks/av/{cameraserver,libstagefright,mediaserver}
 TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 
+### AUDIO
+TARGET_AUDIOHAL_VARIANT := samsung
+
 ### LIGHTS
 TARGET_PROVIDES_LIBLIGHT := false
 
