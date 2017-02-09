@@ -273,12 +273,12 @@ public class SlteRIL extends RIL {
                         + new String(dc.uusInfo.getUserData()));
                 riljLogv("Incoming UUS : data (hex): "
                         + IccUtils.bytesToHexString(dc.uusInfo.getUserData()));
+
+                // Make sure there's a leading + on addresses with a TOA of 145
+                dc.number = PhoneNumberUtils.stringFromStringAndTOA(dc.number, dc.TOA);
             } else {
                 riljLogv("Incoming UUS : NOT present!");
             }
-
-            // Make sure there's a leading + on addresses with a TOA of 145
-            dc.number = PhoneNumberUtils.stringFromStringAndTOA(dc.number, dc.TOA);
 
             response.add(dc);
 
@@ -293,12 +293,12 @@ public class SlteRIL extends RIL {
 
         Collections.sort(response);
 
-        if ((num == 0) && mTestingEmergencyCall.getAndSet(false)) {
-            if (mEmergencyCallbackModeRegistrant != null) {
-                riljLog("responseCallList: call ended, testing emergency call," +
-                            " notify ECM Registrants");
-                mEmergencyCallbackModeRegistrant.notifyRegistrant();
-            }
+        if ((num == 0) &&
+            mTestingEmergencyCall.getAndSet(false) &&
+            (mEmergencyCallbackModeRegistrant != null)) {
+            riljLog("responseCallList: call ended, testing emergency call," +
+                        " notify ECM Registrants");
+            mEmergencyCallbackModeRegistrant.notifyRegistrant();
         }
 
         return response;
