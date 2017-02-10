@@ -247,48 +247,22 @@ BOARD_SEPOLICY_DIRS += \
     $(LOCAL_PATH)/seccomp
 
 ###########################################################
-### CYANOGEN RECOVERY
+### LINEAGEOS RECOVERY
 ###########################################################
 
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/ramdisk/fstab.universal5430
 BOARD_HAS_DOWNLOAD_MODE := true
 
+# Use our own init.rc without setting up functionfs
+TARGET_RECOVERY_PIXEL_FORMAT := "BRGA_8888"
+TARGET_RECOVERY_DEVICE_MODULES += prebuilt_file_contexts
+
+TARGET_OTA_ASSERT_DEVICE := sltexx,slte,,slteskt
+
 ###########################################################
 ### TWRP RECOVERY
 ###########################################################
 
-#RECOVERY_VARIANT := twrp
-#TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/twrp.fstab
-
-TW_THEME := portrait_hdpi
-
-# Use our own init.rc without setting up functionfs
-TARGET_RECOVERY_PIXEL_FORMAT := "BRGA_8888"
-TARGET_RECOVERY_DEVICE_MODULES += prebuilt_file_contexts init.recovery.usb.rc
-
-TARGET_OTA_ASSERT_DEVICE := sltexx,slte,,slteskt
-
-# Add logcat support
-TWRP_INCLUDE_LOGCAT := true
-# Use toolbox instead of busybox
-TW_USE_TOOLBOX := true
-
-TW_BRIGHTNESS_PATH := /sys/class/backlight/panel/brightness
-TW_MAX_BRIGHTNESS := 255
-
-BOARD_HAS_NO_REAL_SDCARD := true
-RECOVERY_GRAPHICS_USE_LINELENGTH := true
-RECOVERY_SDCARD_ON_DATA := true
-
-TW_NO_REBOOT_BOOTLOADER := true
-TW_HAS_DOWNLOAD_MODE := true
-
-# Enable support for encrypted fs
-TW_INCLUDE_CRYPTO := true
-
-# Provide our own init.recovery.usb.rc
-TW_EXCLUDE_DEFAULT_USB_INIT := true
-
-# The kernel has exfat support.
-TW_NO_EXFAT_FUSE := true
-TW_EXCLUDE_SUPERSU := true
+ifeq ($(WITH_TWRP),true)
+-include $(LOCAL_PATH)/twrp.mk
+endif
