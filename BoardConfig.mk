@@ -149,6 +149,9 @@ BOARD_USE_METADATABUFFERTYPE := true
 BOARD_USE_ANB_OUTBUF_SHARE := true
 BOARD_USE_S3D_SUPPORT := true
 
+# frameworks/av
+TARGET_OMX_LEGACY_RESCALING := true
+
 # HEVC support in libvideocodec
 BOARD_USE_HEVC_HWIP := true
 
