@@ -36,6 +36,8 @@
 
 /dev/rfkill                  u:object_r:rfkill_device:s0
 
+/dev/fimg2d(/.*)?            u:object_r:fimg2d_video_device:s0
+
 ####################################
 # efs files
 /efs/FactoryApp(/.*)?        u:object_r:app_efs_file:s0
