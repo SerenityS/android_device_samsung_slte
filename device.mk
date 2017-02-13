@@ -58,6 +58,15 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
 
+
+###########################################################
+### SYSTEM
+###########################################################
+
+# This is needed by gpsd, mali etc. binary blobs
+PRODUCT_PACKAGES += \
+	libstlport
+
 ###########################################################
 ### GRAPHICS
 ###########################################################
@@ -261,7 +270,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
 	mcDriverDaemon \
-	libstlport \
 	keystore.exynos5
 
 ###########################################################
