@@ -17,6 +17,8 @@
 #ifndef SAMSUNG_AUDIO_H
 #define SAMSUNG_AUDIO_H
 
+#include <telephony/ril.h>
+
 /*
  * Sound card specific defines.
  *
@@ -46,6 +48,15 @@
 #define SOUND_CAPTURE_LOOPBACK_AEC_DEVICE 1
 #define SOUND_CAPTURE_HOTWORD_DEVICE 0
 */
+
+/* Wideband AMR callback */
+#ifndef RIL_UNSOL_SNDMGR_WB_AMR_REPORT
+#ifdef RIL_UNSOL_WB_AMR_STATE
+#define RIL_UNSOL_SNDMGR_WB_AMR_REPORT RIL_UNSOL_WB_AMR_STATE
+#else
+#define RIL_UNSOL_SNDMGR_WB_AMR_REPORT 0
+#endif
+#endif
 
 /*
  * If the device has stereo speakers and the speakers are arranged on
