@@ -530,6 +530,84 @@
 
     <!--
     #######################################################
+    ### Headset
+    #######################################################
+    -->
+
+    <path name="headset-default">
+        <ctl name="ASRC RATE 1" value="SYNCCLK rate 1" />
+        <ctl name="HPOUT1 DRE Switch" value="1" />
+        <ctl name="DSP1 Rate" value="SYNCCLK rate 1" />
+        <ctl name="DSP1 Firmware" value="EDAC" />
+        <ctl name="DSP1 Aux 1" value="AIF1RX1" />
+        <ctl name="DSP1 Aux 2" value="AIF1RX2" />
+        <ctl name="LHPF3 Input 1" value="None" />
+        <ctl name="LHPF3 Input 2" value="None" />
+        <ctl name="HPOUT1L Input 1" value="DSP1.3" />
+        <ctl name="HPOUT1R Input 1" value="DSP1.4" />
+        <ctl name="HPOUT1L Input 2" value="ASRC2L" />
+        <ctl name="HPOUT1R Input 2" value="ASRC2R" />
+        <ctl name="AIF2 Mode" value="Master" />
+        <ctl name="HP Switch" value="1" />
+    </path>
+
+    <path name="headset-voicecall-nb">
+        <ctl name="ASRC RATE 1" value="SYNCCLK rate 3" />
+        <ctl name="HPOUT1 DRE Switch" value="0" />
+        <ctl name="ASRC2L Input" value="AIF2RX1" />
+        <ctl name="ISRC2INT1 Input" value="ASRC2L" />
+        <ctl name="LHPF3 Input 1" value="None" />
+        <ctl name="LHPF3 Input 2" value="None" />
+        <ctl name="AIF1TX1 Input 2" value="ISRC2INT1" />
+        <ctl name="AIF1TX2 Input 2" value="ISRC2INT1" />
+        <ctl name="HPOUT1L Input 1" value="AIF1RX1" />
+        <ctl name="HPOUT1R Input 1" value="AIF1RX2" />
+        <ctl name="HPOUT1L Input 2" value="ISRC2INT1" />
+        <ctl name="HPOUT1R Input 2" value="ISRC2INT1" />
+        <ctl name="AIF2 Mode" value="Slave" />
+        <ctl name="HP Switch" value="1" />
+    </path>
+
+    <path name="headset-voicecall-wb">
+        <ctl name="ASRC RATE 1" value="SYNCCLK rate 3" />
+        <ctl name="HPOUT1 DRE Switch" value="0" />
+        <ctl name="ASRC2L Input" value="AIF2RX1" />
+        <ctl name="ISRC2INT1 Input" value="ASRC2L" />
+        <ctl name="LHPF3 Input 1" value="None" />
+        <ctl name="LHPF3 Input 2" value="None" />
+        <ctl name="AIF1TX1 Input 2" value="ISRC2INT1" />
+        <ctl name="AIF1TX2 Input 2" value="ISRC2INT1" />
+        <ctl name="HPOUT1L Input 1" value="AIF1RX1" />
+        <ctl name="HPOUT1R Input 1" value="AIF1RX2" />
+        <ctl name="HPOUT1L Input 2" value="ISRC2INT1" />
+        <ctl name="HPOUT1R Input 2" value="ISRC2INT1" />
+        <ctl name="AIF2 Mode" value="Slave" />
+        <ctl name="HP Switch" value="1" />
+    </path>
+
+    <!-- ### Volume ### -->
+
+    <path name="gain-headset-default">
+        <ctl name="Noise Gate Switch" value="0" />
+        <ctl name="HPOUT1L Impedance Volume" value="108" />
+        <ctl name="HPOUT1R Impedance Volume" value="108" />
+        <ctl name="HPOUT1L Input 1 Volume" value="32" />
+        <ctl name="HPOUT1R Input 1 Volume" value="32" />
+    </path>
+
+    <path name="gain-headset-voicecall">
+        <ctl name="Noise Gate Switch" value="0" />
+        <ctl name="HPOUT1L Impedance Volume" value="112" />
+        <ctl name="HPOUT1R Impedance Volume" value="112" />
+        <ctl name="HPOUT1L Input 1 Volume" value="32" />
+        <ctl name="HPOUT1R Input 1 Volume" value="32" />
+
+        <ctl name="HPOUT1L Input 2 Volume" value="32" />
+        <ctl name="HPOUT1R Input 2 Volume" value="32" />
+    </path>
+
+    <!--
+    #######################################################
     ### BT SCO Headset
     #######################################################
     -->
@@ -1087,6 +1165,11 @@
         <path name="gain-headphones-default" />
     </path>
 
+    <path name="headset">
+        <path name="headset-default" />
+        <path name="gain-headset-default" />
+    </path>
+
     <path name="voice-earpiece">
         <path name="earpiece-voicecall-nb" />
         <path name="gain-earpiece-voicecall-nb" />
@@ -1115,6 +1198,16 @@
     <path name="voice-headphones-wb">
         <path name="headphones-voicecall-wb" />
         <path name="gain-headphones-voicecall" />
+    </path>
+
+    <path name="voice-headset">
+        <path name="headset-voicecall-nb" />
+        <path name="gain-headset-voicecall" />
+    </path>
+
+    <path name="voice-headset-wb">
+        <path name="headset-voicecall-wb" />
+        <path name="gain-headset-voicecall" />
     </path>
 
     <path name="hdmi">
