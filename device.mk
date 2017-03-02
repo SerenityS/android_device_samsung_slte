@@ -140,12 +140,11 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
 	com.android.nfc_extras \
-	libnfc_nci_jni \
-	libnfc-nci \
 	NfcNci \
 	Tag
 
 PRODUCT_PROPERTY_OVERRIDES += \
+	ro.nfc.port="I2C" \
 	ro.nfc.sec_hal=true
 
 ###########################################################
