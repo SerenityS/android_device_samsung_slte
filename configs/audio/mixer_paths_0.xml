@@ -1210,6 +1210,14 @@
         <path name="gain-headset-voicecall" />
     </path>
 
+    <path name="voice-bt-sco-headset">
+        <path name="bt-sco-headset-default" />
+    </path>
+
+    <path name="voice-bt-sco-headset-wb">
+        <path name="bt-sco-headset-default" />
+    </path>
+
     <path name="hdmi">
         <!-- Empty path -->
     </path>
@@ -1313,6 +1321,14 @@
 
         <!-- Call recording route -->
         <path name="capture-channel-right" />
+    </path>
+
+    <path name="voice-bt-sco-mic">
+        <path name="bt-sco-headset-mic-default" />
+    </path>
+
+    <path name="voice-bt-sco-mic-wb">
+        <path name="bt-sco-headset-mic-default" />
     </path>
 
     <path name="hdmi-mic">
