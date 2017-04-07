@@ -245,7 +245,7 @@ BOARD_SEPOLICY_DIRS := \
 
 ### SECCOMP
 # frameworks/av/services/{mediacodec,mediaextractor}/minijail
-BOARD_SEPOLICY_DIRS += \
+BOARD_SECCOMP_POLICY := \
     $(LOCAL_PATH)/seccomp
 
 ###########################################################
