@@ -167,13 +167,13 @@ on post-fs-data
     chmod 0660 /sys/module/cpuidle/parameters/off
 
 # mobicore
-    mkdir /data/app/mcRegistry 0775 drmrpc drmrpc
+    mkdir /data/app/mcRegistry 0775 system system
     chmod 0700 /dev/mobicore
     chmod 0666 /dev/mobicore-user
     chmod 0660 /dev/s5p-smem
-    chown drmrpc drmrpc /dev/mobicore
-    chown drm drmrpc /dev/mobicore-user
-    chown drmrpc drmrpc /dev/s5p-smem
+    chown system system /dev/mobicore
+    chown system system /dev/mobicore-user
+    chown system system /dev/s5p-smem
 
 # Switch Device
     chown system radio /sys/class/sec/switch/ignore_adcerr
@@ -826,9 +826,9 @@ service diag_mdlog_stop /system/bin/diag_mdlog -k
 
 # MobiCore startup
 service mobicore /system/bin/mcDriverDaemon -r /system/app/FFFFFFFF000000000000000000000001.drbin -r /system/app/mcRegistry/ffffffffd0000000000000000000000a.tlbin
-    class main
-    user drmrpc
-    group drmrpc
+    class core
+    user system
+    group system
 
 # Set watchdog timer to 30 seconds and pet it every 10 seconds to get a 20 second margin
 service watchdogd /sbin/watchdogd 10 20

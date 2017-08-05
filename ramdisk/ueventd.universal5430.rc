@@ -73,10 +73,6 @@
 # audio
 /dev/seiren               0660   system     audio
 
-# MobiCore
-/dev/mobicore             0600   drmrpc     drmrpc
-/dev/mobicore-user        0660   drm        drmrpc
-
 # rfkill
 /dev/rfkill               0660   root       wifi
 
