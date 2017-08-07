@@ -168,12 +168,11 @@ on post-fs-data
 
 # mobicore
     mkdir /data/app/mcRegistry 0775 system system
-    chmod 0700 /dev/mobicore
-    chmod 0666 /dev/mobicore-user
+    mkdir /data/app/mcRegistry/TbStorage 0700 system system
+    mkdir /efs/TEE 0770 radio system
     chmod 0660 /dev/s5p-smem
-    chown system system /dev/mobicore
-    chown system system /dev/mobicore-user
     chown system system /dev/s5p-smem
+	export MC_AUTH_TOKEN_PATH /efs
 
 # Switch Device
     chown system radio /sys/class/sec/switch/ignore_adcerr

@@ -31,7 +31,7 @@
 /dev/HPD                  0660   system     system
 
 # mfc
-/dev/video6               0660   media      drmrpc
+/dev/video6               0660   media      media
 /dev/video7               0660   media      media
 /dev/video8               0660   media      media
 /dev/video9               0660   media      media
@@ -75,9 +75,6 @@
 
 # rfkill
 /dev/rfkill               0660   root       wifi
-
-# Secure MEM driver
-/dev/s5p-smem             0660   drm        drmrpc
 
 # NFC
 /dev/sec-nfc              0660   nfc        nfc
