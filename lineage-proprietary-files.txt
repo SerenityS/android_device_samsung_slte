@@ -123,6 +123,7 @@ vendor/lib/liblvvetx_3.21.15.so
 ### Camera
 lib/hw/camera.universal5430.so
 lib/libexynoscamera.so
+lib/libhwjpeg.so
 lib/libvdis.so
 vendor/firmware/setfile_2p2_12m.bin
 vendor/firmware/setfile_6b2.bin
