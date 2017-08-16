@@ -1,6 +1,5 @@
 ##########################
 # Devices
-#
 /dev/mali[0-9]*              u:object_r:gpu_device:s0
 
 /dev/seiren                  u:object_r:seiren_device:s0
@@ -66,6 +65,7 @@
 
 /data/misc/radio(/.*)?       u:object_r:radio_data_file:s0
 
+####################################
 # gps
 /data/system/gps/\.flp\.interface\.pipe\.to_gpsd     u:object_r:gps_data_file:s0
 /data/system/gps/\.gps\.interface\.pipe\.to_gpsd     u:object_r:gps_data_file:s0
@@ -86,26 +86,35 @@
 /sys/class/devfreq/exynos5-busfreq-mif(/.*)? -- u:object_r:sysfs_writable:s0
 /sys/class/lcd(/.*)?         -- u:object_r:sysfs_writable:s0
 
+####################################
 # bluetooth
 /sys/devices/bluetooth\.[0-9]*/rfkill/rfkill0/state  u:object_r:sysfs_bluetooth_writable:s0
 /sys/devices/bluetooth\.[0-9]*/rfkill/rfkill0/type   u:object_r:sysfs_bluetooth_writable:s0
 
+####################################
 # CP device
 /dev/spi_boot_link              u:object_r:radio_device:s0
 
+####################################
 # cbd
 /sys/devices/15510000\.usb/ehci_power        u:object_r:sysfs_usb_power_writable:s0
 /sys/devices/10f24000\.mipi-lli/lli_control  u:object_r:sysfs_mipi_writable:s0
 
+####################################
 # rild
 /sys/devices/virtual/misc/multipdp(/.*)     u:object_r:sysfs_multipdp_writable:s0
 
+####################################
 # vibrator
-/sys/class/timed_output/vibrator/pwm_value  u:object_r:sysfs_vibrator_writeable:s0
+/sys/class/timed_output/vibrator/pwm_value  u:object_r:sysfs_vibrator_writable:s0
 
 ####################################
-# deamons
-#
+# mDNIe
+/sys/devices/[0-9]*.decon_fb/lcd/panel/mdnie/mode      u:object_r:sysfs_mdnie_writable:s0
+/sys/devices/[0-9]*.decon_fb/lcd/panel/mdnie/scenario  u:object_r:sysfs_mdnie_writable:s0
+
+####################################
+# daemons
 /system/bin/mcDriverDaemon   u:object_r:tee_exec:s0
 /system/bin/macloader        u:object_r:macloader_exec:s0
 /system/bin/wifiloader       u:object_r:wifiloader_exec:s0

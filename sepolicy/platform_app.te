@@ -1,0 +1,13 @@
+allow platform_app nfc_service:service_manager find;
+allow platform_app device:dir { read open };
+allow platform_app block_device:dir { read open };
+allow platform_app unlabeled:dir { getattr };
+allow platform_app efs_file:dir { getattr };
+allow platform_app atrace_exec:file { getattr };
+allow platform_app audioserver_exec:file { getattr };
+allow platform_app blkid_exec:file { getattr };
+allow platform_app bootanim_exec:file { getattr };
+allow platform_app bootstat_exec:file { getattr };
+allow platform_app cpboot-daemon_exec:file { getattr };
+allow platform_app clatd_exec:file { getattr };
+allow platform_app debuggerd_exec:file { getattr };

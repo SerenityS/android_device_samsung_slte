@@ -3,7 +3,8 @@
 #allow init kernel:security { setcheckreqprot };
 
 # Mount debugfs on /sys/kernel/debug.
-allow init debugfs_type:dir { mounton };
+allow init debugfs:dir mounton;
+allow init debugfs:file write;
 
 # /dev/block/mmcblk0p[0-9]
 allow init emmcblk_device:blk_file rw_file_perms;
@@ -17,3 +18,6 @@ allow init sdcardd_exec:file r_file_perms;
 # LD_SHIM_LIBS
 allow init gpsd:process { noatsecure };
 allow init mediaserver:process { noatsecure };
+
+# read/chown mDNIe symlinks
+allow init sysfs_mdnie_writable:lnk_file { read setattr };

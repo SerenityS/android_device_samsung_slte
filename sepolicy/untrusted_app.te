@@ -1,0 +1,16 @@
+allow untrusted_app battery_service:service_manager find;
+allow untrusted_app device:dir { read open };
+allow untrusted_app block_device:dir { read open };
+allow untrusted_app untrusted_app:udp_socket ioctl;
+allow untrusted_app rootfs:dir { read open };
+allow untrusted_app sysfs:dir { read open };
+allow untrusted_app sysfs:file { getattr };
+allow untrusted_app efs_file:dir { getattr };
+allow untrusted_app unlabeled:dir { getattr };
+allow untrusted_app wifi_data_file:dir { getattr };
+allow untrusted_app install_data_file:dir { getattr };
+allow untrusted_app system_data_file:dir { getattr };
+allow untrusted_app adb_data_file:dir { getattr };
+allow untrusted_app bluetooth_data_file:dir { getattr };
+allow untrusted_app radio_data_file:dir { getattr };
+allow untrusted_app nfc_data_file:dir { getattr };
