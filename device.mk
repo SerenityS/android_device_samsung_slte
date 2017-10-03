@@ -1,9 +1,6 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-# The gps config appropriate for this device
-$(call inherit-product, device/common/gps/gps_eu_supl.mk)
-
-$(call inherit-product-if-exists, vendor/samsung/slte/slte-vendor.mk)
+$(call inherit-product, vendor/samsung/sltexx/sltexx-vendor.mk)
 
 LOCAL_PATH := device/samsung/sltexx
 
@@ -60,6 +57,15 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
     frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
+
+
+###########################################################
+### SYSTEM
+###########################################################
+
+# This is needed by gpsd, mali etc. binary blobs
+PRODUCT_PACKAGES += \
+	libstlport
 
 ###########################################################
 ### GRAPHICS
@@ -134,12 +140,11 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
 	com.android.nfc_extras \
-	libnfc_nci_jni \
-	libnfc-nci \
 	NfcNci \
 	Tag
 
 PRODUCT_PROPERTY_OVERRIDES += \
+	ro.nfc.port="I2C" \
 	ro.nfc.sec_hal=true
 
 ###########################################################
@@ -149,13 +154,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/audio/audio_effects.conf:system/etc/audio_effects.conf \
 	$(LOCAL_PATH)/configs/audio/audio_policy.conf:system/etc/audio_policy.conf \
-	$(LOCAL_PATH)/configs/audio/mixer_paths.xml:system/etc/mixer_paths.xml
+	$(LOCAL_PATH)/configs/audio/mixer_paths_0.xml:system/etc/mixer_paths_0.xml
 
 PRODUCT_PACKAGES += \
 	audio.a2dp.default \
 	audio.usb.default \
 	audio.r_submix.default \
-	audio.primary.universal5430
+	audio.primary.universal5430 \
+	libtinycompress
 
 ###########################################################
 ### OMX/MEDIA
@@ -247,9 +253,8 @@ PRODUCT_COPY_FILES += \
 ###########################################################
 
 PRODUCT_PACKAGES += \
-	charger_res_images \
-	cm_charger_res_images \
-	charger
+    charger_res_images \
+    charger
 
 ###########################################################
 ### MTP
@@ -264,7 +269,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
 	mcDriverDaemon \
-	libstlport \
 	keystore.exynos5
 
 ###########################################################
@@ -277,7 +281,3 @@ PRODUCT_PACKAGES += \
 
 $(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 $(call inherit-product-if-exists, build/target/product/full.mk)
-
-PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
-PRODUCT_NAME := full_slte
-PRODUCT_DEVICE := slte

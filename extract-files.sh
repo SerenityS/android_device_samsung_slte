@@ -1,12 +1,12 @@
 #!/bin/bash
 
 VENDOR=samsung
-DEVICE=slte
+DEVICE=sltexx
 
 BASE=../../../vendor/$VENDOR/$DEVICE/proprietary
 rm -rf $BASE/*
 
-for FILE in `egrep -v '(^#|^$)' cm-proprietary-files.txt`; do
+for FILE in `egrep -v '(^#|^$)' lineage-proprietary-files.txt`; do
     OLDIFS=$IFS IFS=":" PARSING_ARRAY=($FILE) IFS=$OLDIFS
     FILE=${PARSING_ARRAY[0]}
     DEST=${PARSING_ARRAY[1]}

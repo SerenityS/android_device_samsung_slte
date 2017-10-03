@@ -24,6 +24,9 @@ TARGET_CPU_VARIANT := cortex-a15
 TARGET_CPU_SMP := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
 
+# system/core libcutils
+ENABLE_SCHEDBOOST := true
+
 # RENDERSCRIPT
 BOARD_OVERRIDE_RS_CPU_VARIANT_32 := cortex-a15
 #OVERRIDE_RS_DRIVER := libRSDriverArm.so
@@ -76,8 +79,7 @@ TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 USE_OPENGL_RENDERER := true
 # hwcomposer insignal
 BOARD_HDMI_INCAPABLE := true
-
-# mixer
+# Use Exynos BGRA mixer
 BOARD_USE_BGRA_8888 := true
 
 ### SURFACEFLINGER
@@ -120,8 +122,11 @@ MAX_EGL_CACHE_KEY_SIZE := 12*1024
 # of the device.
 MAX_EGL_CACHE_SIZE := 2048*1024
 
-# Use Exynos BGRA mixer
-BOARD_USE_BGRA_8888 := true
+# FIMG2D
+# external/skia
+BOARD_USES_SKIA_FIMGAPI := true
+BOARD_USES_NEON_BLITANTIH := true
+BOARD_USES_FIMGAPI_V4L2 := false
 
 # GSC
 #BOARD_USES_ONLY_GSC0_GSC1 := true
@@ -133,7 +138,6 @@ BOARD_USES_WFD := true
 # frameworks/base/cmds/bootanimation
 TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := true
-TARGET_BOOTANIMATION_MULTITHREAD_DECODE := true
 
 ### OMX (insignal)
 BOARD_USE_DMA_BUF := true
@@ -142,6 +146,9 @@ BOARD_USE_STOREMETADATA := true
 BOARD_USE_METADATABUFFERTYPE := true
 BOARD_USE_ANB_OUTBUF_SHARE := true
 BOARD_USE_S3D_SUPPORT := true
+
+# frameworks/av
+TARGET_OMX_LEGACY_RESCALING := true
 
 # HEVC support in libvideocodec
 BOARD_USE_HEVC_HWIP := true
@@ -164,10 +171,8 @@ BOARD_HOSTAPD_DRIVER             := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_bcmdhd
 BOARD_WLAN_DEVICE                := bcmdhd
 WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/dhd/parameters/firmware_path"
-WIFI_DRIVER_NVRAM_PATH_PARAM     := "/sys/module/dhd/parameters/nvram_path"
-WIFI_DRIVER_NVRAM_PATH           := "/etc/wifi/nvram_net.txt"
-WIFI_DRIVER_FW_PATH_STA          := "/etc/wifi/bcmdhd_sta.bin"
-WIFI_DRIVER_FW_PATH_AP           := "/etc/wifi/bcmdhd_apsta.bin"
+WIFI_DRIVER_FW_PATH_STA          := "/system/etc/wifi/bcmdhd_sta.bin"
+WIFI_DRIVER_FW_PATH_AP           := "/system/etc/wifi/bcmdhd_apsta.bin"
 # MACLOADER
 BOARD_HAVE_SAMSUNG_WIFI := true
 
@@ -177,10 +182,6 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_HAVE_SAMSUNG_BLUETOOTH := true
 BOARD_CUSTOM_BT_CONFIG := $(LOCAL_PATH)/bluetooth/libbt_vndcfg.txt
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
-
-### NFC
-BOARD_NFC_CHIPSET := pn547
-BOARD_NFC_HAL_SUFFIX := $(TARGET_BOOTLOADER_BOARD_NAME)
 
 ### CAMERA
 # frameworks/av/services/camera/libcameraservice
@@ -199,6 +200,9 @@ BOARD_USE_SAMSUNG_CAMERAFORMAT_NV21 := true
 # frameworks/av/{cameraserver,libstagefright,mediaserver}
 TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 
+### AUDIO
+TARGET_AUDIOHAL_VARIANT := samsung
+
 ### LIGHTS
 TARGET_PROVIDES_LIBLIGHT := false
 
@@ -206,6 +210,7 @@ TARGET_PROVIDES_LIBLIGHT := false
 TARGET_POWERHAL_VARIANT := samsung
 
 ### CHARGER
+WITH_CM_CHARGER := true
 # system/core/init/Android.mk
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 # system/core/healthd/Android.mk
@@ -242,44 +247,26 @@ BOARD_SEPOLICY_DIRS := \
 
 ### SECCOMP
 # frameworks/av/services/{mediacodec,mediaextractor}/minijail
-BOARD_SEPOLICY_DIRS += \
+BOARD_SECCOMP_POLICY := \
     $(LOCAL_PATH)/seccomp
 
 ###########################################################
-### CYANOGEN RECOVERY
+### LINEAGEOS RECOVERY
 ###########################################################
 
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/ramdisk/fstab.universal5430
 BOARD_HAS_DOWNLOAD_MODE := true
 
+# Use our own init.rc without setting up functionfs
+TARGET_RECOVERY_PIXEL_FORMAT := "BRGA_8888"
+TARGET_RECOVERY_DEVICE_MODULES += prebuilt_file_contexts
+
+TARGET_OTA_ASSERT_DEVICE := sltexx,slte,,slteskt
+
 ###########################################################
 ### TWRP RECOVERY
 ###########################################################
 
-#RECOVERY_VARIANT := twrp
-#TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/twrp.fstab
-
-TW_THEME := portrait_hdpi
-
-# Use our own init.rc without setting up functionfs
-TARGET_RECOVERY_PIXEL_FORMAT := "BRGA_8888"
-TARGET_RECOVERY_DEVICE_MODULES += prebuilt_file_contexts init.recovery.usb.rc
-
-TW_BRIGHTNESS_PATH := /sys/class/backlight/panel/brightness
-TW_MAX_BRIGHTNESS := 255
-
-BOARD_HAS_NO_REAL_SDCARD := true
-RECOVERY_GRAPHICS_USE_LINELENGTH := true
-RECOVERY_SDCARD_ON_DATA := true
-
-TW_NO_REBOOT_BOOTLOADER := true
-TW_HAS_DOWNLOAD_MODE := true
-
-TW_INCLUDE_L_CRYPTO := true
-
-# Provide our own init.recovery.usb.rc
-TW_EXCLUDE_DEFAULT_USB_INIT := true
-
-# The kernel has exfat support.
-TW_NO_EXFAT_FUSE := true
-TW_EXCLUDE_SUPERSU := true
+ifeq ($(WITH_TWRP),true)
+-include $(LOCAL_PATH)/twrp.mk
+endif

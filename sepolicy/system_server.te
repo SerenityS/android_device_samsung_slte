@@ -24,3 +24,6 @@ allow system_server wifi_efs_file:file r_file_perms;
 
 # /sys/class/timed_output/vibrator/pwm_value
 allow system_server sysfs_vibrator_writeable:file rw_file_perms;
+
+# /dev/fimg2d
+allow system_server fimg2d_video_device:chr_file rw_file_perms;

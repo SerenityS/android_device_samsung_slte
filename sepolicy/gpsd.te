@@ -1,8 +1,8 @@
 # Automatically label files created in /data/system/gps as gps_data_file
 file_type_auto_trans(gpsd, system_data_file, gps_data_file)
 
-# Allow rild to connect to gpsd
-unix_socket_connect(gpsd, property, rild)
+# Allow gpsd to connect to rild
+unix_socket_connect(gpsd, rild, rild)
 
 allow gpsd system_server:unix_stream_socket { read write setopt };
 

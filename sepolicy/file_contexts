@@ -36,6 +36,8 @@
 
 /dev/rfkill                  u:object_r:rfkill_device:s0
 
+/dev/fimg2d(/.*)?            u:object_r:fimg2d_video_device:s0
+
 ####################################
 # efs files
 /efs/FactoryApp(/.*)?        u:object_r:app_efs_file:s0
@@ -48,19 +50,19 @@
 /efs/bluetooth(/.*)?         u:object_r:bluetooth_efs_file:s0
 /efs/drm(/.*)?               u:object_r:drm_efs_file:s0
 /efs/gyro_cal_data           u:object_r:sensor_efs_file:s0
-/efs/h2k.dat                 u:object_r:cpk_efs_file:s0
+/efs/h2k\.dat                 u:object_r:cpk_efs_file:s0
 /efs/imei(/.*)?              u:object_r:imei_efs_file:s0
 /efs/nv_data.bin(.*)         u:object_r:bin_nv_data_efs_file:s0
 /efs/prov(/.*)?              u:object_r:prov_efs_file:s0
 /efs/prov_data(/.*)?         u:object_r:prov_efs_file:s0
 /efs/wifi(/.*)?              u:object_r:wifi_efs_file:s0
-/efs/wv.keys                 u:object_r:cpk_efs_file:s0
+/efs/wv\.keys                 u:object_r:cpk_efs_file:s0
 
 ####################################
 # data files
 /data/nfc(/.*)?              u:object_r:nfc_data_file:s0
-/data/.cid.info              u:object_r:wifi_data_file:s0
-/data/.wifiver.info          u:object_r:wifi_data_file:s0
+/data/\.cid\.info              u:object_r:wifi_data_file:s0
+/data/\.wifiver\.info          u:object_r:wifi_data_file:s0
 
 /data/misc/radio(/.*)?       u:object_r:radio_data_file:s0
 
@@ -75,7 +77,7 @@
 /data/system/gps/ltoStatus\.txt                      u:object_r:gps_data_file:s0
 
 /data/gps/ctrlpipe                                   u:object_r:gps_data_file:s0
-/data/gps/.gpslogd.pipe                              u:object_r:gps_data_file:s0
+/data/gps/\.gpslogd\.pipe                              u:object_r:gps_data_file:s0
 /data/gps/nmeapipe                                   u:object_r:gps_data_file:s0
 
 ####################################
@@ -85,15 +87,15 @@
 /sys/class/lcd(/.*)?         -- u:object_r:sysfs_writable:s0
 
 # bluetooth
-/sys/devices/bluetooth.[0-9]*/rfkill/rfkill0/state  u:object_r:sysfs_bluetooth_writable:s0
-/sys/devices/bluetooth.[0-9]*/rfkill/rfkill0/type   u:object_r:sysfs_bluetooth_writable:s0
+/sys/devices/bluetooth\.[0-9]*/rfkill/rfkill0/state  u:object_r:sysfs_bluetooth_writable:s0
+/sys/devices/bluetooth\.[0-9]*/rfkill/rfkill0/type   u:object_r:sysfs_bluetooth_writable:s0
 
 # CP device
 /dev/spi_boot_link              u:object_r:radio_device:s0
 
 # cbd
-/sys/devices/15510000.usb/ehci_power        u:object_r:sysfs_usb_power_writable:s0
-/sys/devices/10f24000.mipi-lli/lli_control  u:object_r:sysfs_mipi_writable:s0
+/sys/devices/15510000\.usb/ehci_power        u:object_r:sysfs_usb_power_writable:s0
+/sys/devices/10f24000\.mipi-lli/lli_control  u:object_r:sysfs_mipi_writable:s0
 
 # rild
 /sys/devices/virtual/misc/multipdp(/.*)     u:object_r:sysfs_multipdp_writable:s0
@@ -104,9 +106,9 @@
 ####################################
 # deamons
 #
-/system/bin/mcDriverDaemon   -- u:object_r:tee_exec:s0
-/system/bin/macloader        -- u:object_r:macloader_exec:s0
-/system/bin/wifiloader       -- u:object_r:wifiloader_exec:s0
+/system/bin/mcDriverDaemon   u:object_r:tee_exec:s0
+/system/bin/macloader        u:object_r:macloader_exec:s0
+/system/bin/wifiloader       u:object_r:wifiloader_exec:s0
 
-/system/bin/cbd              -- u:object_r:cpboot-daemon_exec:s0
-/system/bin/gpsd             -- u:object_r:gpsd_exec:s0
+/system/bin/cbd              u:object_r:cpboot-daemon_exec:s0
+/system/bin/gpsd             u:object_r:gpsd_exec:s0
